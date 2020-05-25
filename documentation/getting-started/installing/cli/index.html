@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" dir=>
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Flexkube CLI Download the pre-built binary The easiest way to get Flexkube CLI	is to use one of the pre-built release binaries which are available for macOS and Linux.
+See Github Releases page for finding the latest available release.
+For example, to download version v.0.2.2 on Linux, execute the following command:
+VERSION=v0.2.2 TODO It will download the flexkube binary into your current directory. It is recommende to move this binary into one of directories mentioned in your $PATH environment variable, e.">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="" />
+<meta property="og:description" content="Flexkube CLI Download the pre-built binary The easiest way to get Flexkube CLI	is to use one of the pre-built release binaries which are available for macOS and Linux.
+See Github Releases page for finding the latest available release.
+For example, to download version v.0.2.2 on Linux, execute the following command:
+VERSION=v0.2.2 TODO It will download the flexkube binary into your current directory. It is recommende to move this binary into one of directories mentioned in your $PATH environment variable, e." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://flexkube.github.io/documentation/getting-started/installing/cli/" />
+
+<title>Cli | Flexkube</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.c3e2d100ba2319549e09b81b242634766bd799847cf02e1d6fa2426a64db14dc.css" integrity="sha256-w&#43;LRALojGVSeCbgbJCY0dmvXmYR88C4db6JCamTbFNw=">
+<script defer src="/en.search.min.7e66ba3d65e809c87194207cc2c6c22d6dfbfb99c86e647ec9ce294904be5c6c.js" integrity="sha256-fma6PWXoCchxlCB8wsbCLW37&#43;5nIbmR&#43;yc4pSQS&#43;XGw="></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><img src="/assets/icon.svg" alt="Logo" /><span>Flexkube</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  <ul>
+<li><a href="/documentation/"><strong>Documentation</strong></a>
+<ul>
+<li><a href="/documentation/overview/">Overview</a></li>
+<li><a href="/documentation/getting-started/">Getting Started</a>
+<ul>
+<li><a href="/documentation/getting-started/requirements/">Requirements</a></li>
+<li><a href="/documentation/getting-started/installing/">Installing</a>
+<ul>
+<li><a href="/documentation/getting-started/installing/cli/"class=active>CLI binary</a></li>
+<li><a href="/documentation/getting-started/installing/terraform/">Terraform Provider</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="/documentation/guides/">Guides</a>
+<ul>
+<li><a href="/documentation/guides/creating-single-node-cluster-on-local-machine-using-flexkube-cli/">Creating single-node cluster on local machine using &ldquo;flexkube&rdquo; CLI</a></li>
+<li><a href="/documentation/guides/creating-single-node-cluster-on-local-machine-using-terraform/">Creating single-node cluster on local machine using Terraform</a></li>
+<li><a href="/documentation/guides/creating-multi-node-cluster-using-terraform/">Creating multi-node cluster using Terraform</a></li>
+</ul>
+</li>
+<li><a href="/documentation/concepts/">Concepts</a>
+<ul>
+<li><a href="/documentation/concepts/managing-containers/">Managing Containers</a></li>
+</ul>
+</li>
+<li><a href="/documentation/resources/">Resources</a>
+<ul>
+<li><a href="/documentation/resources/pki/">PKI</a></li>
+<li><a href="/documentation/resources/etcd/">etcd</a></li>
+<li><a href="/documentation/resources/api-loadbalancer/">API Load Balancer</a></li>
+<li><a href="/documentation/resources/controlplane/">Controlplane</a></li>
+<li><a href="/documentation/resources/kubelet-pool/">Kubelet Pool</a></li>
+</ul>
+</li>
+<li><a href="/documentation/helm-charts/">Helm Charts</a></li>
+<li><a href="/documentation/reference/">Reference</a>
+<ul>
+<li><a href="/documentation/reference/go/">Go</a></li>
+<li><a href="/documentation/reference/terraform/">Terraform</a>
+<ul>
+<li><a href="/documentation/reference/terraform/flexkube-provider/">Flexkube Provider</a></li>
+<li><a href="/documentation/reference/terraform/resources/">Resources</a>
+<ul>
+<li><a href="/documentation/reference/terraform/resources/flexkube_pki/">flexkube_pki</a></li>
+<li><a href="/documentation/reference/terraform/resources/flexkube_etcd_cluster/">flexkube_etcd_cluster</a></li>
+<li><a href="/documentation/reference/terraform/resources/flexkube_controlplane/">flexkube_controlplane</a></li>
+<li><a href="/documentation/reference/terraform/resources/flexkube_api_loadbalancer_pool/">flexkube_api_loadbalancer_pool</a></li>
+<li><a href="/documentation/reference/terraform/resources/flexkube_kubelet_pool/">flexkube_kubelet_pool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="/documentation/reference/cli/">CLI</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Cli</strong>
+
+  <label for="toc-control">
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#flexkube-cli">Flexkube CLI</a></li>
+    <li><a href="#download-the-pre-built-binary">Download the pre-built binary</a></li>
+    <li><a href="#building-from-source">Building from source</a>
+      <ul>
+        <li><a href="#using-go-get">Using <code>go get</code></a></li>
+        <li><a href="#using-git-and-go-build">Using <code>git</code> and <code>go build</code></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h2 id="flexkube-cli">Flexkube CLI</h2>
+<h2 id="download-the-pre-built-binary">Download the pre-built binary</h2>
+<p>The easiest way to get Flexkube CLI	 is to use one of the pre-built release binaries which are available for macOS and Linux.</p>
+<p>See <a href="https://github.com/flexkube/libflexkube/releases">Github Releases</a> page for finding the latest available release.</p>
+<p>For example, to download version <code>v.0.2.2</code> on Linux, execute the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">VERSION<span style="color:#f92672">=</span>v0.2.2 TODO
+</code></pre></div><p>It will download the <code>flexkube</code> binary into your current directory. It is recommende to move this binary into one of directories mentioned in your <code>$PATH</code> environment variable, e.g. to <code>~/.local/bin</code> or <code>/usr/local/bin</code>, to make it easy to access.</p>
+<h2 id="building-from-source">Building from source</h2>
+<p>For building from source, make sure you have <code>go</code> and <code>git</code> binaries available in your system.</p>
+<h3 id="using-go-get">Using <code>go get</code></h3>
+<p>You can install Flexkube CLI from source using the following command:</p>
+<pre><code>go get github.com/flexkube/libflexkube/cmd/flexkube
+</code></pre><p>Once done, make sure your Go binary path is included in <code>$PATH</code>, so the binary is accessible for execution.</p>
+<h3 id="using-git-and-go-build">Using <code>git</code> and <code>go build</code></h3>
+<p>To build Flexkube CLI from source, first clone <a href="https://github.com/flexkube/libflexkube">libflexkube</a> repository. This can be done using the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git clone https://github.com/flexkube/libflexkube.git <span style="color:#f92672">&amp;&amp;</span> cd libflexkube
+</code></pre></div><p>Then, to build Terraform Provider binary, run the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">go build ./cmd/flexkube
+</code></pre></div><p>It will build the <code>flexkube</code> binary into your current directory. It is recommende to move this binary into one of directories mentioned in your <code>$PATH</code> environment variable, e.g. to <code>~/.local/bin</code> or <code>/usr/local/bin</code>, to make it easy to access.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/flexkube/website/edit/master/content//documentation/getting-started/installing/cli.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#flexkube-cli">Flexkube CLI</a></li>
+    <li><a href="#download-the-pre-built-binary">Download the pre-built binary</a></li>
+    <li><a href="#building-from-source">Building from source</a>
+      <ul>
+        <li><a href="#using-go-get">Using <code>go get</code></a></li>
+        <li><a href="#using-git-and-go-build">Using <code>git</code> and <code>go build</code></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

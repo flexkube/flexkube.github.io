@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Flexkube</title>
+    <link>https://flexkube.github.io/</link>
+    <description>Recent content on Flexkube</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://flexkube.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/concepts/managing-containers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/concepts/managing-containers/</guid>
+      <description>FoOo </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/getting-started/installing/cli/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/getting-started/installing/cli/</guid>
+      <description>Flexkube CLI Download the pre-built binary The easiest way to get Flexkube CLI	is to use one of the pre-built release binaries which are available for macOS and Linux.
+See Github Releases page for finding the latest available release.
+For example, to download version v.0.2.2 on Linux, execute the following command:
+VERSION=v0.2.2 TODO It will download the flexkube binary into your current directory. It is recommende to move this binary into one of directories mentioned in your $PATH environment variable, e.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/getting-started/installing/terraform/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/getting-started/installing/terraform/</guid>
+      <description>Terraform provider Download the pre-built binary The easiest way to get Flexkube Terraform provider is to use one of the pre-built release binaries which are available for macOS and Linux.
+See Github Releases page for finding the latest available release.
+For example, to download version v.0.2.2 on Linux, execute the following command:
+VERSION=v0.2.2 wget -qO- https://github.com/flexkube/libflexkube/releases/download/$VERSION/terraform-provider-flexkube_$VERSION_linux_amd64.tar.gz | tar zxvf - terraform-provider-flexkube_$VERSION_x4 It will download the terraform-provider-flexkube binary into your current directory.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/getting-started/requirements/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/getting-started/requirements/</guid>
+      <description>Requirements This section describes various requirements of Flexkube.
+It is recommended to deploy Flexkube resources (e.g. etcd, kubelet) into dedicated machine, not into local host, as resources will write to some hosts locations like /etc/kubernetes, /var/lib/kubelet or /var/lib/etcd to persist the cluster state across updates. See TODO section to learn how to create VM for testing.  Summary Short summary of the requirements for each machine where Kubernetes will be deployed:</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/guides/creating-multi-node-cluster-using-terraform/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/guides/creating-multi-node-cluster-using-terraform/</guid>
+      <description>Creating multi-node cluster using Terraform </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/guides/creating-single-node-cluster-on-local-machine-using-flexkube-cli/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/guides/creating-single-node-cluster-on-local-machine-using-flexkube-cli/</guid>
+      <description>Creating single-node cluster on local machine using &amp;ldquo;flexkube&amp;rdquo; CLI This guide describes how to create single node Kubernetes cluster using flexkube CLI. It will explain cluster creation process step by step to explain the configuration and provide some insights.
+For fully automated creation, see Creating cluster with Terraform.
+Requirements For this guide, it is required to have one Linux machine, with Docker daemon installed and running.
+It is recommended that machine has at least 2 GB of RAM and is a fresh machine, as in tutorial the tools will write to directories like /etc/kubernetes or /var/lib/kubelet without notice.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/guides/creating-single-node-cluster-on-local-machine-using-terraform/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/guides/creating-single-node-cluster-on-local-machine-using-terraform/</guid>
+      <description>Creating single-node cluster on local machine using Terraform </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/terraform/flexkube-provider/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/terraform/flexkube-provider/</guid>
+      <description>Flexkube Provider The Flexkube (flexkube) provider is used to interact with the resources supported by libflexkube. The provider itself do not require any configuration.
+Use the navigation to the left to read about the available resources.
+Example Usage provider &amp;#34;flexkube&amp;#34; {} </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_api_loadbalancer_pool/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_api_loadbalancer_pool/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_controlplane/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_controlplane/</guid>
+      <description>flexkube_controlplane </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_etcd_cluster/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_etcd_cluster/</guid>
+      <description>flexkube_etcd_cluster </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_helm_release/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_helm_release/</guid>
+      <description>flexkube_helm_release </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_kubelet_pool/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_kubelet_pool/</guid>
+      <description>flexkube_kubelet_pool </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_pki/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_pki/</guid>
+      <description>flexkube_pki </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/resources/api-loadbalancer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/resources/api-loadbalancer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/resources/controlplane/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/resources/controlplane/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/resources/etcd/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/resources/etcd/</guid>
+      <description>etcd </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/resources/kubelet-pool/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/resources/kubelet-pool/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/resources/pki/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/resources/pki/</guid>
+      <description>PKI PKI (Public Key Infrastructure) resource is responsible for generating all X.509 certificates and RSA key pairs which are required by Kubernetes cluster. Kubernetes requires several certificates to be generated, with specific CNs, different CAs etc, which is difficult to manage, so Flexkube provides configurable and convenient interface to manage them.
+All certificates are generated by following Kubernetes PKI certificates and requirements best practices.
+Current implementation of PKI is experimental and only supports generating the certificates.</description>
+    </item>
+    
+  </channel>
+</rss>

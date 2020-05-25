@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en" dir=>
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Creating single-node cluster on local machine using &ldquo;flexkube&rdquo; CLI This guide describes how to create single node Kubernetes cluster using flexkube CLI. It will explain cluster creation process step by step to explain the configuration and provide some insights.
+For fully automated creation, see Creating cluster with Terraform.
+Requirements For this guide, it is required to have one Linux machine, with Docker daemon installed and running.
+It is recommended that machine has at least 2 GB of RAM and is a fresh machine, as in tutorial the tools will write to directories like /etc/kubernetes or /var/lib/kubelet without notice.">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="" />
+<meta property="og:description" content="Creating single-node cluster on local machine using &ldquo;flexkube&rdquo; CLI This guide describes how to create single node Kubernetes cluster using flexkube CLI. It will explain cluster creation process step by step to explain the configuration and provide some insights.
+For fully automated creation, see Creating cluster with Terraform.
+Requirements For this guide, it is required to have one Linux machine, with Docker daemon installed and running.
+It is recommended that machine has at least 2 GB of RAM and is a fresh machine, as in tutorial the tools will write to directories like /etc/kubernetes or /var/lib/kubelet without notice." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://flexkube.github.io/documentation/guides/creating-single-node-cluster-on-local-machine-using-flexkube-cli/" />
+
+<title>Creating Single Node Cluster on Local Machine Using Flexkube Cli | Flexkube</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.c3e2d100ba2319549e09b81b242634766bd799847cf02e1d6fa2426a64db14dc.css" integrity="sha256-w&#43;LRALojGVSeCbgbJCY0dmvXmYR88C4db6JCamTbFNw=">
+<script defer src="/en.search.min.7e66ba3d65e809c87194207cc2c6c22d6dfbfb99c86e647ec9ce294904be5c6c.js" integrity="sha256-fma6PWXoCchxlCB8wsbCLW37&#43;5nIbmR&#43;yc4pSQS&#43;XGw="></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><img src="/assets/icon.svg" alt="Logo" /><span>Flexkube</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  <ul>
+<li><a href="/documentation/"><strong>Documentation</strong></a>
+<ul>
+<li><a href="/documentation/overview/">Overview</a></li>
+<li><a href="/documentation/getting-started/">Getting Started</a>
+<ul>
+<li><a href="/documentation/getting-started/requirements/">Requirements</a></li>
+<li><a href="/documentation/getting-started/installing/">Installing</a>
+<ul>
+<li><a href="/documentation/getting-started/installing/cli/">CLI binary</a></li>
+<li><a href="/documentation/getting-started/installing/terraform/">Terraform Provider</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="/documentation/guides/">Guides</a>
+<ul>
+<li><a href="/documentation/guides/creating-single-node-cluster-on-local-machine-using-flexkube-cli/"class=active>Creating single-node cluster on local machine using &ldquo;flexkube&rdquo; CLI</a></li>
+<li><a href="/documentation/guides/creating-single-node-cluster-on-local-machine-using-terraform/">Creating single-node cluster on local machine using Terraform</a></li>
+<li><a href="/documentation/guides/creating-multi-node-cluster-using-terraform/">Creating multi-node cluster using Terraform</a></li>
+</ul>
+</li>
+<li><a href="/documentation/concepts/">Concepts</a>
+<ul>
+<li><a href="/documentation/concepts/managing-containers/">Managing Containers</a></li>
+</ul>
+</li>
+<li><a href="/documentation/resources/">Resources</a>
+<ul>
+<li><a href="/documentation/resources/pki/">PKI</a></li>
+<li><a href="/documentation/resources/etcd/">etcd</a></li>
+<li><a href="/documentation/resources/api-loadbalancer/">API Load Balancer</a></li>
+<li><a href="/documentation/resources/controlplane/">Controlplane</a></li>
+<li><a href="/documentation/resources/kubelet-pool/">Kubelet Pool</a></li>
+</ul>
+</li>
+<li><a href="/documentation/helm-charts/">Helm Charts</a></li>
+<li><a href="/documentation/reference/">Reference</a>
+<ul>
+<li><a href="/documentation/reference/go/">Go</a></li>
+<li><a href="/documentation/reference/terraform/">Terraform</a>
+<ul>
+<li><a href="/documentation/reference/terraform/flexkube-provider/">Flexkube Provider</a></li>
+<li><a href="/documentation/reference/terraform/resources/">Resources</a>
+<ul>
+<li><a href="/documentation/reference/terraform/resources/flexkube_pki/">flexkube_pki</a></li>
+<li><a href="/documentation/reference/terraform/resources/flexkube_etcd_cluster/">flexkube_etcd_cluster</a></li>
+<li><a href="/documentation/reference/terraform/resources/flexkube_controlplane/">flexkube_controlplane</a></li>
+<li><a href="/documentation/reference/terraform/resources/flexkube_api_loadbalancer_pool/">flexkube_api_loadbalancer_pool</a></li>
+<li><a href="/documentation/reference/terraform/resources/flexkube_kubelet_pool/">flexkube_kubelet_pool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="/documentation/reference/cli/">CLI</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Creating Single Node Cluster on Local Machine Using Flexkube Cli</strong>
+
+  <label for="toc-control">
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#requirements">Requirements</a></li>
+    <li><a href="#preparation">Preparation</a>
+      <ul>
+        <li><a href="#ip-address-for-deployment">IP address for deployment</a></li>
+        <li><a href="#selecting-service-cidr-and-pod-cidr">Selecting service CIDR and pod CIDR</a></li>
+        <li><a href="#downloading-flexkube-binary">Downloading <code>flexkube</code> binary</a></li>
+        <li><a href="#downloading-kubectl-binary">Downloading <code>kubectl</code> binary</a></li>
+        <li><a href="#downloading-helm-binary">Downloading <code>helm</code> binary</a></li>
+        <li><a href="#make-downloaded-binaries-available-in-path">Make downloaded binaries available in $PATH</a></li>
+      </ul>
+    </li>
+    <li><a href="#creating-the-cluster">Creating the cluster</a>
+      <ul>
+        <li><a href="#creating-certificates">Creating certificates</a></li>
+        <li><a href="#creating-etcd-cluster">Creating etcd cluster</a></li>
+        <li><a href="#creating-static-kubernetes-controlplane">Creating static Kubernetes controlplane</a></li>
+        <li><a href="#getting-kubeconfig-file">Getting kubeconfig file</a></li>
+      </ul>
+    </li>
+    <li><a href="#adding-nodes-to-the-cluster">Adding nodes to the cluster</a>
+      <ul>
+        <li><a href="#creating-tls-bootstrapping-rbac-rules-and-bootstrap-tokens">Creating TLS bootstrapping RBAC rules and bootstrap tokens</a></li>
+        <li><a href="#creating-kubelet-pool">Creating kubelet pool</a></li>
+      </ul>
+    </li>
+    <li><a href="#installing-cni-coredns-and-other-packages">Installing CNI, CoreDNS and other packages</a>
+      <ul>
+        <li><a href="#adding-helm-repositories">Adding helm repositories</a></li>
+        <li><a href="#installing-kube-proxy">Installing kube-proxy</a></li>
+        <li><a href="#installing-calico-chart-as-cni-plugin">Installing Calico chart as CNI plugin</a></li>
+        <li><a href="#installing-coredns-as-cluster-dns">Installing CoreDNS as Cluster DNS</a></li>
+        <li><a href="#installing-kubelet-rubber-stamp">Installing kubelet-rubber-stamp</a></li>
+      </ul>
+    </li>
+    <li><a href="#verifying-cluster-functionality">Verifying cluster functionality</a></li>
+    <li><a href="#cleaning-up">Cleaning up</a></li>
+    <li><a href="#whats-next">What&rsquo;s next</a></li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="creating-single-node-cluster-on-local-machine-using-flexkube-cli">Creating single-node cluster on local machine using &ldquo;flexkube&rdquo; CLI</h1>
+<p>This guide describes how to create single node Kubernetes cluster using <code>flexkube</code> CLI. It will explain cluster creation process step by step to explain the configuration and provide some insights.</p>
+<p>For fully automated creation, see <a href="TODO">Creating cluster with Terraform</a>.</p>
+<h2 id="requirements">Requirements</h2>
+<p>For this guide, it is required to have one Linux machine, with Docker daemon installed and running.</p>
+<p>It is recommended that machine has at least 2 GB of RAM and is a fresh machine, as in tutorial the tools will write to directories like <code>/etc/kubernetes</code> or <code>/var/lib/kubelet</code> without notice.</p>
+<p>The Docker version should be 18.06+.</p>
+<p>Network interfaces setup is not important, however having a private IP address is recommended from security perspective.</p>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>I don&#39;t have such machine.</span>
+      <span>↕</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <p>If you don&rsquo;t have such machine available, you can create it locally, using <a href="https://www.virtualbox.org/">VirtualBox</a> and <a href="https://www.vagrantup.com/">Vagrant</a>. Make sure you have both tools installed by following respective guides:</p>
+<ul>
+<li><a href="https://www.virtualbox.org/manual/ch02.html">Installing VirtualBox</a></li>
+<li><a href="https://www.vagrantup.com/docs/installation/">Installing Vagrant</a></li>
+</ul>
+<p>Once done, create file named <code>Vagrantfile</code> with following content:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">Vagrant</span><span style="color:#f92672">.</span>configure(<span style="color:#e6db74">&#34;2&#34;</span>) <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span>config<span style="color:#f92672">|</span>
+  config<span style="color:#f92672">.</span>vm<span style="color:#f92672">.</span>box       <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;flatcar-stable&#34;</span>
+  config<span style="color:#f92672">.</span>vm<span style="color:#f92672">.</span>box_url   <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://stable.release.flatcar-linux.net/amd64-usr/current/flatcar_production_vagrant.box&#34;</span>
+  config<span style="color:#f92672">.</span>ssh<span style="color:#f92672">.</span>username <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;core&#39;</span>
+  config<span style="color:#f92672">.</span>vm<span style="color:#f92672">.</span>provider <span style="color:#e6db74">:virtualbox</span> <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span>v<span style="color:#f92672">|</span>
+    v<span style="color:#f92672">.</span>memory <span style="color:#f92672">=</span> <span style="color:#ae81ff">2048</span>
+  <span style="color:#66d9ef">end</span>
+<span style="color:#66d9ef">end</span>
+</code></pre></div><p>Then, run the following commands to create and connect to the machine:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">vagrant up <span style="color:#f92672">&amp;&amp;</span> vagrant ssh
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h2 id="preparation">Preparation</h2>
+<p>Before we start creating a cluster, we need to gather some information and download required binaries.</p>
+<p>Log in into the machine where you want to deploy Kubernetes before proceeding.</p>
+<h3 id="ip-address-for-deployment">IP address for deployment</h3>
+<p>To configure cluster components, you need to provide the IP address, which will be used by the cluster. You can find available IP addresses using e.g. <code>ifconfig</code> command.</p>
+<p>You can try getting the IP address automatically using the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export IP<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>ip addr show dev <span style="color:#66d9ef">$(</span>ip r | grep default | tr <span style="color:#e6db74">&#39; &#39;</span> <span style="color:#ae81ff">\\</span>n | grep -A1 dev | tail -n1<span style="color:#66d9ef">)</span> | grep <span style="color:#e6db74">&#39;inet &#39;</span> | awk <span style="color:#e6db74">&#39;{print $2}&#39;</span> | cut -d/ -f1<span style="color:#66d9ef">)</span>; echo $IP
+</code></pre></div><p>On VirtualBox, we can use <code>10.0.2.15</code> IP.</p>
+<p>Save the IP address for future use using the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export IP<span style="color:#f92672">=</span>10.0.2.15
+</code></pre></div><h3 id="selecting-service-cidr-and-pod-cidr">Selecting service CIDR and pod CIDR</h3>
+<p>Kubernetes requires 2 network CIDRs to operate, one from each pod will receive the IP address and one for <code>Service</code> objects with type <code>ClusterIP</code>. While selecting the CIDRs, make sure they don&rsquo;t overlap with each other and other networks your machine is connected to.</p>
+<p>Once decided on CIDRs, we should also save 2 special IP addresses:</p>
+<ul>
+<li><code>kubernetes</code> Service - This IP address will be used by pods which talk to Kubernetes API. It must be included in <code>kube-apiserver</code> server certificate IP addresses list. This must be first address of Service CIDR. So if your service CIDR is <code>11.0.0.0/24</code>, it should be <code>11.0.0.1</code>.</li>
+<li>DNS Service - This IP address will be used by cluster&rsquo;s DNS service. This IP is usually 10th address of Service CIDR. So if your service CIDR is <code>11.0.0.0/24</code>, it should be <code>11.0.0.10</code>.</li>
+</ul>
+<p>With all this information gathered, you command like this to save this information for later use:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export POD_CIDR<span style="color:#f92672">=</span>10.0.0.0/24
+export SERVICE_CIDR<span style="color:#f92672">=</span>11.0.0.0/24
+export KUBERNETES_SERVICE_IP<span style="color:#f92672">=</span>11.0.0.1
+export DNS_SERVICE_IP<span style="color:#f92672">=</span>11.0.0.10
+</code></pre></div><h3 id="downloading-flexkube-binary">Downloading <code>flexkube</code> binary</h3>
+<p>Once logged in, execute the following command to download <code>flexkube</code> CLI binary into working directory. This is the binary, which will be used to create a cluster components.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export VERSION<span style="color:#f92672">=</span>v0.3.0
+wget -O- https://github.com/flexkube/libflexkube/releases/download/<span style="color:#e6db74">${</span>VERSION<span style="color:#e6db74">}</span>/flexkube_<span style="color:#e6db74">${</span>VERSION<span style="color:#e6db74">}</span>_linux_amd64.tar.gz | tar zxvf -
+</code></pre></div><h3 id="downloading-kubectl-binary">Downloading <code>kubectl</code> binary</h3>
+<p>To verify that cluster is operational it is recommended to have <code>kubectl</code> binary available. You can install it using the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">curl -LO https://storage.googleapis.com/kubernetes-release/release/<span style="color:#e6db74">`</span>curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt<span style="color:#e6db74">`</span>/bin/linux/amd64/kubectl <span style="color:#f92672">&amp;&amp;</span> chmod +x kubectl
+</code></pre></div><h3 id="downloading-helm-binary">Downloading <code>helm</code> binary</h3>
+<p>Parts of cluster provisioning is done using <a href="https://helm.sh/">Helm</a> 3 binary, when deploying the cluster using the <code>flexkube</code> CLI. You can install it using the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">wget -O- https://get.helm.sh/helm-v3.2.1-linux-amd64.tar.gz | tar -zxvf - linux-amd64/helm <span style="color:#f92672">&amp;&amp;</span> mv linux-amd64/helm ./ <span style="color:#f92672">&amp;&amp;</span> rmdir linux-amd64
+</code></pre></div><h3 id="make-downloaded-binaries-available-in-path">Make downloaded binaries available in $PATH</h3>
+<p>For compatibility with rest of the tutorial, you should make sure that downloaded binaries are in one of the directories in the $PATH environment variable.</p>
+<p>You can also add working directory to the $PATH using the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>PATH<span style="color:#e6db74">}</span><span style="color:#e6db74">:</span><span style="color:#66d9ef">$(</span>pwd<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+</code></pre></div><h2 id="creating-the-cluster">Creating the cluster</h2>
+<p>Now that you have all required binaries and information, we can start creating the cluster.</p>
+<h3 id="creating-certificates">Creating certificates</h3>
+<p>First step to create a cluster is to generate all certificates required by Kubernetes. As this is not a trivial task to create and manage those certificates, Flexkube provides <a href="TODO">PKI resource</a>, which does exactly that.</p>
+<p>Before we create the certificates, we need to provide some configuration to tell PKI resource to create for you both etcd and Kubernetes certificates, as by default it only creates Root CA certificate.</p>
+<p>For this guide, you can create configuration using the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">cat &lt;&lt;EOF | sed <span style="color:#e6db74">&#39;/^$/d&#39;</span> &gt; config.yaml
+<span style="color:#66d9ef">pki</span>:
+  <span style="color:#66d9ef">etcd</span>:
+    <span style="color:#66d9ef">clientCNs</span>:
+    - kube-apiserver
+    <span style="color:#66d9ef">peers</span>:
+      <span style="color:#66d9ef">testing</span>: ${IP}
+  <span style="color:#66d9ef">kubernetes</span>:
+    <span style="color:#66d9ef">kubeAPIServer</span>:
+      <span style="color:#66d9ef">serverIPs</span>:
+      - ${IP}
+      - ${KUBERNETES_SERVICE_IP}
+EOF
+</code></pre></div><blockquote class="book-hint info">
+  See <a href="TODO">PKI configuration reference</a> to see all available configuration options.
+</blockquote>
+
+<p>Once created, run the following command to generate the certificates:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">flexkube pki
+</code></pre></div><p>If everything succeeded, you should find many certificates in newly created <code>state.yaml</code> file.</p>
+<h3 id="creating-etcd-cluster">Creating etcd cluster</h3>
+<p>Before we start Kubernetes containers, we need etcd cluster. Flexkube provides <a href="TODO">etcd</a> resource to manage such clusters.</p>
+<p>To create etcd cluster, we need to configure it&rsquo;s members in <code>config.yaml</code> file. This can be done using the following:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">cat &lt;&lt;EOF &gt;&gt; config.yaml
+
+<span style="color:#66d9ef">etcd</span>:
+  <span style="color:#66d9ef">members</span>:
+    <span style="color:#66d9ef">testing</span>:
+      <span style="color:#66d9ef">peerAddress</span>: ${IP}
+EOF
+</code></pre></div><blockquote class="book-hint info">
+  See <a href="TODO">etcd configuration reference</a> to see all available configuration options.
+</blockquote>
+
+<p>Now, you can run the following command to create etcd cluster:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">flexkube etcd
+</code></pre></div><p>Once finished, you should see etcd container running, if you run <code>docker ps</code>.</p>
+<h3 id="creating-static-kubernetes-controlplane">Creating static Kubernetes controlplane</h3>
+<p>With etcd running, you can now create static Kubernetes controlplane. Static, as Flexkube recommends to run Kubernetes controlplane <em>self-hosted</em>, so managed using Kubernetes itself. However, before this can be done, temporary, or <em>static</em> controlplane is needed. And this is exactly what <a href="TODO">Controlplane</a> resource provides.</p>
+<p>You can configure it by running the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">cat &lt;&lt;EOF &gt;&gt; config.yaml
+
+<span style="color:#66d9ef">controlplane</span>:
+  <span style="color:#66d9ef">apiServerAddress</span>: ${IP}
+  <span style="color:#66d9ef">apiServerPort</span>: <span style="color:#ae81ff">6443</span>
+  <span style="color:#66d9ef">kubeAPIServer</span>:
+    <span style="color:#66d9ef">serviceCIDR</span>: ${SERVICE_CIDR}
+    <span style="color:#66d9ef">etcdServers</span>:
+    - https://${IP}:<span style="color:#ae81ff">2379</span>
+  <span style="color:#66d9ef">kubeControllerManager</span>:
+    <span style="color:#66d9ef">flexVolumePluginDir</span>: /var/lib/kubelet/volumeplugins
+EOF
+</code></pre></div><blockquote class="book-hint info">
+  See <a href="TODO">Controlplane configuration reference</a> to see all available configuration options.
+</blockquote>
+
+<p>Now, you can create Kubernetes controlplane using the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">flexkube controlplane
+</code></pre></div><p>Execution can take a while, as Kubernetes docker images must be now pulled.</p>
+<p>Once finished, you should see 3 new containers running when you run <code>docker ps</code>.</p>
+<h3 id="getting-kubeconfig-file">Getting kubeconfig file</h3>
+<p>Even though the cluster has no objects or deployments yet, you should be able to access it already. For that, you need <code>kubeconfig</code> file. <code>flexkube</code> CLI provides <code>flexkube kubeconfig</code> command, which will read information about the cluster from configuration and state files and print it to you.</p>
+<p>To generate <code>kubeconfig</code> file, run the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">flexkube kubeconfig | grep -v <span style="color:#e6db74">&#34;Trying to read&#34;</span> &gt; kubeconfig
+</code></pre></div><p><code>kubeconfig</code> file should be created.</p>
+<p>Now, you need to configure Kubernetes clients to use this file. This can be done using the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export KUBECONFIG<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>pwd<span style="color:#66d9ef">)</span>/kubeconfig
+</code></pre></div><p>You can now run <code>kubectl version</code> to verify, that the cluster is accessible.</p>
+<h2 id="adding-nodes-to-the-cluster">Adding nodes to the cluster</h2>
+<p>Having a cluster without nodes is not very useful. This section describes how to add nodes to your cluster.</p>
+<h3 id="creating-tls-bootstrapping-rbac-rules-and-bootstrap-tokens">Creating TLS bootstrapping RBAC rules and bootstrap tokens</h3>
+<p>Flexkube requires <a href="https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet-tls-bootstrapping">TLS bootstrapping</a> process to be used while adding new nodes to the cluster. To enable that, extra RBAC rules must be created before nodes tries to join the cluster.</p>
+<p>This step is handled by <a href="TODO">tls-bootstrapping</a> helm chart, which creates RBAC rules and allows to create bootstrap tokens.</p>
+<p>First, we need to generate bootstrap token, which will be used in next steps. You can do it by running the following commands:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export TOKEN_ID<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>cat /dev/urandom | tr -dc <span style="color:#e6db74">&#39;a-z0-9&#39;</span> | fold -w <span style="color:#ae81ff">6</span> | head -n 1<span style="color:#66d9ef">)</span>
+export TOKEN_SECRET<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>cat /dev/urandom | tr -dc <span style="color:#e6db74">&#39;a-z0-9&#39;</span> | fold -w <span style="color:#ae81ff">16</span> | head -n 1<span style="color:#66d9ef">)</span>
+</code></pre></div><p>Then, install the chart to create RBAC rules and bootstrap token, by running this command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">helm upgrade --install -n kube-system tls-bootstrapping flexkube/tls-bootstrapping --set tokens[<span style="color:#ae81ff">0</span>].token-id=$TOKEN_ID --set tokens[<span style="color:#ae81ff">0</span>].token-secret=$TOKEN_SECRET
+</code></pre></div><h3 id="creating-kubelet-pool">Creating kubelet pool</h3>
+<p>With Flexkube, kubelets are managed in pools by <a href="TODO">Kubelet Pool</a> resource. This allows to group them to share the configuration. Usually clusters have one group called <code>controllers</code> which runs controlplane components and one or more <em>worker</em> pools, which might characterize with e.g. different hardware.</p>
+<p>For this tutorial, we will just create single pool <code>default</code>.</p>
+<p>You can configure this pool by running the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">cat &lt;&lt;EOF &gt;&gt; config.yaml
+
+<span style="color:#66d9ef">kubeletPools</span>:
+  <span style="color:#66d9ef">default</span>:
+    <span style="color:#66d9ef">bootstrapConfig</span>:
+      <span style="color:#66d9ef">token</span>: ${TOKEN_ID}.${TOKEN_SECRET}
+      <span style="color:#66d9ef">server</span>: ${IP}:<span style="color:#ae81ff">6443</span>
+    <span style="color:#66d9ef">adminConfig</span>:
+      <span style="color:#66d9ef">server</span>: ${IP}:<span style="color:#ae81ff">6443</span>
+    <span style="color:#66d9ef">privilegedLabels</span>:
+      <span style="color:#66d9ef">node-role.kubernetes.io/master</span>: <span style="color:#e6db74">&#34;&#34;</span>
+    <span style="color:#66d9ef">volumePluginDir</span>: /var/lib/kubelet/volumeplugins
+    <span style="color:#66d9ef">kubelets</span>:
+    - <span style="color:#66d9ef">name</span>: testing
+      <span style="color:#66d9ef">address</span>: ${IP}
+EOF
+</code></pre></div><p>Now, to create <code>default</code> pool, run the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">flexkube kubelet-pool default
+</code></pre></div><p>Once finished, you should see that node <code>testing </code> has been added to the cluster by running <code>kubectl get nodes</code>.</p>
+<h2 id="installing-cni-coredns-and-other-packages">Installing CNI, CoreDNS and other packages</h2>
+<p>Now that you have cluster running with nodes, you need to install some extra packages to make the cluster fully functional.</p>
+<h3 id="adding-helm-repositories">Adding helm repositories</h3>
+<p>Before proceeding, make sure you have <code>stable</code> and <code>flexkube</code> Helm repositories configured, as it is the recommended source for installing the charts mentioned in next sections. You can add required repositories by running the following commands:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+helm repo add flexkube https://flexkube.github.io/charts/
+</code></pre></div><h3 id="installing-kube-proxy">Installing kube-proxy</h3>
+<p><code>kube-proxy</code> is not required for bare Kubernetes cluster, so it can be fully managed using Kubernetes itself.</p>
+<p><code>kube-proxy</code> handles load balancing traffic to service CIDR in the cluster.</p>
+<p>To install it, run the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">helm upgrade --install -n kube-system kube-proxy flexkube/kube-proxy --set <span style="color:#e6db74">&#34;podCIDR=</span><span style="color:#e6db74">${</span>POD_CIDR<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> --set apiServers<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{</span><span style="color:#e6db74">${</span>IP<span style="color:#e6db74">}</span><span style="color:#e6db74">:6443}&#34;</span>
+</code></pre></div><h3 id="installing-calico-chart-as-cni-plugin">Installing Calico chart as CNI plugin</h3>
+<p>While not necessarily required for this guide, as we only run one node, it is recommended to install some CNI plugin on the cluster, as without that, kubelet will stay in <code>NotReady</code> state.</p>
+<p>Flexkube recommends using <a href="https://www.projectcalico.org/">Calico</a> as a CNI plugin, as it works on variety of platforms and provides both IPAM and <a href="https://kubernetes.io/docs/concepts/services-networking/network-policies/">NetworkPolicies</a> implementation. Flexkube also provides <a href="TODO">calico helm chart</a>, so Calico installation can be easily configured and managed.</p>
+<p>To install it, run the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">helm upgrade --install -n kube-system calico flexkube/calico --set flexVolumePluginDir<span style="color:#f92672">=</span>/var/lib/kubelet/volumeplugins --set podCIDR<span style="color:#f92672">=</span>$POD_CIDR
+</code></pre></div><blockquote class="book-hint info">
+  We specify <code>flexVolumePluginDir</code>, as default path is on <code>/usr</code> partition, which is read-only in Flatcar Container Linux.
+</blockquote>
+
+<h3 id="installing-coredns-as-cluster-dns">Installing CoreDNS as Cluster DNS</h3>
+<p>To provide <a href="https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/">DNS resolving for pods and service names</a> it is recommended to run CoreDNS on your cluster. It can be installed from upstream Helm chart.</p>
+<p>To install it, run the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">helm upgrade --install -n kube-system coredns stable/coredns --set rbac.pspEnable<span style="color:#f92672">=</span>true --set service.ClusterIP<span style="color:#f92672">=</span>$DNS_SERVICE_IP
+</code></pre></div><h3 id="installing-kubelet-rubber-stamp">Installing kubelet-rubber-stamp</h3>
+<p>As part of kubelet TLS bootstrapping process, kubelet requests serving certificate from Kubernetes API, to be able to use it for serving logs and metrics securely to <code>kube-apiserver</code>.</p>
+<p>At the time of writing, <code>kube-controller-manager</code> does not approve those certificates and 3rd party controller needs to be used to automate this process. This is what <a href="https://github.com/kontena/kubelet-rubber-stamp">kubelet-rubber-stamp</a> does.</p>
+<p>It can be installed by running the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">helm upgrade --install -n kube-system kubelet-rubber-stamp flexkube/kubelet-rubber-stamp
+</code></pre></div><h2 id="verifying-cluster-functionality">Verifying cluster functionality</h2>
+<p>Now your cluster is ready to use. Go ahead and try deploying some application on it. Please keep following things in mind, while using the cluster:</p>
+<ul>
+<li>Service of type <code>LoadBalancer</code> won&rsquo;t get the IP address, as there is no controller, which could assign it.</li>
+<li>The cluster has <a href="https://kubernetes.io/docs/concepts/policy/pod-security-policy/">Pod Security Policies</a> enabled by default. Make sure your deployment ships the PSP.</li>
+<li>There is no storage provider on the cluster, so pods requesting PVCs will be stuck in pending state.</li>
+</ul>
+<h2 id="cleaning-up">Cleaning up</h2>
+<p>To clean up the host, first, uninstall all helm releases, so kubelet removes all the pods. This can be done using the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">helm uninstall -n kube-system calico coredns kube-proxy kubelet-rubber-stamp tls-bootstrapping
+</code></pre></div><p>Then, rename or remove <code>config.yaml</code> file, so CLI will be able to clean up the resources. For example, execute:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">mv config.yaml config.yaml.old
+</code></pre></div><p>Now you can remove all containers managed by <code>flexkube</code> using following commands:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">flexkube kubelet-pool default
+flexkube controlplane
+flexkube etcd
+</code></pre></div><p>Finally, following directories can be removed as well:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo rm -rf /etc/kubernetes/ /var/lib/etcd/ /var/lib/kubelet/ /var/lib/calico/
+</code></pre></div><h2 id="whats-next">What&rsquo;s next</h2>
+<p>This guide explains, how to create a cluster using <code>flexkube</code> CLI, which explains every step and provides insights, but might be time consuming and error-prone. For fully automated installation, see &ldquo;<a href="/documentation/guides/creating-single-node-cluster-on-local-machine-using-terraform/">Creating single-node cluster on local machine using Terraform</a>&quot;.</p>
+<p>If you want to deploy the cluster to remote machine(s), which also supports HA controlplane, see &ldquo;<a href="/documentation/guides/creating-multi-node-cluster-using-terraform/">Creating multi-node cluster using Terraform</a>&quot;.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/flexkube/website/edit/master/content//documentation/guides/creating-single-node-cluster-on-local-machine-using-flexkube-cli.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#requirements">Requirements</a></li>
+    <li><a href="#preparation">Preparation</a>
+      <ul>
+        <li><a href="#ip-address-for-deployment">IP address for deployment</a></li>
+        <li><a href="#selecting-service-cidr-and-pod-cidr">Selecting service CIDR and pod CIDR</a></li>
+        <li><a href="#downloading-flexkube-binary">Downloading <code>flexkube</code> binary</a></li>
+        <li><a href="#downloading-kubectl-binary">Downloading <code>kubectl</code> binary</a></li>
+        <li><a href="#downloading-helm-binary">Downloading <code>helm</code> binary</a></li>
+        <li><a href="#make-downloaded-binaries-available-in-path">Make downloaded binaries available in $PATH</a></li>
+      </ul>
+    </li>
+    <li><a href="#creating-the-cluster">Creating the cluster</a>
+      <ul>
+        <li><a href="#creating-certificates">Creating certificates</a></li>
+        <li><a href="#creating-etcd-cluster">Creating etcd cluster</a></li>
+        <li><a href="#creating-static-kubernetes-controlplane">Creating static Kubernetes controlplane</a></li>
+        <li><a href="#getting-kubeconfig-file">Getting kubeconfig file</a></li>
+      </ul>
+    </li>
+    <li><a href="#adding-nodes-to-the-cluster">Adding nodes to the cluster</a>
+      <ul>
+        <li><a href="#creating-tls-bootstrapping-rbac-rules-and-bootstrap-tokens">Creating TLS bootstrapping RBAC rules and bootstrap tokens</a></li>
+        <li><a href="#creating-kubelet-pool">Creating kubelet pool</a></li>
+      </ul>
+    </li>
+    <li><a href="#installing-cni-coredns-and-other-packages">Installing CNI, CoreDNS and other packages</a>
+      <ul>
+        <li><a href="#adding-helm-repositories">Adding helm repositories</a></li>
+        <li><a href="#installing-kube-proxy">Installing kube-proxy</a></li>
+        <li><a href="#installing-calico-chart-as-cni-plugin">Installing Calico chart as CNI plugin</a></li>
+        <li><a href="#installing-coredns-as-cluster-dns">Installing CoreDNS as Cluster DNS</a></li>
+        <li><a href="#installing-kubelet-rubber-stamp">Installing kubelet-rubber-stamp</a></li>
+      </ul>
+    </li>
+    <li><a href="#verifying-cluster-functionality">Verifying cluster functionality</a></li>
+    <li><a href="#cleaning-up">Cleaning up</a></li>
+    <li><a href="#whats-next">What&rsquo;s next</a></li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

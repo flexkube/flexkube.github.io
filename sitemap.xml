@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://flexkube.github.io/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/concepts/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/concepts/managing-containers/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/getting-started/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/getting-started/installing/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/getting-started/installing/cli/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/getting-started/installing/terraform/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/getting-started/requirements/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/guides/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/guides/creating-multi-node-cluster-using-terraform/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/guides/creating-single-node-cluster-on-local-machine-using-flexkube-cli/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/guides/creating-single-node-cluster-on-local-machine-using-terraform/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/helm-charts/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/overview/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/reference/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/reference/cli/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/reference/go/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/reference/terraform/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/reference/terraform/flexkube-provider/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/reference/terraform/resources/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_api_loadbalancer_pool/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_controlplane/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_etcd_cluster/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_helm_release/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_kubelet_pool/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_pki/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/resources/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/resources/api-loadbalancer/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/resources/controlplane/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/resources/etcd/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/resources/kubelet-pool/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/resources/pki/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/tags/</loc>
+  </url>
+  
+</urlset>

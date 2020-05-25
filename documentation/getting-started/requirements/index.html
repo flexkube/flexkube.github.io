@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" dir=>
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Requirements This section describes various requirements of Flexkube.
+It is recommended to deploy Flexkube resources (e.g. etcd, kubelet) into dedicated machine, not into local host, as resources will write to some hosts locations like /etc/kubernetes, /var/lib/kubelet or /var/lib/etcd to persist the cluster state across updates. See TODO section to learn how to create VM for testing.  Summary Short summary of the requirements for each machine where Kubernetes will be deployed:">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="" />
+<meta property="og:description" content="Requirements This section describes various requirements of Flexkube.
+It is recommended to deploy Flexkube resources (e.g. etcd, kubelet) into dedicated machine, not into local host, as resources will write to some hosts locations like /etc/kubernetes, /var/lib/kubelet or /var/lib/etcd to persist the cluster state across updates. See TODO section to learn how to create VM for testing.  Summary Short summary of the requirements for each machine where Kubernetes will be deployed:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://flexkube.github.io/documentation/getting-started/requirements/" />
+
+<title>Requirements | Flexkube</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.c3e2d100ba2319549e09b81b242634766bd799847cf02e1d6fa2426a64db14dc.css" integrity="sha256-w&#43;LRALojGVSeCbgbJCY0dmvXmYR88C4db6JCamTbFNw=">
+<script defer src="/en.search.min.7e66ba3d65e809c87194207cc2c6c22d6dfbfb99c86e647ec9ce294904be5c6c.js" integrity="sha256-fma6PWXoCchxlCB8wsbCLW37&#43;5nIbmR&#43;yc4pSQS&#43;XGw="></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><img src="/assets/icon.svg" alt="Logo" /><span>Flexkube</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  <ul>
+<li><a href="/documentation/"><strong>Documentation</strong></a>
+<ul>
+<li><a href="/documentation/overview/">Overview</a></li>
+<li><a href="/documentation/getting-started/">Getting Started</a>
+<ul>
+<li><a href="/documentation/getting-started/requirements/"class=active>Requirements</a></li>
+<li><a href="/documentation/getting-started/installing/">Installing</a>
+<ul>
+<li><a href="/documentation/getting-started/installing/cli/">CLI binary</a></li>
+<li><a href="/documentation/getting-started/installing/terraform/">Terraform Provider</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="/documentation/guides/">Guides</a>
+<ul>
+<li><a href="/documentation/guides/creating-single-node-cluster-on-local-machine-using-flexkube-cli/">Creating single-node cluster on local machine using &ldquo;flexkube&rdquo; CLI</a></li>
+<li><a href="/documentation/guides/creating-single-node-cluster-on-local-machine-using-terraform/">Creating single-node cluster on local machine using Terraform</a></li>
+<li><a href="/documentation/guides/creating-multi-node-cluster-using-terraform/">Creating multi-node cluster using Terraform</a></li>
+</ul>
+</li>
+<li><a href="/documentation/concepts/">Concepts</a>
+<ul>
+<li><a href="/documentation/concepts/managing-containers/">Managing Containers</a></li>
+</ul>
+</li>
+<li><a href="/documentation/resources/">Resources</a>
+<ul>
+<li><a href="/documentation/resources/pki/">PKI</a></li>
+<li><a href="/documentation/resources/etcd/">etcd</a></li>
+<li><a href="/documentation/resources/api-loadbalancer/">API Load Balancer</a></li>
+<li><a href="/documentation/resources/controlplane/">Controlplane</a></li>
+<li><a href="/documentation/resources/kubelet-pool/">Kubelet Pool</a></li>
+</ul>
+</li>
+<li><a href="/documentation/helm-charts/">Helm Charts</a></li>
+<li><a href="/documentation/reference/">Reference</a>
+<ul>
+<li><a href="/documentation/reference/go/">Go</a></li>
+<li><a href="/documentation/reference/terraform/">Terraform</a>
+<ul>
+<li><a href="/documentation/reference/terraform/flexkube-provider/">Flexkube Provider</a></li>
+<li><a href="/documentation/reference/terraform/resources/">Resources</a>
+<ul>
+<li><a href="/documentation/reference/terraform/resources/flexkube_pki/">flexkube_pki</a></li>
+<li><a href="/documentation/reference/terraform/resources/flexkube_etcd_cluster/">flexkube_etcd_cluster</a></li>
+<li><a href="/documentation/reference/terraform/resources/flexkube_controlplane/">flexkube_controlplane</a></li>
+<li><a href="/documentation/reference/terraform/resources/flexkube_api_loadbalancer_pool/">flexkube_api_loadbalancer_pool</a></li>
+<li><a href="/documentation/reference/terraform/resources/flexkube_kubelet_pool/">flexkube_kubelet_pool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="/documentation/reference/cli/">CLI</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Requirements</strong>
+
+  <label for="toc-control">
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#summary">Summary</a></li>
+    <li><a href="#hardware-requirements">Hardware requirements</a></li>
+    <li><a href="#connectivity">Connectivity</a>
+      <ul>
+        <li><a href="#containers-registry">Containers registry</a></li>
+        <li><a href="#ssh">SSH</a></li>
+        <li><a href="#network">Network</a></li>
+      </ul>
+    </li>
+    <li><a href="#container-runtime">Container runtime</a></li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="requirements">Requirements</h1>
+<p>This section describes various requirements of Flexkube.</p>
+<blockquote class="book-hint warning">
+  It is recommended to deploy Flexkube resources (e.g. etcd, kubelet) into dedicated machine, <strong>not</strong> into local host, as resources will write to some hosts locations like <code>/etc/kubernetes</code>, <code>/var/lib/kubelet</code> or <code>/var/lib/etcd</code> to persist the cluster state across updates. See TODO section to learn how to create VM for testing.
+</blockquote>
+
+<h2 id="summary">Summary</h2>
+<p>Short summary of the requirements for each machine where Kubernetes will be deployed:</p>
+<ul>
+<li>Minimum 2 GB of RAM</li>
+<li>SSH server configured (if deploying to remote machines)</li>
+<li>Internet access</li>
+<li><code>docker</code> daemon installed and running</li>
+</ul>
+<h2 id="hardware-requirements">Hardware requirements</h2>
+<p>To create Kubernetes cluster using Flexkube, you need a machine with at least 2 GB of RAM for controller node and at least 1 GB of RAM for worker nodes.</p>
+<h2 id="connectivity">Connectivity</h2>
+<h3 id="containers-registry">Containers registry</h3>
+<p>Machines which will be part of the cluster must have access to container registry from where the cluster component images will be pulled. By default public registries are used, so machines <strong>must have internet access</strong>.</p>
+<p>If you re-configure the cluster to use images from private repository, internet access should not be required.</p>
+<h3 id="ssh">SSH</h3>
+<p>For deploying on remote machines, Flexkube use SSH tunnels to talk to container runtime on remote machine, so make sure SSH daemon is configured on them and is accessible from the host you will be deploying.</p>
+<p>If you deploy only on local machine, SSH is not required.</p>
+<h3 id="network">Network</h3>
+<p>It is recommended, that all machines which are part of the cluster are connected using private network, to avoid exposing your cluster components to the internet.</p>
+<h2 id="container-runtime">Container runtime</h2>
+<p>Flexkube runs all of Kubernetes controlplane components as containers, so container runtime must be installed and configured on the machines before deploying.</p>
+<p>At the moment only <strong>Docker</strong> runtime is supported. In the future, support for more container runtime might be added.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/flexkube/website/edit/master/content//documentation/getting-started/requirements.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#summary">Summary</a></li>
+    <li><a href="#hardware-requirements">Hardware requirements</a></li>
+    <li><a href="#connectivity">Connectivity</a>
+      <ul>
+        <li><a href="#containers-registry">Containers registry</a></li>
+        <li><a href="#ssh">SSH</a></li>
+        <li><a href="#network">Network</a></li>
+      </ul>
+    </li>
+    <li><a href="#container-runtime">Container runtime</a></li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

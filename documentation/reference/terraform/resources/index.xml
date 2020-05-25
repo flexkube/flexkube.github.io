@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Flexkube</title>
+    <link>https://flexkube.github.io/documentation/reference/terraform/resources/</link>
+    <description>Recent content on Flexkube</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://flexkube.github.io/documentation/reference/terraform/resources/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_api_loadbalancer_pool/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_api_loadbalancer_pool/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_controlplane/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_controlplane/</guid>
+      <description>flexkube_controlplane </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_etcd_cluster/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_etcd_cluster/</guid>
+      <description>flexkube_etcd_cluster </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_helm_release/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_helm_release/</guid>
+      <description>flexkube_helm_release </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_kubelet_pool/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_kubelet_pool/</guid>
+      <description>flexkube_kubelet_pool </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_pki/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_pki/</guid>
+      <description>flexkube_pki </description>
+    </item>
+    
+  </channel>
+</rss>

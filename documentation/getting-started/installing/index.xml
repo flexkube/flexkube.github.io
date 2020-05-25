@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Flexkube</title>
+    <link>https://flexkube.github.io/documentation/getting-started/installing/</link>
+    <description>Recent content on Flexkube</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://flexkube.github.io/documentation/getting-started/installing/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/getting-started/installing/cli/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/getting-started/installing/cli/</guid>
+      <description>Flexkube CLI Download the pre-built binary The easiest way to get Flexkube CLI	is to use one of the pre-built release binaries which are available for macOS and Linux.
+See Github Releases page for finding the latest available release.
+For example, to download version v.0.2.2 on Linux, execute the following command:
+VERSION=v0.2.2 TODO It will download the flexkube binary into your current directory. It is recommende to move this binary into one of directories mentioned in your $PATH environment variable, e.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/getting-started/installing/terraform/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/getting-started/installing/terraform/</guid>
+      <description>Terraform provider Download the pre-built binary The easiest way to get Flexkube Terraform provider is to use one of the pre-built release binaries which are available for macOS and Linux.
+See Github Releases page for finding the latest available release.
+For example, to download version v.0.2.2 on Linux, execute the following command:
+VERSION=v0.2.2 wget -qO- https://github.com/flexkube/libflexkube/releases/download/$VERSION/terraform-provider-flexkube_$VERSION_linux_amd64.tar.gz | tar zxvf - terraform-provider-flexkube_$VERSION_x4 It will download the terraform-provider-flexkube binary into your current directory.</description>
+    </item>
+    
+  </channel>
+</rss>
