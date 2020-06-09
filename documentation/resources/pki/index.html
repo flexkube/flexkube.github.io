@@ -18,7 +18,7 @@ Current implementation of PKI is experimental and only supports generating the c
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.c3e2d100ba2319549e09b81b242634766bd799847cf02e1d6fa2426a64db14dc.css" integrity="sha256-w&#43;LRALojGVSeCbgbJCY0dmvXmYR88C4db6JCamTbFNw=">
-<script defer src="/en.search.min.7e66ba3d65e809c87194207cc2c6c22d6dfbfb99c86e647ec9ce294904be5c6c.js" integrity="sha256-fma6PWXoCchxlCB8wsbCLW37&#43;5nIbmR&#43;yc4pSQS&#43;XGw="></script>
+<script defer src="/en.search.min.35543c814fafb3e100b2456f4924d9f036d57cc4776535a5c0938aaa14957296.js" integrity="sha256-NVQ8gU&#43;vs&#43;EAskVvSSTZ8DbVfMR3ZTWlwJOKqhSVcpY="></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -65,21 +65,40 @@ https://github.com/alex-shpak/hugo-book
 <li><a href="/documentation/getting-started/installing/">Installing</a>
 <ul>
 <li><a href="/documentation/getting-started/installing/cli/">CLI binary</a></li>
-<li><a href="/documentation/getting-started/installing/terraform/">Terraform Provider</a></li>
+<li><a href="/documentation/getting-started/installing/terraform/">Terraform Provider</a>
+<ul>
+<li>Go module</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </li>
 <li><a href="/documentation/guides/">Guides</a>
 <ul>
-<li><a href="/documentation/guides/creating-single-node-cluster-on-local-machine-using-flexkube-cli/">Creating single-node cluster on local machine using &ldquo;flexkube&rdquo; CLI</a></li>
-<li><a href="/documentation/guides/creating-single-node-cluster-on-local-machine-using-terraform/">Creating single-node cluster on local machine using Terraform</a></li>
-<li><a href="/documentation/guides/creating-multi-node-cluster-using-terraform/">Creating multi-node cluster using Terraform</a></li>
+<li>etcd
+<ul>
+<li><a href="/documentation/guides/etcd/creating-single-member-cluster-on-local-machine-using-terraform/">Creating single-member cluster on local machine using Terraform</a></li>
+<li><a href="/documentation/guides/etcd/creating-single-member-cluster-on-local-machine-using-flexkube-cli/">Creating single-member cluster on local machine using Flexkube CLI</a></li>
+<li><a href="/documentation/guides/etcd/creating-multi-member-cluster-over-ssh-using-terraform/">Creating multi-node cluster over SSH using Terraform</a></li>
+</ul>
+</li>
+<li><a href="/documentation/guides/kubernetes/">Kubernetes</a>
+<ul>
+<li><a href="/documentation/guides/kubernetes/creating-single-node-cluster-on-local-machine-using-flexkube-cli/">Creating single-node cluster on local machine using &ldquo;flexkube&rdquo; CLI</a></li>
+<li><a href="/documentation/guides/kubernetes/creating-single-node-cluster-on-local-machine-using-terraform/">Creating single-node cluster on local machine using Terraform</a></li>
+<li><a href="/documentation/guides/kubernetes/creating-multi-node-cluster-using-terraform/">Creating multi-node cluster using Terraform</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="/documentation/concepts/">Concepts</a>
 <ul>
-<li><a href="/documentation/concepts/managing-containers/">Managing Containers</a></li>
+<li><a href="/documentation/concepts/managing-containers/">Managing containers</a></li>
+<li>Managing Kubernetes certificates</li>
+<li>Supported transport protocols</li>
+<li>Supported container runtimes</li>
+<li>Self-hosted Kubernetes controlplane</li>
 </ul>
 </li>
 <li><a href="/documentation/resources/">Resources</a>
@@ -89,15 +108,59 @@ https://github.com/alex-shpak/hugo-book
 <li><a href="/documentation/resources/api-loadbalancer/">API Load Balancer</a></li>
 <li><a href="/documentation/resources/controlplane/">Controlplane</a></li>
 <li><a href="/documentation/resources/kubelet-pool/">Kubelet Pool</a></li>
+<li>Containers</li>
 </ul>
 </li>
-<li><a href="/documentation/helm-charts/">Helm Charts</a></li>
+<li><a href="/documentation/helm-charts/">Helm charts</a>
+<ul>
+<li>Maintained
+<ul>
+<li>calico</li>
+<li>kube-apiserver</li>
+<li>kube-proxy</li>
+<li>kubelet-rubber-stamp</li>
+<li>kubernetes</li>
+<li>tls-bootstrapping</li>
+</ul>
+</li>
+<li>Upstream
+<ul>
+<li>stable/coredns</li>
+<li>stable/metrics-server</li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a href="/documentation/reference/">Reference</a>
 <ul>
-<li><a href="/documentation/reference/go/">Go</a></li>
+<li><a href="/documentation/reference/cli/">CLI</a>
+<ul>
+<li>Configuration
+<ul>
+<li>kubelet-pool</li>
+<li>apiloadbalancer-pool</li>
+<li>etcd</li>
+<li>pki</li>
+<li>controlplane</li>
+<li>containers</li>
+</ul>
+</li>
+<li>Commands
+<ul>
+<li>kubelet-pool</li>
+<li>apiloadbalancer-pool</li>
+<li>etcd</li>
+<li>pki</li>
+<li>controlplane</li>
+<li>kubeconfig</li>
+<li>containers</li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a href="/documentation/reference/terraform/">Terraform</a>
 <ul>
-<li><a href="/documentation/reference/terraform/flexkube-provider/">Flexkube Provider</a></li>
+<li><a href="/documentation/reference/terraform/flexkube-provider/">Flexkube provider</a></li>
 <li><a href="/documentation/reference/terraform/resources/">Resources</a>
 <ul>
 <li><a href="/documentation/reference/terraform/resources/flexkube_pki/">flexkube_pki</a></li>
@@ -109,9 +172,19 @@ https://github.com/alex-shpak/hugo-book
 </li>
 </ul>
 </li>
-<li><a href="/documentation/reference/cli/">CLI</a></li>
+<li>Helm charts
+<ul>
+<li>kube-apiserver</li>
+<li>kubernetes</li>
+<li>tls-bootstrapping</li>
+<li>calico</li>
+<li>kubelet-rubber-stamp</li>
 </ul>
 </li>
+<li><a href="/documentation/reference/go/">Go</a></li>
+</ul>
+</li>
+<li>Project status</li>
 </ul>
 </li>
 </ul>

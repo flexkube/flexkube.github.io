@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en" dir=>
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Creating multi-member cluster over SSH using Terraform This guide describes how to create multi member etcd cluster using Terraform and Flexkube provider. The process is very simple and requires just a few steps. If you have at least 3 members, your cluster will be able to tolerate loss on one member, so it will be highly available.
+Requirements For this guide, it is required to have at least 2 Linux machines, with Docker daemon installed and running.">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="" />
+<meta property="og:description" content="Creating multi-member cluster over SSH using Terraform This guide describes how to create multi member etcd cluster using Terraform and Flexkube provider. The process is very simple and requires just a few steps. If you have at least 3 members, your cluster will be able to tolerate loss on one member, so it will be highly available.
+Requirements For this guide, it is required to have at least 2 Linux machines, with Docker daemon installed and running." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://flexkube.github.io/documentation/guides/etcd/creating-multi-member-cluster-over-ssh-using-terraform/" />
+
+<title>Creating Multi Member Cluster Over Ssh Using Terraform | Flexkube</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.c3e2d100ba2319549e09b81b242634766bd799847cf02e1d6fa2426a64db14dc.css" integrity="sha256-w&#43;LRALojGVSeCbgbJCY0dmvXmYR88C4db6JCamTbFNw=">
+<script defer src="/en.search.min.35543c814fafb3e100b2456f4924d9f036d57cc4776535a5c0938aaa14957296.js" integrity="sha256-NVQ8gU&#43;vs&#43;EAskVvSSTZ8DbVfMR3ZTWlwJOKqhSVcpY="></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><img src="/assets/icon.svg" alt="Logo" /><span>Flexkube</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  <ul>
+<li><a href="/documentation/"><strong>Documentation</strong></a>
+<ul>
+<li><a href="/documentation/overview/">Overview</a></li>
+<li><a href="/documentation/getting-started/">Getting Started</a>
+<ul>
+<li><a href="/documentation/getting-started/requirements/">Requirements</a></li>
+<li><a href="/documentation/getting-started/installing/">Installing</a>
+<ul>
+<li><a href="/documentation/getting-started/installing/cli/">CLI binary</a></li>
+<li><a href="/documentation/getting-started/installing/terraform/">Terraform Provider</a>
+<ul>
+<li>Go module</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="/documentation/guides/">Guides</a>
+<ul>
+<li>etcd
+<ul>
+<li><a href="/documentation/guides/etcd/creating-single-member-cluster-on-local-machine-using-terraform/">Creating single-member cluster on local machine using Terraform</a></li>
+<li><a href="/documentation/guides/etcd/creating-single-member-cluster-on-local-machine-using-flexkube-cli/">Creating single-member cluster on local machine using Flexkube CLI</a></li>
+<li><a href="/documentation/guides/etcd/creating-multi-member-cluster-over-ssh-using-terraform/"class=active>Creating multi-node cluster over SSH using Terraform</a></li>
+</ul>
+</li>
+<li><a href="/documentation/guides/kubernetes/">Kubernetes</a>
+<ul>
+<li><a href="/documentation/guides/kubernetes/creating-single-node-cluster-on-local-machine-using-flexkube-cli/">Creating single-node cluster on local machine using &ldquo;flexkube&rdquo; CLI</a></li>
+<li><a href="/documentation/guides/kubernetes/creating-single-node-cluster-on-local-machine-using-terraform/">Creating single-node cluster on local machine using Terraform</a></li>
+<li><a href="/documentation/guides/kubernetes/creating-multi-node-cluster-using-terraform/">Creating multi-node cluster using Terraform</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="/documentation/concepts/">Concepts</a>
+<ul>
+<li><a href="/documentation/concepts/managing-containers/">Managing containers</a></li>
+<li>Managing Kubernetes certificates</li>
+<li>Supported transport protocols</li>
+<li>Supported container runtimes</li>
+<li>Self-hosted Kubernetes controlplane</li>
+</ul>
+</li>
+<li><a href="/documentation/resources/">Resources</a>
+<ul>
+<li><a href="/documentation/resources/pki/">PKI</a></li>
+<li><a href="/documentation/resources/etcd/">etcd</a></li>
+<li><a href="/documentation/resources/api-loadbalancer/">API Load Balancer</a></li>
+<li><a href="/documentation/resources/controlplane/">Controlplane</a></li>
+<li><a href="/documentation/resources/kubelet-pool/">Kubelet Pool</a></li>
+<li>Containers</li>
+</ul>
+</li>
+<li><a href="/documentation/helm-charts/">Helm charts</a>
+<ul>
+<li>Maintained
+<ul>
+<li>calico</li>
+<li>kube-apiserver</li>
+<li>kube-proxy</li>
+<li>kubelet-rubber-stamp</li>
+<li>kubernetes</li>
+<li>tls-bootstrapping</li>
+</ul>
+</li>
+<li>Upstream
+<ul>
+<li>stable/coredns</li>
+<li>stable/metrics-server</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="/documentation/reference/">Reference</a>
+<ul>
+<li><a href="/documentation/reference/cli/">CLI</a>
+<ul>
+<li>Configuration
+<ul>
+<li>kubelet-pool</li>
+<li>apiloadbalancer-pool</li>
+<li>etcd</li>
+<li>pki</li>
+<li>controlplane</li>
+<li>containers</li>
+</ul>
+</li>
+<li>Commands
+<ul>
+<li>kubelet-pool</li>
+<li>apiloadbalancer-pool</li>
+<li>etcd</li>
+<li>pki</li>
+<li>controlplane</li>
+<li>kubeconfig</li>
+<li>containers</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="/documentation/reference/terraform/">Terraform</a>
+<ul>
+<li><a href="/documentation/reference/terraform/flexkube-provider/">Flexkube provider</a></li>
+<li><a href="/documentation/reference/terraform/resources/">Resources</a>
+<ul>
+<li><a href="/documentation/reference/terraform/resources/flexkube_pki/">flexkube_pki</a></li>
+<li><a href="/documentation/reference/terraform/resources/flexkube_etcd_cluster/">flexkube_etcd_cluster</a></li>
+<li><a href="/documentation/reference/terraform/resources/flexkube_controlplane/">flexkube_controlplane</a></li>
+<li><a href="/documentation/reference/terraform/resources/flexkube_api_loadbalancer_pool/">flexkube_api_loadbalancer_pool</a></li>
+<li><a href="/documentation/reference/terraform/resources/flexkube_kubelet_pool/">flexkube_kubelet_pool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Helm charts
+<ul>
+<li>kube-apiserver</li>
+<li>kubernetes</li>
+<li>tls-bootstrapping</li>
+<li>calico</li>
+<li>kubelet-rubber-stamp</li>
+</ul>
+</li>
+<li><a href="/documentation/reference/go/">Go</a></li>
+</ul>
+</li>
+<li>Project status</li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Creating Multi Member Cluster Over Ssh Using Terraform</strong>
+
+  <label for="toc-control">
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#requirements">Requirements</a></li>
+    <li><a href="#preparation">Preparation</a>
+      <ul>
+        <li><a href="#ip-addresses-for-etcd-members-and-ssh">IP addresses for etcd members and SSH</a></li>
+        <li><a href="#downloading-terraform-binary">Downloading <code>terraform</code> binary</a></li>
+        <li><a href="#downloading-terraform-provider-flexkube-binary">Downloading <code>terraform-provider-flexkube</code> binary</a></li>
+        <li><a href="#downloading-etcdctl-binary-optional">Downloading <code>etcdctl</code> binary (optional)</a></li>
+        <li><a href="#make-downloaded-binaries-available-in-path">Make downloaded binaries available in $PATH</a></li>
+      </ul>
+    </li>
+    <li><a href="#creating-the-cluster">Creating the cluster</a>
+      <ul>
+        <li><a href="#terraform-configuration">Terraform configuration</a></li>
+        <li><a href="#terraform-values">Terraform values</a></li>
+        <li><a href="#running-terraform">Running Terraform</a></li>
+      </ul>
+    </li>
+    <li><a href="#verifying-cluster-functionality">Verifying cluster functionality</a>
+      <ul>
+        <li><a href="#inspect-created-files">Inspect created files</a></li>
+        <li><a href="#using-etcdctl">Using <code>etcdctl</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#whats-next">What&rsquo;s next</a></li>
+    <li><a href="#cleaning-up">Cleaning up</a></li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="creating-multi-member-cluster-over-ssh-using-terraform">Creating multi-member cluster over SSH using Terraform</h1>
+<p>This guide describes how to create multi member etcd cluster using Terraform and Flexkube provider. The process is very simple and requires just a few steps. If you have at least 3 members, your cluster will be able to tolerate loss on one member, so it will be highly available.</p>
+<h2 id="requirements">Requirements</h2>
+<p>For this guide, it is required to have at least 2 Linux machines, with Docker daemon installed and running.</p>
+<p>It is recommended that machines has at least 1 GB of RAM and are fresh machines, as in tutorial the tools will write to directories like <code>/var/lib/etcd</code> or <code>/etc/kubernetes/</code>without notice.</p>
+<p>The Docker version should be 18.06+.</p>
+<p>Network interfaces setup is not important, however having a private IP address is recommended from security perspective.</p>
+<p>The machines must be able to communicate with each other.</p>
+
+<div class="book-expand">
+  <label>
+    <div class="book-expand-head flex justify-between">
+      <span>I don&#39;t have such machines.</span>
+      <span>↕</span>
+    </div>
+    <input type="checkbox" class="hidden" />
+    <div class="book-expand-content markdown-inner">
+      <p>If you don&rsquo;t have such machines available, you can create it locally, using <a href="https://www.virtualbox.org/">VirtualBox</a> and <a href="https://www.vagrantup.com/">Vagrant</a>. Make sure you have both tools installed by following respective guides:</p>
+<ul>
+<li><a href="https://www.virtualbox.org/manual/ch02.html">Installing VirtualBox</a></li>
+<li><a href="https://www.vagrantup.com/docs/installation/">Installing Vagrant</a></li>
+</ul>
+<p>Once done, create file named <code>Vagrantfile</code> with following content:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">Vagrant</span><span style="color:#f92672">.</span>configure(<span style="color:#e6db74">&#34;2&#34;</span>) <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span>config<span style="color:#f92672">|</span>
+  config<span style="color:#f92672">.</span>vm<span style="color:#f92672">.</span>box       <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;flatcar-stable&#34;</span>
+  config<span style="color:#f92672">.</span>vm<span style="color:#f92672">.</span>box_url   <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://stable.release.flatcar-linux.net/amd64-usr/current/flatcar_production_vagrant.box&#34;</span>
+  config<span style="color:#f92672">.</span>ssh<span style="color:#f92672">.</span>username <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;core&#39;</span>
+  config<span style="color:#f92672">.</span>vm<span style="color:#f92672">.</span>provider <span style="color:#e6db74">:virtualbox</span> <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span>v<span style="color:#f92672">|</span>
+    v<span style="color:#f92672">.</span>memory <span style="color:#f92672">=</span> <span style="color:#ae81ff">1024</span>
+  <span style="color:#66d9ef">end</span>
+
+  config<span style="color:#f92672">.</span>vm<span style="color:#f92672">.</span>define <span style="color:#e6db74">&#34;member1&#34;</span> <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span>config<span style="color:#f92672">|</span>
+    config<span style="color:#f92672">.</span>vm<span style="color:#f92672">.</span>hostname <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;member1&#34;</span>
+    config<span style="color:#f92672">.</span>vm<span style="color:#f92672">.</span>network <span style="color:#e6db74">&#34;private_network&#34;</span>, <span style="color:#e6db74">ip</span>: <span style="color:#e6db74">&#34;192.168.52.10&#34;</span>
+  <span style="color:#66d9ef">end</span>
+
+  config<span style="color:#f92672">.</span>vm<span style="color:#f92672">.</span>define <span style="color:#e6db74">&#34;member2&#34;</span> <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span>config<span style="color:#f92672">|</span>
+    config<span style="color:#f92672">.</span>vm<span style="color:#f92672">.</span>hostname <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;member2&#34;</span>
+    config<span style="color:#f92672">.</span>vm<span style="color:#f92672">.</span>network <span style="color:#e6db74">&#34;private_network&#34;</span>, <span style="color:#e6db74">ip</span>: <span style="color:#e6db74">&#34;192.168.52.11&#34;</span>
+  <span style="color:#66d9ef">end</span>
+<span style="color:#66d9ef">end</span>
+</code></pre></div><p>Then, run the following commands to create the machines:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">vagrant up 
+</code></pre></div>
+    </div>
+  </label>
+</div>
+
+<h2 id="preparation">Preparation</h2>
+<p>Before we start creating a cluster, we need to gather some information and download required binaries.</p>
+<h3 id="ip-addresses-for-etcd-members-and-ssh">IP addresses for etcd members and SSH</h3>
+<p>IP addresses of members must be known ahead of cluster creation time.</p>
+<p>You can find available IP addresses on your machines using e.g. <code>ifconfig</code> tool.</p>
+<p>You can try getting the IP address automatically using the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">ip addr show dev <span style="color:#66d9ef">$(</span>ip r | grep default | tr <span style="color:#e6db74">&#39; &#39;</span> <span style="color:#ae81ff">\\</span>n | grep -A1 dev | tail -n1<span style="color:#66d9ef">)</span> | grep <span style="color:#e6db74">&#39;inet &#39;</span> | awk <span style="color:#e6db74">&#39;{print $2}&#39;</span> | cut -d/ -f1
+</code></pre></div><p>Save the IP addresses of your machines, as they will be needed later on for configuration.</p>
+<blockquote class="book-hint warning">
+  If you plan to use different IP addresses for connecting over SSH to your machines and different for members to communicate, note both of them.
+</blockquote>
+
+<h3 id="downloading-terraform-binary">Downloading <code>terraform</code> binary</h3>
+<p>For this guide, you must have <code>terraform</code> binary available. You can download it using the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export VERSION<span style="color:#f92672">=</span>0.12.26
+wget https://releases.hashicorp.com/terraform/<span style="color:#e6db74">${</span>VERSION<span style="color:#e6db74">}</span>/terraform_<span style="color:#e6db74">${</span>VERSION<span style="color:#e6db74">}</span>_linux_amd64.zip <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>unzip terraform_<span style="color:#e6db74">${</span>VERSION<span style="color:#e6db74">}</span>_linux_amd64.zip <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>rm terraform_0.12.26_linux_amd64.zip
+</code></pre></div><h3 id="downloading-terraform-provider-flexkube-binary">Downloading <code>terraform-provider-flexkube</code> binary</h3>
+<p>Execute the following command to download <code>flexkube</code> CLI binary into working directory on the machine where you want to create the etcd cluster.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export VERSION<span style="color:#f92672">=</span>v0.3.0
+wget -O- https://github.com/flexkube/libflexkube/releases/download/<span style="color:#e6db74">${</span>VERSION<span style="color:#e6db74">}</span>/terraform-provider-flexkube_<span style="color:#e6db74">${</span>VERSION<span style="color:#e6db74">}</span>_linux_amd64.tar.gz | tar zxvf - terraform-provider-flexkube_<span style="color:#e6db74">${</span>VERSION<span style="color:#e6db74">}</span>_x4
+</code></pre></div><h3 id="downloading-etcdctl-binary-optional">Downloading <code>etcdctl</code> binary (optional)</h3>
+<p>To test cluster functionality, you can download <code>etcdctl</code> binary, however, this is optional. Also, if you use Flatcar Container Linux, the binary should be available on the system already.</p>
+<p>You can download it using the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export ETCD_VER<span style="color:#f92672">=</span>v3.4.9
+wget https://storage.googleapis.com/etcd/<span style="color:#e6db74">${</span>ETCD_VER<span style="color:#e6db74">}</span>/etcd-<span style="color:#e6db74">${</span>ETCD_VER<span style="color:#e6db74">}</span>-linux-amd64.tar.gz -O- | tar zxvf - etcd-<span style="color:#e6db74">${</span>ETCD_VER<span style="color:#e6db74">}</span>-linux-amd64/etcdctl <span style="color:#f92672">&amp;&amp;</span> mv etcd-<span style="color:#e6db74">${</span>ETCD_VER<span style="color:#e6db74">}</span>-linux-amd64/etcdctl ./ <span style="color:#f92672">&amp;&amp;</span> rm
+dir etcd-<span style="color:#e6db74">${</span>ETCD_VER<span style="color:#e6db74">}</span>-linux-amd64
+</code></pre></div><h3 id="make-downloaded-binaries-available-in-path">Make downloaded binaries available in $PATH</h3>
+<p>For compatibility with rest of the tutorial, you should make sure that downloaded binaries are in one of the directories in the $PATH environment variable.</p>
+<p>You can also add working directory to the $PATH using the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>pwd<span style="color:#66d9ef">)</span><span style="color:#e6db74">:</span><span style="color:#e6db74">${</span>PATH<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</code></pre></div><h2 id="creating-the-cluster">Creating the cluster</h2>
+<p>Now that you have all required binaries and information, we can start creating the cluster.</p>
+<h3 id="terraform-configuration">Terraform configuration</h3>
+<p>First, create <code>main.tf</code> file with the following content:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tf" data-lang="tf"><span style="color:#66d9ef">provider</span> <span style="color:#e6db74">&#34;flexkube&#34;</span> {
+  <span style="color:#a6e22e">version</span> = <span style="color:#e6db74">&#34;0.3.0&#34;</span>
+}
+<span style="color:#66d9ef">
+</span><span style="color:#66d9ef">provider</span> <span style="color:#e6db74">&#34;local&#34;</span> {
+  <span style="color:#a6e22e">version</span> = <span style="color:#e6db74">&#34;1.4.0&#34;</span>
+}
+<span style="color:#66d9ef">
+</span><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;members&#34;</span> {
+  <span style="color:#a6e22e">type</span> = map(<span style="color:#a6e22e">object</span>({
+    <span style="color:#a6e22e">peer_address</span> = <span style="color:#a6e22e">string</span>
+    <span style="color:#a6e22e">ssh_address</span>  = <span style="color:#a6e22e">string</span>
+  }))
+}
+<span style="color:#66d9ef">
+</span><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;ssh_user&#34;</span> {
+  <span style="color:#a6e22e">default</span> = <span style="color:#e6db74">&#34;&#34;</span>
+}
+<span style="color:#66d9ef">
+</span><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;ssh_password&#34;</span> {
+  <span style="color:#a6e22e">default</span> = <span style="color:#e6db74">&#34;&#34;</span>
+}
+<span style="color:#66d9ef">
+</span><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;ssh_private_key&#34;</span> {
+  <span style="color:#a6e22e">default</span> = <span style="color:#e6db74">&#34;&#34;</span>
+}
+<span style="color:#66d9ef">
+</span><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;flexkube_pki&#34;</span> <span style="color:#e6db74">&#34;pki&#34;</span> {
+  <span style="color:#a6e22e">etcd</span> {
+    <span style="color:#a6e22e">peers</span> = { <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">member</span> <span style="color:#66d9ef">in</span> var.<span style="color:#a6e22e">members</span> <span style="color:#f92672">:</span> <span style="color:#a6e22e">name</span> =&gt; <span style="color:#a6e22e">member</span>.<span style="color:#a6e22e">peer_address</span> }
+
+    <span style="color:#a6e22e">servers</span> = { <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">member</span> <span style="color:#66d9ef">in</span> var.<span style="color:#a6e22e">members</span> <span style="color:#f92672">:</span> <span style="color:#a6e22e">name</span> =&gt; <span style="color:#a6e22e">member</span>.<span style="color:#a6e22e">peer_address</span> }
+
+    <span style="color:#a6e22e">client_cns</span> = [<span style="color:#e6db74">&#34;root&#34;</span>]
+  }
+}
+<span style="color:#66d9ef">
+</span><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;flexkube_etcd_cluster&#34;</span> <span style="color:#e6db74">&#34;etcd&#34;</span> {
+  <span style="color:#a6e22e">pki_yaml</span> = <span style="color:#a6e22e">flexkube_pki</span>.<span style="color:#a6e22e">pki</span>.<span style="color:#a6e22e">state_yaml</span>
+
+  <span style="color:#a6e22e">dynamic</span> <span style="color:#e6db74">&#34;member&#34;</span> {
+    <span style="color:#a6e22e">for_each</span> = var.<span style="color:#a6e22e">members</span>
+
+    <span style="color:#a6e22e">content</span> {
+      <span style="color:#a6e22e">name</span>           = <span style="color:#a6e22e">member</span>.<span style="color:#a6e22e">key</span>
+      <span style="color:#a6e22e">peer_address</span>   = <span style="color:#a6e22e">member</span>.<span style="color:#a6e22e">value</span>.<span style="color:#a6e22e">peer_address</span>
+      <span style="color:#a6e22e">server_address</span> = <span style="color:#a6e22e">member</span>.<span style="color:#a6e22e">value</span>.<span style="color:#a6e22e">peer_address</span>
+
+      <span style="color:#a6e22e">host</span> {
+        <span style="color:#a6e22e">ssh</span> {
+          <span style="color:#a6e22e">user</span>        = var.<span style="color:#a6e22e">ssh_user</span>
+          <span style="color:#a6e22e">password</span>    = var.<span style="color:#a6e22e">ssh_password</span>
+          <span style="color:#a6e22e">private_key</span> = var.<span style="color:#a6e22e">ssh_private_key</span>
+          <span style="color:#a6e22e">address</span>     = <span style="color:#a6e22e">member</span>.<span style="color:#a6e22e">value</span>.<span style="color:#a6e22e">ssh_address</span>
+        }
+      }
+    }
+  }
+}
+
+<span style="color:#a6e22e">locals</span> {
+  <span style="color:#a6e22e">ca_cert</span> = <span style="color:#e6db74">&#34;./ca.pem&#34;</span>
+  <span style="color:#a6e22e">cert</span>    = <span style="color:#e6db74">&#34;./client.pem&#34;</span>
+  <span style="color:#a6e22e">key</span>     = <span style="color:#e6db74">&#34;./client.key&#34;</span>
+}
+<span style="color:#66d9ef">
+</span><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;local_file&#34;</span> <span style="color:#e6db74">&#34;etcd_ca_certificate&#34;</span> {
+  <span style="color:#a6e22e">content</span>  = <span style="color:#a6e22e">flexkube_pki</span>.<span style="color:#a6e22e">pki</span>.<span style="color:#a6e22e">etcd</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">ca</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">x509_certificate</span>
+  <span style="color:#a6e22e">filename</span> = <span style="color:#a6e22e">local</span>.<span style="color:#a6e22e">ca_cert</span>
+}
+<span style="color:#66d9ef">
+</span><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;local_file&#34;</span> <span style="color:#e6db74">&#34;etcd_root_user_certificate&#34;</span> {
+  <span style="color:#a6e22e">content</span>  = <span style="color:#a6e22e">flexkube_pki</span>.<span style="color:#a6e22e">pki</span>.<span style="color:#a6e22e">etcd</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">client_certificates</span>[<span style="color:#a6e22e">index</span>(<span style="color:#a6e22e">flexkube_pki</span>.<span style="color:#a6e22e">pki</span>.<span style="color:#a6e22e">etcd</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">client_cns</span>, <span style="color:#e6db74">&#34;root&#34;</span>)].<span style="color:#a6e22e">x509_certificate</span>
+  <span style="color:#a6e22e">filename</span> = <span style="color:#a6e22e">local</span>.<span style="color:#a6e22e">cert</span>
+}
+<span style="color:#66d9ef">
+</span><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;local_file&#34;</span> <span style="color:#e6db74">&#34;etcd_root_user_private_key&#34;</span> {
+  <span style="color:#a6e22e">sensitive_content</span> = <span style="color:#a6e22e">flexkube_pki</span>.<span style="color:#a6e22e">pki</span>.<span style="color:#a6e22e">etcd</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">client_certificates</span>[<span style="color:#a6e22e">index</span>(<span style="color:#a6e22e">flexkube_pki</span>.<span style="color:#a6e22e">pki</span>.<span style="color:#a6e22e">etcd</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">client_cns</span>, <span style="color:#e6db74">&#34;root&#34;</span>)].<span style="color:#a6e22e">private_key</span>
+  <span style="color:#a6e22e">filename</span>          = <span style="color:#a6e22e">local</span>.<span style="color:#a6e22e">key</span>
+}
+<span style="color:#66d9ef">
+</span><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;local_file&#34;</span> <span style="color:#e6db74">&#34;etcd_environment&#34;</span> {
+  <span style="color:#a6e22e">filename</span> = <span style="color:#e6db74">&#34;./etcd.env&#34;</span>
+  <span style="color:#a6e22e">content</span>  = <span style="color:#f92672">&lt;&lt;EOF</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">#!/bin/bash
+</span><span style="color:#e6db74">export ETCDCTL_API=3
+</span><span style="color:#e6db74">export ETCDCTL_CACERT=${abspath(local.ca_cert)}
+</span><span style="color:#e6db74">export ETCDCTL_CERT=${abspath(local.cert)}
+</span><span style="color:#e6db74">export ETCDCTL_KEY=${abspath(local.key)}
+</span><span style="color:#e6db74">export ETCDCTL_ENDPOINTS=&#34;${join(&#34;,&#34;, formatlist(&#34;https://%s:2379&#34;, [for name, member in var.members : member.peer_address]))}&#34;
+</span><span style="color:#e6db74"></span><span style="color:#f92672">EOF</span>
+
+  <span style="color:#a6e22e">depends_on</span> = [
+    <span style="color:#a6e22e">flexkube_etcd_cluster</span>.<span style="color:#a6e22e">etcd</span>,
+  ]
+}
+</code></pre></div><h3 id="terraform-values">Terraform values</h3>
+<p>Next, create file named <code>values.auto.tfvars</code>, which will store the values required by the Terraform configuration. The file should look like following:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tf" data-lang="tf"><span style="color:#a6e22e">members</span> = {
+  <span style="color:#e6db74">&#34;member1&#34;</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">peer_address</span> = <span style="color:#e6db74">&#34;192.168.52.10&#34;</span>
+    <span style="color:#a6e22e">ssh_address</span>  = <span style="color:#e6db74">&#34;192.168.52.10&#34;</span>
+  },
+  <span style="color:#e6db74">&#34;member2&#34;</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">peer_address</span> = <span style="color:#e6db74">&#34;192.168.52.11&#34;</span>
+    <span style="color:#a6e22e">ssh_address</span>  = <span style="color:#e6db74">&#34;192.168.52.11&#34;</span>
+  },
+}
+
+<span style="color:#a6e22e">ssh_user</span>        = <span style="color:#e6db74">&#34;core&#34;</span>
+<span style="color:#a6e22e">ssh_password</span>    = <span style="color:#e6db74">&#34;&#34;</span>
+<span style="color:#a6e22e">ssh_port</span>        = <span style="color:#ae81ff">22</span>
+<span style="color:#a6e22e">ssh_private_key</span> = <span style="color:#960050;background-color:#1e0010">&lt;</span><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">EOF</span>
+<span style="color:#a6e22e">EOF</span>
+</code></pre></div><p>First, it has defined map of members, where they key is the member name and then each member has peer address and SSH address defined. <code>peer_address</code> will be used for etcd and <code>ssh_address</code> will be used to SSH into the machines.</p>
+<p>Next, make sure that SSH settings are correct. If the SSH key, which is authorized to log in into the machines, is loaded in your <code>ssh-agent</code>, you don&rsquo;t need to specify any credentials. Flexkube will automatically pick it up and use it. If not, you can specify content of private key in <code>ssh_private_key</code> field or use password authentication using <code>ssh_password</code> field.</p>
+<p>Using bastion host is currently not supported, though it will be in the future.</p>
+<h3 id="running-terraform">Running Terraform</h3>
+<p>Now, to create the cluster run following commands:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">terraform init <span style="color:#f92672">&amp;&amp;</span> terraform apply
+</code></pre></div><p>If everything went successfully, you should see now running etcd container, when you execute <code>docker ps</code> on the machines.</p>
+<h2 id="verifying-cluster-functionality">Verifying cluster functionality</h2>
+<p>Now that the cluster is running, we can verify that it is functional.</p>
+<h3 id="inspect-created-files">Inspect created files</h3>
+<p>After creating the cluster, you can find following files in the working directory, created by Terraform:</p>
+<ul>
+<li><code>ca.pem</code> containing etcd CA X.509 certificate in PEM format.</li>
+<li><code>client.pem</code> containing etcd client X.509 certificate in PEM format, with <code>root</code> Common Name.</li>
+<li><code>client.key</code> RSA private key in PEM format for certificate in <code>client.pem</code>file.</li>
+<li><code>etcd.env</code> containing environment variables needed for <code>etcdctl</code>.</li>
+</ul>
+<p>Certificates and private key files are required to access the cluster. The <code>etcd.env</code> file is just a helper file for this tutorial.</p>
+<p>The files can also be safely removed, as all the certificates are stored in Terraform state anyway.</p>
+<h3 id="using-etcdctl">Using <code>etcdctl</code></h3>
+<p><code>etcdctl</code> can be used to verify that the cluster is functional and to perform some basic operations as well as administrative tasks.</p>
+<p>To be able to use it, it is recommended to set environment variables, pointing to the certificates and cluster members, so they don&rsquo;t have to be repeated for each command.</p>
+<p>With this guide, you get <code>etcd.env</code> helper file created, from which you can load the environment variables, using following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">source etcd.env
+</code></pre></div><p>Now <code>etcdctl</code> is ready to use.</p>
+<p>To check if cluster is healthy, execute the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">etcdctl endpoint health
+</code></pre></div><h2 id="whats-next">What&rsquo;s next</h2>
+<p>With cluster running, you can now start using it, e.g. to deploy Kubernetes cluster. To do that using Flexkube and Terraform, you can follow <a href="TODO">Creating multi node Kubernetes cluster over SSH using Terraform</a>.</p>
+<p>To clean up created resources, see the section below.</p>
+<h2 id="cleaning-up">Cleaning up</h2>
+<p>First step of removing the cluster is running Terraform, to remove all containers. To perform that, run this command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">terraform destroy
+</code></pre></div><p>Once finished, you can remove the directories created by the cluster, using the following command <strong>on the machines</strong>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo rm -rf /var/lib/etcd/ /etc/kubernetes/
+</code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/flexkube/website/edit/master/content//documentation/guides/etcd/creating-multi-member-cluster-over-ssh-using-terraform.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#requirements">Requirements</a></li>
+    <li><a href="#preparation">Preparation</a>
+      <ul>
+        <li><a href="#ip-addresses-for-etcd-members-and-ssh">IP addresses for etcd members and SSH</a></li>
+        <li><a href="#downloading-terraform-binary">Downloading <code>terraform</code> binary</a></li>
+        <li><a href="#downloading-terraform-provider-flexkube-binary">Downloading <code>terraform-provider-flexkube</code> binary</a></li>
+        <li><a href="#downloading-etcdctl-binary-optional">Downloading <code>etcdctl</code> binary (optional)</a></li>
+        <li><a href="#make-downloaded-binaries-available-in-path">Make downloaded binaries available in $PATH</a></li>
+      </ul>
+    </li>
+    <li><a href="#creating-the-cluster">Creating the cluster</a>
+      <ul>
+        <li><a href="#terraform-configuration">Terraform configuration</a></li>
+        <li><a href="#terraform-values">Terraform values</a></li>
+        <li><a href="#running-terraform">Running Terraform</a></li>
+      </ul>
+    </li>
+    <li><a href="#verifying-cluster-functionality">Verifying cluster functionality</a>
+      <ul>
+        <li><a href="#inspect-created-files">Inspect created files</a></li>
+        <li><a href="#using-etcdctl">Using <code>etcdctl</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#whats-next">What&rsquo;s next</a></li>
+    <li><a href="#cleaning-up">Cleaning up</a></li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
