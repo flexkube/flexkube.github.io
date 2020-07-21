@@ -12,11 +12,29 @@
     
     <item>
       <title></title>
+      <link>https://flexkube.github.io/documentation/concepts/managing-certificates/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/concepts/managing-certificates/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>https://flexkube.github.io/documentation/concepts/managing-containers/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://flexkube.github.io/documentation/concepts/managing-containers/</guid>
-      <description>FoOo </description>
+      <description>Managing containers This document should explain how libflexkube manages the containers.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/concepts/self-hosted-kubernetes-controlplane/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/concepts/self-hosted-kubernetes-controlplane/</guid>
+      <description>Self-hosted Kubernetes controlplane This document should describe why Flexkube uses and recommends using self-hosted Kubernetes controlplane, how it works etc.</description>
     </item>
     
   </channel>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en" dir=>
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://flexkube.github.io/documentation/reference/cli/commands/apiloadbalancer-pool/" />
+
+<title>Apiloadbalancer Pool | Flexkube</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.c3e2d100ba2319549e09b81b242634766bd799847cf02e1d6fa2426a64db14dc.css" integrity="sha256-w&#43;LRALojGVSeCbgbJCY0dmvXmYR88C4db6JCamTbFNw=">
+<script defer src="/en.search.min.f73a13d381eec3e0d8171979929020bbeee6e73f32fca6c56a293718c8e02039.js" integrity="sha256-9zoT04Huw&#43;DYFxl5kpAgu&#43;7m5z8y/KbFaik3GMjgIDk="></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><img src="/assets/icon.svg" alt="Logo" /><span>Flexkube</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  <ul>
+<li><a href="/documentation/"><strong>Documentation</strong></a>
+<ul>
+<li><a href="/documentation/overview/">Overview</a></li>
+<li><a href="/documentation/getting-started/">Getting Started</a>
+<ul>
+<li><a href="/documentation/getting-started/requirements/">Requirements</a></li>
+<li><a href="/documentation/getting-started/installing/">Installing</a>
+<ul>
+<li><a href="/documentation/getting-started/installing/cli/">CLI binary</a></li>
+<li><a href="/documentation/getting-started/installing/terraform/">Terraform Provider</a></li>
+<li><a href="/documentation/getting-started/installing/go/">Go module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="/documentation/guides/">Guides</a>
+<ul>
+<li><a href="/documentation/guides/etcd/">etcd</a>
+<ul>
+<li><a href="/documentation/guides/etcd/creating-single-member-cluster-on-local-machine-using-terraform/">Creating single-member cluster on local machine using Terraform</a></li>
+<li><a href="/documentation/guides/etcd/creating-single-member-cluster-on-local-machine-using-flexkube-cli/">Creating single-member cluster on local machine using Flexkube CLI</a></li>
+<li><a href="/documentation/guides/etcd/creating-multi-member-cluster-over-ssh-using-terraform/">Creating multi-node cluster over SSH using Terraform</a></li>
+</ul>
+</li>
+<li><a href="/documentation/guides/kubernetes/">Kubernetes</a>
+<ul>
+<li><a href="/documentation/guides/kubernetes/creating-single-node-cluster-on-local-machine-using-flexkube-cli/">Creating single-node cluster on local machine using &ldquo;flexkube&rdquo; CLI</a></li>
+<li><a href="/documentation/guides/kubernetes/creating-single-node-cluster-on-local-machine-using-terraform/">Creating single-node cluster on local machine using Terraform</a></li>
+<li><a href="/documentation/guides/kubernetes/creating-multi-node-cluster-using-terraform/">Creating multi-node cluster using Terraform</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="/documentation/concepts/">Concepts</a>
+<ul>
+<li><a href="/documentation/concepts/managing-containers/">Managing containers</a></li>
+<li><a href="/documentation/concepts/managing-certificates/">Managing Kubernetes certificates</a></li>
+<li><a href="/documentation/concepts/supported-transport-protocols/">Supported transport protocols</a>
+<ul>
+<li><a href="/documentation/concepts/supported-transport-protocols/direct/">Direct</a></li>
+<li><a href="/documentation/concepts/supported-transport-protocols/ssh/">SSH</a></li>
+</ul>
+</li>
+<li><a href="/documentation/concepts/supported-container-runtimes/">Supported container runtimes</a>
+<ul>
+<li><a href="/documentation/concepts/supported-container-runtimes/docker/">Docker</a></li>
+</ul>
+</li>
+<li><a href="/documentation/concepts/self-hosted-kubernetes-controlplane/">Self-hosted Kubernetes controlplane</a></li>
+</ul>
+</li>
+<li><a href="/documentation/resources/">Resources</a>
+<ul>
+<li><a href="/documentation/resources/pki/">PKI</a></li>
+<li><a href="/documentation/resources/etcd/">etcd</a></li>
+<li><a href="/documentation/resources/api-loadbalancer/">API Load Balancer</a></li>
+<li><a href="/documentation/resources/controlplane/">Controlplane</a></li>
+<li><a href="/documentation/resources/kubelet-pool/">Kubelet Pool</a></li>
+<li><a href="/documentation/resources/containers/">Containers</a></li>
+</ul>
+</li>
+<li><a href="/documentation/helm-charts/">Helm charts</a>
+<ul>
+<li><a href="/documentation/helm-charts/maintained/">Maintained</a>
+<ul>
+<li><a href="/documentation/helm-charts/maintained/calico/">calico</a></li>
+<li><a href="/documentation/helm-charts/maintained/kube-apiserver/">kube-apiserver</a></li>
+<li><a href="/documentation/helm-charts/maintained/kube-proxy/">kube-proxy</a></li>
+<li><a href="/documentation/helm-charts/maintained/kubelet-rubber-stamp/">kubelet-rubber-stamp</a></li>
+<li><a href="/documentation/helm-charts/maintained/kubernetes/">kubernetes</a></li>
+<li><a href="/documentation/helm-charts/maintained/tls-bootstrapping/">tls-bootstrapping</a></li>
+</ul>
+</li>
+<li><a href="/documentation/helm-charts/upstream/">Upstream</a>
+<ul>
+<li><a href="/documentation/helm-charts/upstream/stable-coredns/">stable/coredns</a></li>
+<li><a href="/documentation/helm-charts/upstream/stable-metrics-server/">stable/metrics-server</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="/documentation/reference/">Reference</a>
+<ul>
+<li><a href="/documentation/reference/cli/">CLI</a>
+<ul>
+<li><a href="/documentation/reference/cli/configuration/">Configuration</a>
+<ul>
+<li><a href="/documentation/reference/cli/configuration/kubelet-pool/">kubelet-pool</a></li>
+<li><a href="/documentation/reference/cli/configuration/apiloadbalancer-pool/">apiloadbalancer-pool</a></li>
+<li><a href="/documentation/reference/cli/configuration/etcd/">etcd</a></li>
+<li><a href="/documentation/reference/cli/configuration/pki/">pki</a></li>
+<li><a href="/documentation/reference/cli/configuration/controlplane/">controlplane</a></li>
+<li><a href="/documentation/reference/cli/configuration/containers/">containers</a></li>
+</ul>
+</li>
+<li><a href="/documentation/reference/cli/commands/">Commands</a>
+<ul>
+<li><a href="/documentation/reference/cli/commands/kubelet-pool/">kubelet-pool</a></li>
+<li><a href="/documentation/reference/cli/commands/apiloadbalancer-pool/"class=active>apiloadbalancer-pool</a></li>
+<li><a href="/documentation/reference/cli/commands/etcd/">etcd</a></li>
+<li><a href="/documentation/reference/cli/commands/pki/">pki</a></li>
+<li><a href="/documentation/reference/cli/commands/controlplane/">controlplane</a></li>
+<li><a href="/documentation/reference/cli/commands/kubeconfig/">kubeconfig</a></li>
+<li><a href="/documentation/reference/cli/commands/containers/">containers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="/documentation/reference/terraform/">Terraform</a>
+<ul>
+<li><a href="/documentation/reference/terraform/flexkube-provider/">Flexkube provider</a></li>
+<li><a href="/documentation/reference/terraform/resources/">Resources</a>
+<ul>
+<li><a href="/documentation/reference/terraform/resources/flexkube_pki/">flexkube_pki</a></li>
+<li><a href="/documentation/reference/terraform/resources/flexkube_etcd_cluster/">flexkube_etcd_cluster</a></li>
+<li><a href="/documentation/reference/terraform/resources/flexkube_controlplane/">flexkube_controlplane</a></li>
+<li><a href="/documentation/reference/terraform/resources/flexkube_api_loadbalancer_pool/">flexkube_api_loadbalancer_pool</a></li>
+<li><a href="/documentation/reference/terraform/resources/flexkube_kubelet_pool/">flexkube_kubelet_pool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="/documentation/reference/helm-charts/">Helm charts</a>
+<ul>
+<li><a href="/documentation/reference/helm-charts/kube-apiserver/">kube-apiserver</a></li>
+<li><a href="/documentation/reference/helm-charts/kubernetes/">kubernetes</a></li>
+<li><a href="/documentation/reference/helm-charts/tls-bootstrapping/">tls-bootstrapping</a></li>
+<li><a href="/documentation/reference/helm-charts/calico/">calico</a></li>
+<li><a href="/documentation/reference/helm-charts/kubelet-rubber-stamp/">kubelet-rubber-stamp</a></li>
+</ul>
+</li>
+<li><a href="/documentation/reference/go/">Go</a></li>
+</ul>
+</li>
+<li><a href="/documentation/project-status/">Project status</a></li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Apiloadbalancer Pool</strong>
+
+  <label for="toc-control">
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents"></nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/flexkube/website/edit/master/content//documentation/reference/cli/commands/apiloadbalancer-pool.md" target="_blank" rel="noopener">
+      <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents"></nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

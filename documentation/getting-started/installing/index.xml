@@ -18,8 +18,17 @@
       <guid>https://flexkube.github.io/documentation/getting-started/installing/cli/</guid>
       <description>Flexkube CLI Download the pre-built binary The easiest way to get Flexkube CLI	is to use one of the pre-built release binaries which are available for macOS and Linux.
 See Github Releases page for finding the latest available release.
-For example, to download version v.0.2.2 on Linux, execute the following command:
-VERSION=v0.2.2 TODO It will download the flexkube binary into your current directory. It is recommende to move this binary into one of directories mentioned in your $PATH environment variable, e.</description>
+For example, to download version v0.3.0 on Linux, execute the following command:
+VERSION=v0.3.0 It will download the flexkube binary into your current directory. It is recommende to move this binary into one of directories mentioned in your $PATH environment variable, e.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/getting-started/installing/go/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/getting-started/installing/go/</guid>
+      <description>Go module This document should describe how to include libflexkube Go packages as part of your Go project.</description>
     </item>
     
     <item>

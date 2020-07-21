@@ -12,11 +12,56 @@
     
     <item>
       <title></title>
+      <link>https://flexkube.github.io/documentation/concepts/managing-certificates/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/concepts/managing-certificates/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>https://flexkube.github.io/documentation/concepts/managing-containers/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://flexkube.github.io/documentation/concepts/managing-containers/</guid>
-      <description>FoOo </description>
+      <description>Managing containers This document should explain how libflexkube manages the containers.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/concepts/self-hosted-kubernetes-controlplane/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/concepts/self-hosted-kubernetes-controlplane/</guid>
+      <description>Self-hosted Kubernetes controlplane This document should describe why Flexkube uses and recommends using self-hosted Kubernetes controlplane, how it works etc.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/concepts/supported-container-runtimes/docker/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/concepts/supported-container-runtimes/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/concepts/supported-transport-protocols/direct/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/concepts/supported-transport-protocols/direct/</guid>
+      <description>Direct transport protocol This document should explain how direct transport protocol works.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/concepts/supported-transport-protocols/ssh/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/concepts/supported-transport-protocols/ssh/</guid>
+      <description>SSH transport protocol This document should explain how SSH transport protocol works.</description>
     </item>
     
     <item>
@@ -27,8 +72,17 @@
       <guid>https://flexkube.github.io/documentation/getting-started/installing/cli/</guid>
       <description>Flexkube CLI Download the pre-built binary The easiest way to get Flexkube CLI	is to use one of the pre-built release binaries which are available for macOS and Linux.
 See Github Releases page for finding the latest available release.
-For example, to download version v.0.2.2 on Linux, execute the following command:
-VERSION=v0.2.2 TODO It will download the flexkube binary into your current directory. It is recommende to move this binary into one of directories mentioned in your $PATH environment variable, e.</description>
+For example, to download version v0.3.0 on Linux, execute the following command:
+VERSION=v0.3.0 It will download the flexkube binary into your current directory. It is recommende to move this binary into one of directories mentioned in your $PATH environment variable, e.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/getting-started/installing/go/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/getting-started/installing/go/</guid>
+      <description>Go module This document should describe how to include libflexkube Go packages as part of your Go project.</description>
     </item>
     
     <item>
@@ -117,6 +171,249 @@ Requirements For this guide, it is required to have one Linux machine, with Dock
     
     <item>
       <title></title>
+      <link>https://flexkube.github.io/documentation/helm-charts/maintained/calico/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/helm-charts/maintained/calico/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/helm-charts/maintained/kube-apiserver/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/helm-charts/maintained/kube-apiserver/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/helm-charts/maintained/kube-proxy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/helm-charts/maintained/kube-proxy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/helm-charts/maintained/kubelet-rubber-stamp/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/helm-charts/maintained/kubelet-rubber-stamp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/helm-charts/maintained/kubernetes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/helm-charts/maintained/kubernetes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/helm-charts/maintained/tls-bootstrapping/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/helm-charts/maintained/tls-bootstrapping/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/helm-charts/upstream/stable-coredns/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/helm-charts/upstream/stable-coredns/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/helm-charts/upstream/stable-metrics-server/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/helm-charts/upstream/stable-metrics-server/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/project-status/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/project-status/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/cli/commands/apiloadbalancer-pool/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/cli/commands/apiloadbalancer-pool/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/cli/commands/containers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/cli/commands/containers/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/cli/commands/controlplane/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/cli/commands/controlplane/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/cli/commands/etcd/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/cli/commands/etcd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/cli/commands/kubeconfig/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/cli/commands/kubeconfig/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/cli/commands/kubelet-pool/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/cli/commands/kubelet-pool/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/cli/commands/pki/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/cli/commands/pki/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/cli/configuration/apiloadbalancer-pool/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/cli/configuration/apiloadbalancer-pool/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/cli/configuration/containers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/cli/configuration/containers/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/cli/configuration/controlplane/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/cli/configuration/controlplane/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/cli/configuration/etcd/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/cli/configuration/etcd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/cli/configuration/kubelet-pool/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/cli/configuration/kubelet-pool/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/cli/configuration/pki/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/cli/configuration/pki/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/helm-charts/calico/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/helm-charts/calico/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/helm-charts/kube-apiserver/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/helm-charts/kube-apiserver/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/helm-charts/kubelet-rubber-stamp/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/helm-charts/kubelet-rubber-stamp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/helm-charts/kubernetes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/helm-charts/kubernetes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/reference/helm-charts/tls-bootstrapping/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/reference/helm-charts/tls-bootstrapping/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>https://flexkube.github.io/documentation/reference/terraform/flexkube-provider/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -187,6 +484,15 @@ Example Usage provider &amp;#34;flexkube&amp;#34; {} </description>
       
       <guid>https://flexkube.github.io/documentation/resources/api-loadbalancer/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://flexkube.github.io/documentation/resources/containers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://flexkube.github.io/documentation/resources/containers/</guid>
+      <description>Containers resource This document should describe when containers resource is useful.</description>
     </item>
     
     <item>

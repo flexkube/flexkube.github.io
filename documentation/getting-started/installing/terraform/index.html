@@ -20,7 +20,7 @@ VERSION=v0.2.2 wget -qO- https://github.com/flexkube/libflexkube/releases/downlo
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.c3e2d100ba2319549e09b81b242634766bd799847cf02e1d6fa2426a64db14dc.css" integrity="sha256-w&#43;LRALojGVSeCbgbJCY0dmvXmYR88C4db6JCamTbFNw=">
-<script defer src="/en.search.min.35543c814fafb3e100b2456f4924d9f036d57cc4776535a5c0938aaa14957296.js" integrity="sha256-NVQ8gU&#43;vs&#43;EAskVvSSTZ8DbVfMR3ZTWlwJOKqhSVcpY="></script>
+<script defer src="/en.search.min.f73a13d381eec3e0d8171979929020bbeee6e73f32fca6c56a293718c8e02039.js" integrity="sha256-9zoT04Huw&#43;DYFxl5kpAgu&#43;7m5z8y/KbFaik3GMjgIDk="></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -67,18 +67,15 @@ https://github.com/alex-shpak/hugo-book
 <li><a href="/documentation/getting-started/installing/">Installing</a>
 <ul>
 <li><a href="/documentation/getting-started/installing/cli/">CLI binary</a></li>
-<li><a href="/documentation/getting-started/installing/terraform/"class=active>Terraform Provider</a>
-<ul>
-<li>Go module</li>
-</ul>
-</li>
+<li><a href="/documentation/getting-started/installing/terraform/"class=active>Terraform Provider</a></li>
+<li><a href="/documentation/getting-started/installing/go/">Go module</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li><a href="/documentation/guides/">Guides</a>
 <ul>
-<li>etcd
+<li><a href="/documentation/guides/etcd/">etcd</a>
 <ul>
 <li><a href="/documentation/guides/etcd/creating-single-member-cluster-on-local-machine-using-terraform/">Creating single-member cluster on local machine using Terraform</a></li>
 <li><a href="/documentation/guides/etcd/creating-single-member-cluster-on-local-machine-using-flexkube-cli/">Creating single-member cluster on local machine using Flexkube CLI</a></li>
@@ -97,10 +94,19 @@ https://github.com/alex-shpak/hugo-book
 <li><a href="/documentation/concepts/">Concepts</a>
 <ul>
 <li><a href="/documentation/concepts/managing-containers/">Managing containers</a></li>
-<li>Managing Kubernetes certificates</li>
-<li>Supported transport protocols</li>
-<li>Supported container runtimes</li>
-<li>Self-hosted Kubernetes controlplane</li>
+<li><a href="/documentation/concepts/managing-certificates/">Managing Kubernetes certificates</a></li>
+<li><a href="/documentation/concepts/supported-transport-protocols/">Supported transport protocols</a>
+<ul>
+<li><a href="/documentation/concepts/supported-transport-protocols/direct/">Direct</a></li>
+<li><a href="/documentation/concepts/supported-transport-protocols/ssh/">SSH</a></li>
+</ul>
+</li>
+<li><a href="/documentation/concepts/supported-container-runtimes/">Supported container runtimes</a>
+<ul>
+<li><a href="/documentation/concepts/supported-container-runtimes/docker/">Docker</a></li>
+</ul>
+</li>
+<li><a href="/documentation/concepts/self-hosted-kubernetes-controlplane/">Self-hosted Kubernetes controlplane</a></li>
 </ul>
 </li>
 <li><a href="/documentation/resources/">Resources</a>
@@ -110,25 +116,25 @@ https://github.com/alex-shpak/hugo-book
 <li><a href="/documentation/resources/api-loadbalancer/">API Load Balancer</a></li>
 <li><a href="/documentation/resources/controlplane/">Controlplane</a></li>
 <li><a href="/documentation/resources/kubelet-pool/">Kubelet Pool</a></li>
-<li>Containers</li>
+<li><a href="/documentation/resources/containers/">Containers</a></li>
 </ul>
 </li>
 <li><a href="/documentation/helm-charts/">Helm charts</a>
 <ul>
-<li>Maintained
+<li><a href="/documentation/helm-charts/maintained/">Maintained</a>
 <ul>
-<li>calico</li>
-<li>kube-apiserver</li>
-<li>kube-proxy</li>
-<li>kubelet-rubber-stamp</li>
-<li>kubernetes</li>
-<li>tls-bootstrapping</li>
+<li><a href="/documentation/helm-charts/maintained/calico/">calico</a></li>
+<li><a href="/documentation/helm-charts/maintained/kube-apiserver/">kube-apiserver</a></li>
+<li><a href="/documentation/helm-charts/maintained/kube-proxy/">kube-proxy</a></li>
+<li><a href="/documentation/helm-charts/maintained/kubelet-rubber-stamp/">kubelet-rubber-stamp</a></li>
+<li><a href="/documentation/helm-charts/maintained/kubernetes/">kubernetes</a></li>
+<li><a href="/documentation/helm-charts/maintained/tls-bootstrapping/">tls-bootstrapping</a></li>
 </ul>
 </li>
-<li>Upstream
+<li><a href="/documentation/helm-charts/upstream/">Upstream</a>
 <ul>
-<li>stable/coredns</li>
-<li>stable/metrics-server</li>
+<li><a href="/documentation/helm-charts/upstream/stable-coredns/">stable/coredns</a></li>
+<li><a href="/documentation/helm-charts/upstream/stable-metrics-server/">stable/metrics-server</a></li>
 </ul>
 </li>
 </ul>
@@ -137,25 +143,25 @@ https://github.com/alex-shpak/hugo-book
 <ul>
 <li><a href="/documentation/reference/cli/">CLI</a>
 <ul>
-<li>Configuration
+<li><a href="/documentation/reference/cli/configuration/">Configuration</a>
 <ul>
-<li>kubelet-pool</li>
-<li>apiloadbalancer-pool</li>
-<li>etcd</li>
-<li>pki</li>
-<li>controlplane</li>
-<li>containers</li>
+<li><a href="/documentation/reference/cli/configuration/kubelet-pool/">kubelet-pool</a></li>
+<li><a href="/documentation/reference/cli/configuration/apiloadbalancer-pool/">apiloadbalancer-pool</a></li>
+<li><a href="/documentation/reference/cli/configuration/etcd/">etcd</a></li>
+<li><a href="/documentation/reference/cli/configuration/pki/">pki</a></li>
+<li><a href="/documentation/reference/cli/configuration/controlplane/">controlplane</a></li>
+<li><a href="/documentation/reference/cli/configuration/containers/">containers</a></li>
 </ul>
 </li>
-<li>Commands
+<li><a href="/documentation/reference/cli/commands/">Commands</a>
 <ul>
-<li>kubelet-pool</li>
-<li>apiloadbalancer-pool</li>
-<li>etcd</li>
-<li>pki</li>
-<li>controlplane</li>
-<li>kubeconfig</li>
-<li>containers</li>
+<li><a href="/documentation/reference/cli/commands/kubelet-pool/">kubelet-pool</a></li>
+<li><a href="/documentation/reference/cli/commands/apiloadbalancer-pool/">apiloadbalancer-pool</a></li>
+<li><a href="/documentation/reference/cli/commands/etcd/">etcd</a></li>
+<li><a href="/documentation/reference/cli/commands/pki/">pki</a></li>
+<li><a href="/documentation/reference/cli/commands/controlplane/">controlplane</a></li>
+<li><a href="/documentation/reference/cli/commands/kubeconfig/">kubeconfig</a></li>
+<li><a href="/documentation/reference/cli/commands/containers/">containers</a></li>
 </ul>
 </li>
 </ul>
@@ -174,19 +180,19 @@ https://github.com/alex-shpak/hugo-book
 </li>
 </ul>
 </li>
-<li>Helm charts
+<li><a href="/documentation/reference/helm-charts/">Helm charts</a>
 <ul>
-<li>kube-apiserver</li>
-<li>kubernetes</li>
-<li>tls-bootstrapping</li>
-<li>calico</li>
-<li>kubelet-rubber-stamp</li>
+<li><a href="/documentation/reference/helm-charts/kube-apiserver/">kube-apiserver</a></li>
+<li><a href="/documentation/reference/helm-charts/kubernetes/">kubernetes</a></li>
+<li><a href="/documentation/reference/helm-charts/tls-bootstrapping/">tls-bootstrapping</a></li>
+<li><a href="/documentation/reference/helm-charts/calico/">calico</a></li>
+<li><a href="/documentation/reference/helm-charts/kubelet-rubber-stamp/">kubelet-rubber-stamp</a></li>
 </ul>
 </li>
 <li><a href="/documentation/reference/go/">Go</a></li>
 </ul>
 </li>
-<li>Project status</li>
+<li><a href="/documentation/project-status/">Project status</a></li>
 </ul>
 </li>
 </ul>

@@ -18,7 +18,7 @@ Requirements For this guide, it is required to have one Linux machine, with Dock
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.c3e2d100ba2319549e09b81b242634766bd799847cf02e1d6fa2426a64db14dc.css" integrity="sha256-w&#43;LRALojGVSeCbgbJCY0dmvXmYR88C4db6JCamTbFNw=">
-<script defer src="/en.search.min.35543c814fafb3e100b2456f4924d9f036d57cc4776535a5c0938aaa14957296.js" integrity="sha256-NVQ8gU&#43;vs&#43;EAskVvSSTZ8DbVfMR3ZTWlwJOKqhSVcpY="></script>
+<script defer src="/en.search.min.f73a13d381eec3e0d8171979929020bbeee6e73f32fca6c56a293718c8e02039.js" integrity="sha256-9zoT04Huw&#43;DYFxl5kpAgu&#43;7m5z8y/KbFaik3GMjgIDk="></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -65,18 +65,15 @@ https://github.com/alex-shpak/hugo-book
 <li><a href="/documentation/getting-started/installing/">Installing</a>
 <ul>
 <li><a href="/documentation/getting-started/installing/cli/">CLI binary</a></li>
-<li><a href="/documentation/getting-started/installing/terraform/">Terraform Provider</a>
-<ul>
-<li>Go module</li>
-</ul>
-</li>
+<li><a href="/documentation/getting-started/installing/terraform/">Terraform Provider</a></li>
+<li><a href="/documentation/getting-started/installing/go/">Go module</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li><a href="/documentation/guides/">Guides</a>
 <ul>
-<li>etcd
+<li><a href="/documentation/guides/etcd/">etcd</a>
 <ul>
 <li><a href="/documentation/guides/etcd/creating-single-member-cluster-on-local-machine-using-terraform/">Creating single-member cluster on local machine using Terraform</a></li>
 <li><a href="/documentation/guides/etcd/creating-single-member-cluster-on-local-machine-using-flexkube-cli/"class=active>Creating single-member cluster on local machine using Flexkube CLI</a></li>
@@ -95,10 +92,19 @@ https://github.com/alex-shpak/hugo-book
 <li><a href="/documentation/concepts/">Concepts</a>
 <ul>
 <li><a href="/documentation/concepts/managing-containers/">Managing containers</a></li>
-<li>Managing Kubernetes certificates</li>
-<li>Supported transport protocols</li>
-<li>Supported container runtimes</li>
-<li>Self-hosted Kubernetes controlplane</li>
+<li><a href="/documentation/concepts/managing-certificates/">Managing Kubernetes certificates</a></li>
+<li><a href="/documentation/concepts/supported-transport-protocols/">Supported transport protocols</a>
+<ul>
+<li><a href="/documentation/concepts/supported-transport-protocols/direct/">Direct</a></li>
+<li><a href="/documentation/concepts/supported-transport-protocols/ssh/">SSH</a></li>
+</ul>
+</li>
+<li><a href="/documentation/concepts/supported-container-runtimes/">Supported container runtimes</a>
+<ul>
+<li><a href="/documentation/concepts/supported-container-runtimes/docker/">Docker</a></li>
+</ul>
+</li>
+<li><a href="/documentation/concepts/self-hosted-kubernetes-controlplane/">Self-hosted Kubernetes controlplane</a></li>
 </ul>
 </li>
 <li><a href="/documentation/resources/">Resources</a>
@@ -108,25 +114,25 @@ https://github.com/alex-shpak/hugo-book
 <li><a href="/documentation/resources/api-loadbalancer/">API Load Balancer</a></li>
 <li><a href="/documentation/resources/controlplane/">Controlplane</a></li>
 <li><a href="/documentation/resources/kubelet-pool/">Kubelet Pool</a></li>
-<li>Containers</li>
+<li><a href="/documentation/resources/containers/">Containers</a></li>
 </ul>
 </li>
 <li><a href="/documentation/helm-charts/">Helm charts</a>
 <ul>
-<li>Maintained
+<li><a href="/documentation/helm-charts/maintained/">Maintained</a>
 <ul>
-<li>calico</li>
-<li>kube-apiserver</li>
-<li>kube-proxy</li>
-<li>kubelet-rubber-stamp</li>
-<li>kubernetes</li>
-<li>tls-bootstrapping</li>
+<li><a href="/documentation/helm-charts/maintained/calico/">calico</a></li>
+<li><a href="/documentation/helm-charts/maintained/kube-apiserver/">kube-apiserver</a></li>
+<li><a href="/documentation/helm-charts/maintained/kube-proxy/">kube-proxy</a></li>
+<li><a href="/documentation/helm-charts/maintained/kubelet-rubber-stamp/">kubelet-rubber-stamp</a></li>
+<li><a href="/documentation/helm-charts/maintained/kubernetes/">kubernetes</a></li>
+<li><a href="/documentation/helm-charts/maintained/tls-bootstrapping/">tls-bootstrapping</a></li>
 </ul>
 </li>
-<li>Upstream
+<li><a href="/documentation/helm-charts/upstream/">Upstream</a>
 <ul>
-<li>stable/coredns</li>
-<li>stable/metrics-server</li>
+<li><a href="/documentation/helm-charts/upstream/stable-coredns/">stable/coredns</a></li>
+<li><a href="/documentation/helm-charts/upstream/stable-metrics-server/">stable/metrics-server</a></li>
 </ul>
 </li>
 </ul>
@@ -135,25 +141,25 @@ https://github.com/alex-shpak/hugo-book
 <ul>
 <li><a href="/documentation/reference/cli/">CLI</a>
 <ul>
-<li>Configuration
+<li><a href="/documentation/reference/cli/configuration/">Configuration</a>
 <ul>
-<li>kubelet-pool</li>
-<li>apiloadbalancer-pool</li>
-<li>etcd</li>
-<li>pki</li>
-<li>controlplane</li>
-<li>containers</li>
+<li><a href="/documentation/reference/cli/configuration/kubelet-pool/">kubelet-pool</a></li>
+<li><a href="/documentation/reference/cli/configuration/apiloadbalancer-pool/">apiloadbalancer-pool</a></li>
+<li><a href="/documentation/reference/cli/configuration/etcd/">etcd</a></li>
+<li><a href="/documentation/reference/cli/configuration/pki/">pki</a></li>
+<li><a href="/documentation/reference/cli/configuration/controlplane/">controlplane</a></li>
+<li><a href="/documentation/reference/cli/configuration/containers/">containers</a></li>
 </ul>
 </li>
-<li>Commands
+<li><a href="/documentation/reference/cli/commands/">Commands</a>
 <ul>
-<li>kubelet-pool</li>
-<li>apiloadbalancer-pool</li>
-<li>etcd</li>
-<li>pki</li>
-<li>controlplane</li>
-<li>kubeconfig</li>
-<li>containers</li>
+<li><a href="/documentation/reference/cli/commands/kubelet-pool/">kubelet-pool</a></li>
+<li><a href="/documentation/reference/cli/commands/apiloadbalancer-pool/">apiloadbalancer-pool</a></li>
+<li><a href="/documentation/reference/cli/commands/etcd/">etcd</a></li>
+<li><a href="/documentation/reference/cli/commands/pki/">pki</a></li>
+<li><a href="/documentation/reference/cli/commands/controlplane/">controlplane</a></li>
+<li><a href="/documentation/reference/cli/commands/kubeconfig/">kubeconfig</a></li>
+<li><a href="/documentation/reference/cli/commands/containers/">containers</a></li>
 </ul>
 </li>
 </ul>
@@ -172,19 +178,19 @@ https://github.com/alex-shpak/hugo-book
 </li>
 </ul>
 </li>
-<li>Helm charts
+<li><a href="/documentation/reference/helm-charts/">Helm charts</a>
 <ul>
-<li>kube-apiserver</li>
-<li>kubernetes</li>
-<li>tls-bootstrapping</li>
-<li>calico</li>
-<li>kubelet-rubber-stamp</li>
+<li><a href="/documentation/reference/helm-charts/kube-apiserver/">kube-apiserver</a></li>
+<li><a href="/documentation/reference/helm-charts/kubernetes/">kubernetes</a></li>
+<li><a href="/documentation/reference/helm-charts/tls-bootstrapping/">tls-bootstrapping</a></li>
+<li><a href="/documentation/reference/helm-charts/calico/">calico</a></li>
+<li><a href="/documentation/reference/helm-charts/kubelet-rubber-stamp/">kubelet-rubber-stamp</a></li>
 </ul>
 </li>
 <li><a href="/documentation/reference/go/">Go</a></li>
 </ul>
 </li>
-<li>Project status</li>
+<li><a href="/documentation/project-status/">Project status</a></li>
 </ul>
 </li>
 </ul>
@@ -238,12 +244,14 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#downloading-flexkube-binary">Downloading <code>flexkube</code> binary</a></li>
         <li><a href="#downloading-etcdctl-binary-optional">Downloading <code>etcdctl</code> binary (optional)</a></li>
         <li><a href="#make-downloaded-binaries-available-in-path">Make downloaded binaries available in $PATH</a></li>
+        <li><a href="#checking-docker-availability">Checking Docker availability</a></li>
       </ul>
     </li>
     <li><a href="#creating-the-cluster">Creating the cluster</a>
       <ul>
         <li><a href="#creating-certificates">Creating certificates</a></li>
         <li><a href="#creating-etcd-cluster">Creating etcd cluster</a></li>
+        <li><a href="#inspecting-stateyaml-file-optional">Inspecting state.yaml file (optional)</a></li>
       </ul>
     </li>
     <li><a href="#verifying-cluster-functionality">Verifying cluster functionality</a></li>
@@ -265,8 +273,8 @@ https://github.com/alex-shpak/hugo-book
 <p>For fully automated creation, see <a href="/documentation/guides/etcd/creating-single-member-cluster-on-local-machine-using-terraform/">Creating single-member etcd cluster on local machine using Terraform</a>.</p>
 <h2 id="requirements">Requirements</h2>
 <p>For this guide, it is required to have one Linux machine, with Docker daemon installed and running.</p>
-<p>It is recommended that machine has at least 2 GB of RAM and is a fresh machine, as in tutorial the tools will write to directories like <code>/etc/kubernetes</code> or <code>/var/lib/kubelet</code> without notice.</p>
-<p>The Docker version should be 18.06+.</p>
+<p>It is recommended that machine has at least 1 GB of RAM and is a fresh machine, as in tutorial the tools will write to directories like <code>/etc/kubernetes</code> or <code>/var/lib/etcd</code> without notice.</p>
+<p>The Docker version should be 18.06+. You can follow <a href="https://docs.docker.com/get-docker/">Docker documentation</a> to see how to install Docker on your machine.</p>
 <p>Network interfaces setup is not important, however having a private IP address is recommended from security perspective.</p>
 
 <div class="book-expand">
@@ -323,10 +331,13 @@ dir etcd-<span style="color:#e6db74">${</span>ETCD_VER<span style="color:#e6db74
 <p>For compatibility with rest of the tutorial, you should make sure that downloaded binaries are in one of the directories in the $PATH environment variable.</p>
 <p>You can also add working directory to the $PATH using the following command:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>pwd<span style="color:#66d9ef">)</span><span style="color:#e6db74">:</span><span style="color:#e6db74">${</span>PATH<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</code></pre></div><h3 id="checking-docker-availability">Checking Docker availability</h3>
+<p>To avoid runtime issues while running <code>flexkube</code>, run the following command to ensure, that Docker is running and is accessible on your machine:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">docker ps
 </code></pre></div><h2 id="creating-the-cluster">Creating the cluster</h2>
 <p>Now that you have all required binaries and information, we can start creating the cluster.</p>
 <h3 id="creating-certificates">Creating certificates</h3>
-<p>First step to create a cluster is to generate all certificates required by etcd. For that, we will use Flexkube <a href="TODO">PKI resource</a>.</p>
+<p>First step to create a cluster is to generate all certificates required by etcd. For that, we will use Flexkube <a href="/documentation/resources/pki/">PKI resource</a>.</p>
 <p>Before we create the certificates, we need to provide some configuration to tell PKI resource to create etcd certificates, as by default it only creates Root CA certificate.</p>
 <p>For this guide, you can create configuration using the following command:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">cat &lt;&lt;EOF | sed <span style="color:#e6db74">&#39;/^$/d&#39;</span> &gt; config.yaml
@@ -336,14 +347,23 @@ dir etcd-<span style="color:#e6db74">${</span>ETCD_VER<span style="color:#e6db74
       <span style="color:#66d9ef">member1</span>: ${IP}
 EOF
 </code></pre></div><blockquote class="book-hint info">
-  See <a href="TODO">PKI configuration reference</a> to see all available configuration options.
+  See <a href="/documentation/reference/cli/configuration/pki/">PKI configuration reference</a> to see all available configuration options.
 </blockquote>
 
+<p>In the following example, we use <code>member1</code> as a etcd member name. There is no strict convention about the names. <a href="https://etcd.io/docs/v3.4.0/op-guide/configuration/#--name">etcd documentation</a> suggests to use the <code>hostname</code> or <code>machine-id</code>, which might be a good choice, if you plan to run only one member on a single machine. Please note, that changing the member name here must also be reflected in next steps of the tutorial.</p>
 <p>Once created, run the following command to generate the certificates:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">flexkube pki
 </code></pre></div><p>If everything succeeded, you should find many certificates in newly created <code>state.yaml</code> file.</p>
+<blockquote class="book-hint info">
+  <p>You can inspect <code>state.yaml</code> file using the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">less state.yaml
+</code></pre></div><p>In there, you should find etcd CA certificate and private key, peer and server certificates and private keys for all members we defined (in this tutorial only <code>member1</code>) and root CA certificate with private key.</p>
+<p>The certificates properties are generated with accordance with <a href="https://kubernetes.io/docs/setup/best-practices/certificates/">Kubernetes PKI certificates and requirements</a>.</p>
+
+</blockquote>
+
 <h3 id="creating-etcd-cluster">Creating etcd cluster</h3>
-<p>With certificates ready, we can now create etcd cluster using <a href="TODO">etcd</a> resource.</p>
+<p>With certificates ready, we can now create etcd cluster using <a href="/documentation/resources/etcd/">etcd</a> resource.</p>
 <p>To create etcd cluster, we need to configure it&rsquo;s members in <code>config.yaml</code> file. This can be done using the following command:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">cat &lt;&lt;EOF &gt;&gt; config.yaml
 
@@ -353,12 +373,26 @@ EOF
       <span style="color:#66d9ef">peerAddress</span>: ${IP}
 EOF
 </code></pre></div><blockquote class="book-hint info">
-  See <a href="TODO">etcd configuration reference</a> to see all available configuration options.
+  See <a href="/documentation/reference/cli/configuration/etcd/">etcd configuration reference</a> to see all available configuration options.
 </blockquote>
 
 <p>Now, you can run the following command to create etcd cluster:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">flexkube etcd
-</code></pre></div><p>Once finished, you should see etcd container running, if you run <code>docker ps</code>.</p>
+</code></pre></div><p>When you execute this command, it will print you the list of the containers which will be created and ask you to confirm it.</p>
+<p>You can also run it with <code>--yes</code> flag, to skip the confirmation.</p>
+<p>After confirmation, <code>flexkube</code> binary will by default talk to Docker runtime over UNIX socket on local host and create desired containers.</p>
+<blockquote class="book-hint info">
+  <p>On consecutive runs, <code>flexkube</code> will first check the state of the created containers and then, it there is any update pending (e.g. container image update), it will again show you the diff which will be applied and ask you for confirmation.</p>
+<p>You can also run it with <code>--noop</code> to only see if there are some updates pending.</p>
+
+</blockquote>
+
+<p>Once finished, if you run <code>docker ps</code>, you should see etcd container running.</p>
+<h3 id="inspecting-stateyaml-file-optional">Inspecting state.yaml file (optional)</h3>
+<p>With etcd cluster created, state about running containers will be stored in <code>state.yaml</code> file. Storing state is needed to calculate configuration updates in the future runs and also to allow cleaning up created containers.</p>
+<p>You can have a look into state file using the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">less state.yaml
+</code></pre></div><p>In there, you can find list of all containers which has been created, their configuration files, flags and on which host and using which container runtime they has been created. This is useful if you want to inspect the configuration of created containers.</p>
 <h2 id="verifying-cluster-functionality">Verifying cluster functionality</h2>
 <p>To verify that the cluster is healthy, we will use etcd member certificates itself and previously downloaded <code>etcdctl</code> binary.</p>
 <p>First, we need to prepare the environment variables used by <code>etcdctl</code> to define how to authenticate to cluster. This can be done using the following commands:</p>
@@ -374,7 +408,7 @@ export ETCDCTL_ENDPOINTS<span style="color:#f92672">=</span><span style="color:#
 </blockquote>
 
 <h2 id="whats-next">What&rsquo;s next</h2>
-<p>With cluster running, you can now start using it, e.g. to deploy Kubernetes cluster. To do that using Flexkube and Terraform, you can follow <a href="TODO">Creating single node Kubernetes cluster on local machine using Terraform</a>.</p>
+<p>With cluster running, you can now start using it, e.g. to deploy Kubernetes cluster. To do that using Flexkube and Terraform, you can follow <a href="/documentation/guides/kubernetes/creating-single-node-cluster-on-local-machine-using-terraform/">Creating single node Kubernetes cluster on local machine using Terraform</a>.</p>
 <p>To clean up created resources, see the section below.</p>
 <h2 id="cleaning-up">Cleaning up</h2>
 <p>To clean up the host, first, rename or remove <code>config.yaml</code> file, so CLI will be able to clean up the resources. For example, execute:</p>
@@ -431,12 +465,14 @@ export ETCDCTL_ENDPOINTS<span style="color:#f92672">=</span><span style="color:#
         <li><a href="#downloading-flexkube-binary">Downloading <code>flexkube</code> binary</a></li>
         <li><a href="#downloading-etcdctl-binary-optional">Downloading <code>etcdctl</code> binary (optional)</a></li>
         <li><a href="#make-downloaded-binaries-available-in-path">Make downloaded binaries available in $PATH</a></li>
+        <li><a href="#checking-docker-availability">Checking Docker availability</a></li>
       </ul>
     </li>
     <li><a href="#creating-the-cluster">Creating the cluster</a>
       <ul>
         <li><a href="#creating-certificates">Creating certificates</a></li>
         <li><a href="#creating-etcd-cluster">Creating etcd cluster</a></li>
+        <li><a href="#inspecting-stateyaml-file-optional">Inspecting state.yaml file (optional)</a></li>
       </ul>
     </li>
     <li><a href="#verifying-cluster-functionality">Verifying cluster functionality</a></li>
