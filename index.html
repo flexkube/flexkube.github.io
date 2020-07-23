@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Flexkube Flexkube is a minimalistic and flexible Kubernetes distribution, providing tools to manage each main Kubernetes component independently, which can be used together to create Kubernetes clusters.
 Core part of the project is libflexkube, a Go library providing logic for managing Kubernetes components (e.g. etcd, kubelet) and reference implementation of CLI tool and Terraform provider.
-Installation and usage CLI tool For more detailed instructions see the user guide.
+Installation and usage CLI tool For more detailed instructions see the user guides.
 If you have go binary available in your system, you can start using Flexkube for creating Kubernetes certificates just by running the following commands:">
 <meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="" />
 <meta property="og:description" content="" />
@@ -18,7 +18,7 @@ If you have go binary available in your system, you can start using Flexkube for
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.c3e2d100ba2319549e09b81b242634766bd799847cf02e1d6fa2426a64db14dc.css" integrity="sha256-w&#43;LRALojGVSeCbgbJCY0dmvXmYR88C4db6JCamTbFNw=">
-<script defer src="/en.search.min.f73a13d381eec3e0d8171979929020bbeee6e73f32fca6c56a293718c8e02039.js" integrity="sha256-9zoT04Huw&#43;DYFxl5kpAgu&#43;7m5z8y/KbFaik3GMjgIDk="></script>
+<script defer src="/en.search.min.7a63aba954a40c1a9aaddec439aed58958034abfe8d249c700c6ec2a3531319f.js" integrity="sha256-emOrqVSkDBqard7EOa7ViVgDSr/o0knHAMbsKjUxMZ8="></script>
 <link rel="alternate" type="application/rss+xml" href="https://flexkube.github.io/index.xml" title="Flexkube" />
 <!--
 Made with Book Theme
@@ -242,7 +242,7 @@ https://github.com/alex-shpak/hugo-book
       <ul>
         <li><a href="#cli-tool">CLI tool</a></li>
         <li><a href="#terraform">Terraform</a></li>
-        <li><a href="#todo">TODO</a></li>
+        <li><a href="#characteristics">Characteristics</a></li>
       </ul>
     </li>
   </ul>
@@ -261,7 +261,7 @@ https://github.com/alex-shpak/hugo-book
 <p>Core part of the project is <a href="https://github.com/flexkube/libflexkube">libflexkube</a>, a Go library providing logic for managing Kubernetes components (e.g. <a href="https://etcd.io/">etcd</a>, <a href="https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/">kubelet</a>) and reference implementation of CLI tool and <a href="https://terraform.io">Terraform</a> provider.</p>
 <h2 id="installation-and-usage">Installation and usage</h2>
 <h3 id="cli-tool">CLI tool</h3>
-<p>For more detailed instructions see the user guide.</p>
+<p>For more detailed instructions see the user <a href="/documentation/guides/">guides</a>.</p>
 <p>If you have <code>go</code> binary available in your system, you can start using Flexkube for creating Kubernetes certificates just by running the following commands:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">echo <span style="color:#e6db74">&#39;pki:
 </span><span style="color:#e6db74">  kubernetes: {}
@@ -270,27 +270,24 @@ go run github.com/flexkube/libflexkube/cmd/flexkube pki
 </code></pre></div><p>It will create <code>config.yaml</code> configuration file consumed by <code>flexkube</code> CLI tool and generate the certificates into <code>state.yaml</code> file.</p>
 <h3 id="terraform">Terraform</h3>
 <p>If you want to perform the same action using Terraform.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">VERSION<span style="color:#f92672">=</span>v0.2.2 wget -qO- https://github.com/flexkube/libflexkube/releases/download/$VERSION/terraform-provider-flexkube_$VERSION_linux_amd64.tar.gz | tar zxvf - terraform-provider-flexkube_$VERSION_x4
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">VERSION<span style="color:#f92672">=</span>v0.3.0 wget -qO- https://github.com/flexkube/libflexkube/releases/download/$VERSION/terraform-provider-flexkube_$VERSION_linux_amd64.tar.gz | tar zxvf - terraform-provider-flexkube_$VERSION_x4
 echo <span style="color:#e6db74">&#39;resource &#34;flexkube_pki&#34; &#34;pki&#34; {
 </span><span style="color:#e6db74">  etcd {}
 </span><span style="color:#e6db74">  kubernetes {}
 </span><span style="color:#e6db74">}&#39;</span> &gt; main.tf
 terraform init <span style="color:#f92672">&amp;&amp;</span> terraform apply
 </code></pre></div><p>After applying, Kubernetes certificates should be available as Terraform resource attributes of <code>flexkube_pki.pki</code> resource.</p>
-<h3 id="todo">TODO</h3>
+<h3 id="characteristics">Characteristics</h3>
+<p>Flexkube project focuses on:</p>
 <ul>
-<li>For who is this project suitable for</li>
-<li>For who is this project not really suitable</li>
-<li>Getting started
-<ul>
-<li>Installation
-<ul>
-<li>CLI</li>
-<li>Terraform</li>
-</ul>
+<li>
+<p>Correctness -</p>
 </li>
-<li></li>
-</ul>
+<li>
+<p>For who is this project suitable for</p>
+</li>
+<li>
+<p>For who is this project not really suitable</p>
 </li>
 </ul>
 </article>
@@ -338,7 +335,7 @@ terraform init <span style="color:#f92672">&amp;&amp;</span> terraform apply
       <ul>
         <li><a href="#cli-tool">CLI tool</a></li>
         <li><a href="#terraform">Terraform</a></li>
-        <li><a href="#todo">TODO</a></li>
+        <li><a href="#characteristics">Characteristics</a></li>
       </ul>
     </li>
   </ul>
