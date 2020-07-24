@@ -4,9 +4,15 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Go module This document should describe how to include libflexkube Go packages as part of your Go project.">
+<meta name="description" content="Go module Recommended way of using Flexkube in your Go project is via libflexkube library. libflexkube uses Go modules to manage it&rsquo;s dependencies, so it is also recommended for your project to use it.
+To add libflexkube module to your project, simply run the following command:
+go get github.com/flexkube/libflexkube It will import latest release of libflexkube into your project.
+With module added, go to Go examples to see how to use it in your code or see reference documentation to see all available packages.">
 <meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="" />
-<meta property="og:description" content="Go module This document should describe how to include libflexkube Go packages as part of your Go project." />
+<meta property="og:description" content="Go module Recommended way of using Flexkube in your Go project is via libflexkube library. libflexkube uses Go modules to manage it&rsquo;s dependencies, so it is also recommended for your project to use it.
+To add libflexkube module to your project, simply run the following command:
+go get github.com/flexkube/libflexkube It will import latest release of libflexkube into your project.
+With module added, go to Go examples to see how to use it in your code or see reference documentation to see all available packages." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://flexkube.github.io/documentation/getting-started/installing/go/" />
 
@@ -14,13 +20,20 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.c3e2d100ba2319549e09b81b242634766bd799847cf02e1d6fa2426a64db14dc.css" integrity="sha256-w&#43;LRALojGVSeCbgbJCY0dmvXmYR88C4db6JCamTbFNw=">
-<script defer src="/en.search.min.7a63aba954a40c1a9aaddec439aed58958034abfe8d249c700c6ec2a3531319f.js" integrity="sha256-emOrqVSkDBqard7EOa7ViVgDSr/o0knHAMbsKjUxMZ8="></script>
+<script defer src="/en.search.min.1c0099f0585e6134dc57d3eccbfe45aba3191d79c68740f15a8d06b815b9ab74.js" integrity="sha256-HACZ8FheYTTcV9Psy/5Fq6MZHXnGh0DxWo0GuBW5q3Q="></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
 -->
 
-  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#0076a5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
 </head>
 
 <body>
@@ -54,10 +67,13 @@ https://github.com/alex-shpak/hugo-book
   <ul>
 <li><a href="/documentation/"><strong>Documentation</strong></a>
 <ul>
-<li><a href="/documentation/overview/">Overview</a></li>
 <li><a href="/documentation/getting-started/">Getting Started</a>
 <ul>
-<li><a href="/documentation/getting-started/requirements/">Requirements</a></li>
+<li><a href="/documentation/getting-started/requirements/">Requirements</a>
+<ul>
+<li><a href="/documentation/getting-started/requirements/creating-virtual-machines-for-testing/">Creating virtual machines for testing</a></li>
+</ul>
+</li>
 <li><a href="/documentation/getting-started/installing/">Installing</a>
 <ul>
 <li><a href="/documentation/getting-started/installing/cli/">CLI binary</a></li>
@@ -83,6 +99,13 @@ https://github.com/alex-shpak/hugo-book
 <li><a href="/documentation/guides/kubernetes/creating-multi-node-cluster-using-terraform/">Creating multi-node cluster using Terraform</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a href="/documentation/examples/">Examples</a>
+<ul>
+<li><a href="/documentation/examples/cli/">CLI</a></li>
+<li><a href="/documentation/examples/terraform/">Terraform</a></li>
+<li><a href="/documentation/examples/go/">Go</a></li>
 </ul>
 </li>
 <li><a href="/documentation/concepts/">Concepts</a>
@@ -242,7 +265,11 @@ https://github.com/alex-shpak/hugo-book
       
       
   <article class="markdown"><h1 id="go-module">Go module</h1>
-<p>This document should describe how to include <code>libflexkube</code> Go packages as part of your Go project.</p>
+<p>Recommended way of using Flexkube in your Go project is via <a href="https://github.com/flexkube/libflexkube">libflexkube</a> library. <code>libflexkube</code> uses <a href="https://blog.golang.org/using-go-modules">Go modules</a> to manage it&rsquo;s dependencies, so it is also recommended for your project to use it.</p>
+<p>To add <code>libflexkube</code> module to your project, simply run the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">go get github.com/flexkube/libflexkube
+</code></pre></div><p>It will import latest release of <code>libflexkube</code> into your project.</p>
+<p>With module added, go to <a href="/documentation/examples/go/">Go examples</a> to see how to use it in your code or see <a href="/documentation/reference/go/">reference documentation</a> to see all available packages.</p>
 </article>
  
       

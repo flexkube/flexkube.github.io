@@ -17,7 +17,7 @@
       
       <guid>https://flexkube.github.io/documentation/getting-started/installing/cli/</guid>
       <description>Flexkube CLI Download the pre-built binary The easiest way to get Flexkube CLI	is to use one of the pre-built release binaries which are available for macOS and Linux.
-See Github Releases page for finding the latest available release.
+See Github Releases page to find the latest available release.
 For example, to download version v0.3.0 on Linux, execute the following command:
 VERSION=v0.3.0 It will download the flexkube binary into your current directory. It is recommende to move this binary into one of directories mentioned in your $PATH environment variable, e.</description>
     </item>
@@ -28,7 +28,10 @@ VERSION=v0.3.0 It will download the flexkube binary into your current directory.
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://flexkube.github.io/documentation/getting-started/installing/go/</guid>
-      <description>Go module This document should describe how to include libflexkube Go packages as part of your Go project.</description>
+      <description>Go module Recommended way of using Flexkube in your Go project is via libflexkube library. libflexkube uses Go modules to manage it&amp;rsquo;s dependencies, so it is also recommended for your project to use it.
+To add libflexkube module to your project, simply run the following command:
+go get github.com/flexkube/libflexkube It will import latest release of libflexkube into your project.
+With module added, go to Go examples to see how to use it in your code or see reference documentation to see all available packages.</description>
     </item>
     
     <item>
@@ -39,8 +42,8 @@ VERSION=v0.3.0 It will download the flexkube binary into your current directory.
       <guid>https://flexkube.github.io/documentation/getting-started/installing/terraform/</guid>
       <description>Terraform provider Download the pre-built binary The easiest way to get Flexkube Terraform provider is to use one of the pre-built release binaries which are available for macOS and Linux.
 See Github Releases page for finding the latest available release.
-For example, to download version v.0.2.2 on Linux, execute the following command:
-VERSION=v0.2.2 wget -qO- https://github.com/flexkube/libflexkube/releases/download/$VERSION/terraform-provider-flexkube_$VERSION_linux_amd64.tar.gz | tar zxvf - terraform-provider-flexkube_$VERSION_x4 It will download the terraform-provider-flexkube binary into your current directory.</description>
+For example, to download version v0.3.0 on Linux, execute the following command:
+VERSION=v0.3.0 wget -qO- https://github.com/flexkube/libflexkube/releases/download/$VERSION/terraform-provider-flexkube_$VERSION_linux_amd64.tar.gz | tar zxvf - terraform-provider-flexkube_$VERSION_x4 It will download the terraform-provider-flexkube binary into your current directory.</description>
     </item>
     
   </channel>

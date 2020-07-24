@@ -10,15 +10,5 @@
 	<atom:link href="https://flexkube.github.io/documentation/getting-started/index.xml" rel="self" type="application/rss+xml" />
     
     
-    <item>
-      <title></title>
-      <link>https://flexkube.github.io/documentation/getting-started/requirements/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://flexkube.github.io/documentation/getting-started/requirements/</guid>
-      <description>Requirements This section describes various requirements of Flexkube.
-It is recommended to deploy Flexkube resources (e.g. etcd, kubelet) into dedicated machine, not into local host, as resources will write to some hosts locations like /etc/kubernetes, /var/lib/kubelet or /var/lib/etcd to persist the cluster state across updates. See TODO section to learn how to create VM for testing.  Summary Short summary of the requirements for each machine where Kubernetes will be deployed:</description>
-    </item>
-    
   </channel>
 </rss>

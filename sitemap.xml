@@ -58,6 +58,26 @@
   </url>
   
   <url>
+    <loc>https://flexkube.github.io/documentation/examples/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/examples/cli/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/examples/go/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/examples/terraform/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://flexkube.github.io/documentation/getting-started/</loc>
     <priority>0</priority>
   </url>
@@ -84,6 +104,11 @@
   
   <url>
     <loc>https://flexkube.github.io/documentation/getting-started/requirements/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://flexkube.github.io/documentation/getting-started/requirements/creating-virtual-machines-for-testing/</loc>
     <priority>0</priority>
   </url>
   
@@ -184,11 +209,6 @@
   
   <url>
     <loc>https://flexkube.github.io/documentation/helm-charts/upstream/stable-metrics-server/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://flexkube.github.io/documentation/overview/</loc>
     <priority>0</priority>
   </url>
   

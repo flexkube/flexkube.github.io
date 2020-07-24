@@ -20,13 +20,20 @@ It is recommended that machine has at least 1 GB of RAM and is a fresh machine, 
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.c3e2d100ba2319549e09b81b242634766bd799847cf02e1d6fa2426a64db14dc.css" integrity="sha256-w&#43;LRALojGVSeCbgbJCY0dmvXmYR88C4db6JCamTbFNw=">
-<script defer src="/en.search.min.7a63aba954a40c1a9aaddec439aed58958034abfe8d249c700c6ec2a3531319f.js" integrity="sha256-emOrqVSkDBqard7EOa7ViVgDSr/o0knHAMbsKjUxMZ8="></script>
+<script defer src="/en.search.min.1c0099f0585e6134dc57d3eccbfe45aba3191d79c68740f15a8d06b815b9ab74.js" integrity="sha256-HACZ8FheYTTcV9Psy/5Fq6MZHXnGh0DxWo0GuBW5q3Q="></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
 -->
 
-  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#0076a5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
 </head>
 
 <body>
@@ -60,10 +67,13 @@ https://github.com/alex-shpak/hugo-book
   <ul>
 <li><a href="/documentation/"><strong>Documentation</strong></a>
 <ul>
-<li><a href="/documentation/overview/">Overview</a></li>
 <li><a href="/documentation/getting-started/">Getting Started</a>
 <ul>
-<li><a href="/documentation/getting-started/requirements/">Requirements</a></li>
+<li><a href="/documentation/getting-started/requirements/">Requirements</a>
+<ul>
+<li><a href="/documentation/getting-started/requirements/creating-virtual-machines-for-testing/">Creating virtual machines for testing</a></li>
+</ul>
+</li>
 <li><a href="/documentation/getting-started/installing/">Installing</a>
 <ul>
 <li><a href="/documentation/getting-started/installing/cli/">CLI binary</a></li>
@@ -89,6 +99,13 @@ https://github.com/alex-shpak/hugo-book
 <li><a href="/documentation/guides/kubernetes/creating-multi-node-cluster-using-terraform/">Creating multi-node cluster using Terraform</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a href="/documentation/examples/">Examples</a>
+<ul>
+<li><a href="/documentation/examples/cli/">CLI</a></li>
+<li><a href="/documentation/examples/terraform/">Terraform</a></li>
+<li><a href="/documentation/examples/go/">Go</a></li>
 </ul>
 </li>
 <li><a href="/documentation/concepts/">Concepts</a>
@@ -277,36 +294,7 @@ https://github.com/alex-shpak/hugo-book
 <p>It is recommended that machine has at least 1 GB of RAM and is a fresh machine, as in tutorial the tools will write to directories like <code>/var/lib/etcd</code> or <code>/etc/kubernetes</code> without notice.</p>
 <p>The Docker version should be 18.06+. You can follow <a href="https://docs.docker.com/get-docker/">Docker documentation</a> to see how to install Docker on your machine.</p>
 <p>Network interfaces setup is not important, however having a private IP address is recommended from security perspective.</p>
-
-<div class="book-expand">
-  <label>
-    <div class="book-expand-head flex justify-between">
-      <span>I don&#39;t have such machine.</span>
-      <span>↕</span>
-    </div>
-    <input type="checkbox" class="hidden" />
-    <div class="book-expand-content markdown-inner">
-      <p>If you don&rsquo;t have such machine available, you can create it locally, using <a href="https://www.virtualbox.org/">VirtualBox</a> and <a href="https://www.vagrantup.com/">Vagrant</a>. Make sure you have both tools installed by following respective guides:</p>
-<ul>
-<li><a href="https://www.virtualbox.org/manual/ch02.html">Installing VirtualBox</a></li>
-<li><a href="https://www.vagrantup.com/docs/installation/">Installing Vagrant</a></li>
-</ul>
-<p>Once done, create file named <code>Vagrantfile</code> with following content:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby"><span style="color:#66d9ef">Vagrant</span><span style="color:#f92672">.</span>configure(<span style="color:#e6db74">&#34;2&#34;</span>) <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span>config<span style="color:#f92672">|</span>
-  config<span style="color:#f92672">.</span>vm<span style="color:#f92672">.</span>box       <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;flatcar-stable&#34;</span>
-  config<span style="color:#f92672">.</span>vm<span style="color:#f92672">.</span>box_url   <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://stable.release.flatcar-linux.net/amd64-usr/current/flatcar_production_vagrant.box&#34;</span>
-  config<span style="color:#f92672">.</span>ssh<span style="color:#f92672">.</span>username <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;core&#39;</span>
-  config<span style="color:#f92672">.</span>vm<span style="color:#f92672">.</span>provider <span style="color:#e6db74">:virtualbox</span> <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span>v<span style="color:#f92672">|</span>
-    v<span style="color:#f92672">.</span>memory <span style="color:#f92672">=</span> <span style="color:#ae81ff">1024</span>
-  <span style="color:#66d9ef">end</span>
-<span style="color:#66d9ef">end</span>
-</code></pre></div><p>Then, run the following commands to create and connect to the machine:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">vagrant up <span style="color:#f92672">&amp;&amp;</span> vagrant ssh
-</code></pre></div>
-    </div>
-  </label>
-</div>
-
+<p>If you don&rsquo;t have such machine, visit <a href="/documentation/getting-started/requirements/creating-virtual-machines-for-testing/#single-node">Creating virtual machines for testing</a> to see how to create one locally.</p>
 <h2 id="preparation">Preparation</h2>
 <p>Before we start creating a cluster, we need to gather some information and download required binaries.</p>
 <p>Log in into the machine where you want to deploy etcd before proceeding.</p>

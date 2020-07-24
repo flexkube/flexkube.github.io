@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="etcd guides In this section you can find all guides related to managing etcd clusters using Flexkube.">
+<meta name="description" content="etcd guides In this section you can find all guides related to managing etcd clusters using Flexkube. Depending on tools you want to use and setup you need, see the appropriate guide:
+ Creating single-member cluster on local machine using Terraform Creating single-member cluster on local machine using Flexkube CLI Creating multi-node cluster over SSH using Terraform  ">
 <meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
@@ -14,14 +15,21 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.c3e2d100ba2319549e09b81b242634766bd799847cf02e1d6fa2426a64db14dc.css" integrity="sha256-w&#43;LRALojGVSeCbgbJCY0dmvXmYR88C4db6JCamTbFNw=">
-<script defer src="/en.search.min.7a63aba954a40c1a9aaddec439aed58958034abfe8d249c700c6ec2a3531319f.js" integrity="sha256-emOrqVSkDBqard7EOa7ViVgDSr/o0knHAMbsKjUxMZ8="></script>
+<script defer src="/en.search.min.1c0099f0585e6134dc57d3eccbfe45aba3191d79c68740f15a8d06b815b9ab74.js" integrity="sha256-HACZ8FheYTTcV9Psy/5Fq6MZHXnGh0DxWo0GuBW5q3Q="></script>
 <link rel="alternate" type="application/rss+xml" href="https://flexkube.github.io/documentation/guides/etcd/index.xml" title="Flexkube" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
 -->
 
-  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#0076a5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
 </head>
 
 <body>
@@ -55,10 +63,13 @@ https://github.com/alex-shpak/hugo-book
   <ul>
 <li><a href="/documentation/"><strong>Documentation</strong></a>
 <ul>
-<li><a href="/documentation/overview/">Overview</a></li>
 <li><a href="/documentation/getting-started/">Getting Started</a>
 <ul>
-<li><a href="/documentation/getting-started/requirements/">Requirements</a></li>
+<li><a href="/documentation/getting-started/requirements/">Requirements</a>
+<ul>
+<li><a href="/documentation/getting-started/requirements/creating-virtual-machines-for-testing/">Creating virtual machines for testing</a></li>
+</ul>
+</li>
 <li><a href="/documentation/getting-started/installing/">Installing</a>
 <ul>
 <li><a href="/documentation/getting-started/installing/cli/">CLI binary</a></li>
@@ -84,6 +95,13 @@ https://github.com/alex-shpak/hugo-book
 <li><a href="/documentation/guides/kubernetes/creating-multi-node-cluster-using-terraform/">Creating multi-node cluster using Terraform</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a href="/documentation/examples/">Examples</a>
+<ul>
+<li><a href="/documentation/examples/cli/">CLI</a></li>
+<li><a href="/documentation/examples/terraform/">Terraform</a></li>
+<li><a href="/documentation/examples/go/">Go</a></li>
 </ul>
 </li>
 <li><a href="/documentation/concepts/">Concepts</a>
@@ -243,7 +261,12 @@ https://github.com/alex-shpak/hugo-book
       
       
   <article class="markdown"><h1 id="etcd-guides">etcd guides</h1>
-<p>In this section you can find all guides related to managing etcd clusters using Flexkube.</p>
+<p>In this section you can find all guides related to managing etcd clusters using Flexkube. Depending on tools you want to use and setup you need, see the appropriate guide:</p>
+<ul>
+<li><a href="/documentation/guides/etcd/creating-single-member-cluster-on-local-machine-using-terraform/">Creating single-member cluster on local machine using Terraform</a></li>
+<li><a href="/documentation/guides/etcd/creating-single-member-cluster-on-local-machine-using-flexkube-cli/">Creating single-member cluster on local machine using Flexkube CLI</a></li>
+<li><a href="/documentation/guides/etcd/creating-multi-member-cluster-over-ssh-using-terraform/">Creating multi-node cluster over SSH using Terraform</a></li>
+</ul>
 </article>
  
       

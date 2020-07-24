@@ -5,24 +5,32 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Requirements This section describes various requirements of Flexkube.
-It is recommended to deploy Flexkube resources (e.g. etcd, kubelet) into dedicated machine, not into local host, as resources will write to some hosts locations like /etc/kubernetes, /var/lib/kubelet or /var/lib/etcd to persist the cluster state across updates. See TODO section to learn how to create VM for testing.  Summary Short summary of the requirements for each machine where Kubernetes will be deployed:">
+It is recommended to deploy Flexkube resources (e.g. etcd, kubelet) into dedicated machine, not into local host, as resources will write to some hosts directories like /etc/kubernetes, /var/lib/kubelet or /var/lib/etcd to persist the cluster state across updates.  Summary Short summary of the requirements for each machine where Kubernetes will be deployed:
+ Minimum 2 GB of RAM SSH server configured (if deploying to remote machines) Internet access Docker daemon installed and running  Hardware requirements To create Kubernetes cluster using Flexkube, you need a machine with at least 2 GB of RAM for controller node and at least 1 GB of RAM for worker nodes.">
 <meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="" />
-<meta property="og:description" content="Requirements This section describes various requirements of Flexkube.
-It is recommended to deploy Flexkube resources (e.g. etcd, kubelet) into dedicated machine, not into local host, as resources will write to some hosts locations like /etc/kubernetes, /var/lib/kubelet or /var/lib/etcd to persist the cluster state across updates. See TODO section to learn how to create VM for testing.  Summary Short summary of the requirements for each machine where Kubernetes will be deployed:" />
-<meta property="og:type" content="article" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
 <meta property="og:url" content="https://flexkube.github.io/documentation/getting-started/requirements/" />
 
 <title>Requirements | Flexkube</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.c3e2d100ba2319549e09b81b242634766bd799847cf02e1d6fa2426a64db14dc.css" integrity="sha256-w&#43;LRALojGVSeCbgbJCY0dmvXmYR88C4db6JCamTbFNw=">
-<script defer src="/en.search.min.7a63aba954a40c1a9aaddec439aed58958034abfe8d249c700c6ec2a3531319f.js" integrity="sha256-emOrqVSkDBqard7EOa7ViVgDSr/o0knHAMbsKjUxMZ8="></script>
+<script defer src="/en.search.min.1c0099f0585e6134dc57d3eccbfe45aba3191d79c68740f15a8d06b815b9ab74.js" integrity="sha256-HACZ8FheYTTcV9Psy/5Fq6MZHXnGh0DxWo0GuBW5q3Q="></script>
+<link rel="alternate" type="application/rss+xml" href="https://flexkube.github.io/documentation/getting-started/requirements/index.xml" title="Flexkube" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
 -->
 
-  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#0076a5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+
 </head>
 
 <body>
@@ -56,10 +64,13 @@ https://github.com/alex-shpak/hugo-book
   <ul>
 <li><a href="/documentation/"><strong>Documentation</strong></a>
 <ul>
-<li><a href="/documentation/overview/">Overview</a></li>
 <li><a href="/documentation/getting-started/">Getting Started</a>
 <ul>
-<li><a href="/documentation/getting-started/requirements/"class=active>Requirements</a></li>
+<li><a href="/documentation/getting-started/requirements/"class=active>Requirements</a>
+<ul>
+<li><a href="/documentation/getting-started/requirements/creating-virtual-machines-for-testing/">Creating virtual machines for testing</a></li>
+</ul>
+</li>
 <li><a href="/documentation/getting-started/installing/">Installing</a>
 <ul>
 <li><a href="/documentation/getting-started/installing/cli/">CLI binary</a></li>
@@ -85,6 +96,13 @@ https://github.com/alex-shpak/hugo-book
 <li><a href="/documentation/guides/kubernetes/creating-multi-node-cluster-using-terraform/">Creating multi-node cluster using Terraform</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a href="/documentation/examples/">Examples</a>
+<ul>
+<li><a href="/documentation/examples/cli/">CLI</a></li>
+<li><a href="/documentation/examples/terraform/">Terraform</a></li>
+<li><a href="/documentation/examples/go/">Go</a></li>
 </ul>
 </li>
 <li><a href="/documentation/concepts/">Concepts</a>
@@ -245,6 +263,7 @@ https://github.com/alex-shpak/hugo-book
       </ul>
     </li>
     <li><a href="#container-runtime">Container runtime</a></li>
+    <li><a href="#creating-virtual-machines-locally-for-testing">Creating virtual machines locally for testing.</a></li>
   </ul>
 </nav>
 
@@ -259,7 +278,7 @@ https://github.com/alex-shpak/hugo-book
   <article class="markdown"><h1 id="requirements">Requirements</h1>
 <p>This section describes various requirements of Flexkube.</p>
 <blockquote class="book-hint warning">
-  It is recommended to deploy Flexkube resources (e.g. etcd, kubelet) into dedicated machine, <strong>not</strong> into local host, as resources will write to some hosts locations like <code>/etc/kubernetes</code>, <code>/var/lib/kubelet</code> or <code>/var/lib/etcd</code> to persist the cluster state across updates. See TODO section to learn how to create VM for testing.
+  It is recommended to deploy Flexkube resources (e.g. etcd, kubelet) into dedicated machine, <strong>not</strong> into local host, as resources will write to some hosts directories like <code>/etc/kubernetes</code>, <code>/var/lib/kubelet</code> or <code>/var/lib/etcd</code> to persist the cluster state across updates.
 </blockquote>
 
 <h2 id="summary">Summary</h2>
@@ -268,7 +287,7 @@ https://github.com/alex-shpak/hugo-book
 <li>Minimum 2 GB of RAM</li>
 <li>SSH server configured (if deploying to remote machines)</li>
 <li>Internet access</li>
-<li><code>docker</code> daemon installed and running</li>
+<li>Docker daemon installed and running</li>
 </ul>
 <h2 id="hardware-requirements">Hardware requirements</h2>
 <p>To create Kubernetes cluster using Flexkube, you need a machine with at least 2 GB of RAM for controller node and at least 1 GB of RAM for worker nodes.</p>
@@ -278,12 +297,15 @@ https://github.com/alex-shpak/hugo-book
 <p>If you re-configure the cluster to use images from private repository, internet access should not be required.</p>
 <h3 id="ssh">SSH</h3>
 <p>For deploying on remote machines, Flexkube use SSH tunnels to talk to container runtime on remote machine, so make sure SSH daemon is configured on them and is accessible from the host you will be deploying.</p>
-<p>If you deploy only on local machine, SSH is not required.</p>
+<p>If you deploy only on local machine <strong>or your container runtime on remote machines is directly reachable over network</strong> SSH is not required.</p>
+<p>User used for SSH connection should have permissions to talk to local <a href="#container-runtime">container runtime</a>.</p>
 <h3 id="network">Network</h3>
 <p>It is recommended, that all machines which are part of the cluster are connected using private network, to avoid exposing your cluster components to the internet.</p>
 <h2 id="container-runtime">Container runtime</h2>
 <p>Flexkube runs all of Kubernetes controlplane components as containers, so container runtime must be installed and configured on the machines before deploying.</p>
 <p>At the moment only <strong>Docker</strong> runtime is supported. In the future, support for more container runtime might be added.</p>
+<h2 id="creating-virtual-machines-locally-for-testing">Creating virtual machines locally for testing.</h2>
+<p>If you don&rsquo;t have a suitable machine available for testing, see <a href="/documentation/getting-started/requirements/creating-virtual-machines-for-testing/">Creating virtual machines for testing</a> page, which explains how to create one on your local machine.</p>
 </article>
  
       
@@ -297,7 +319,7 @@ https://github.com/alex-shpak/hugo-book
 
 
   <div>
-    <a class="flex align-center" href="https://github.com/flexkube/website/edit/master/content//documentation/getting-started/requirements.md" target="_blank" rel="noopener">
+    <a class="flex align-center" href="https://github.com/flexkube/website/edit/master/content//documentation/getting-started/requirements/_index.md" target="_blank" rel="noopener">
       <img src="/svg/edit.svg" class="book-icon" alt="Edit" />
       <span>Edit this page</span>
     </a>
@@ -335,6 +357,7 @@ https://github.com/alex-shpak/hugo-book
       </ul>
     </li>
     <li><a href="#container-runtime">Container runtime</a></li>
+    <li><a href="#creating-virtual-machines-locally-for-testing">Creating virtual machines locally for testing.</a></li>
   </ul>
 </nav>
 
