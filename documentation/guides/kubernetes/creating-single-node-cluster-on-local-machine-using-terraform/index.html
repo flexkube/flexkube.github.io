@@ -4,9 +4,15 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Creating single-node cluster on local machine using Terraform ">
+<meta name="description" content="Creating single-member cluster on local machine using Terraform This guide describes how to create single node Kubernetes cluster using Terraform and Flexkube provider. The process is very simple and requires just a few steps.
+For more detailed guide, see Creating single node Kubernetes cluster on local machine using flexkube CLI.
+Requirements For this guide, it is required to have one Linux machine, with Docker daemon installed and running.
+It is recommended that machine has at least 2 GB of RAM and is a fresh machine, as in tutorial the tools will write to directories like /var/lib/etcd, /etc/kubernetes or /var/lib/kubelet without notice.">
 <meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="" />
-<meta property="og:description" content="Creating single-node cluster on local machine using Terraform " />
+<meta property="og:description" content="Creating single-member cluster on local machine using Terraform This guide describes how to create single node Kubernetes cluster using Terraform and Flexkube provider. The process is very simple and requires just a few steps.
+For more detailed guide, see Creating single node Kubernetes cluster on local machine using flexkube CLI.
+Requirements For this guide, it is required to have one Linux machine, with Docker daemon installed and running.
+It is recommended that machine has at least 2 GB of RAM and is a fresh machine, as in tutorial the tools will write to directories like /var/lib/etcd, /etc/kubernetes or /var/lib/kubelet without notice." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://flexkube.github.io/documentation/guides/kubernetes/creating-single-node-cluster-on-local-machine-using-terraform/" />
 
@@ -14,7 +20,7 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.c3e2d100ba2319549e09b81b242634766bd799847cf02e1d6fa2426a64db14dc.css" integrity="sha256-w&#43;LRALojGVSeCbgbJCY0dmvXmYR88C4db6JCamTbFNw=">
-<script defer src="/en.search.min.1c0099f0585e6134dc57d3eccbfe45aba3191d79c68740f15a8d06b815b9ab74.js" integrity="sha256-HACZ8FheYTTcV9Psy/5Fq6MZHXnGh0DxWo0GuBW5q3Q="></script>
+<script defer src="/en.search.min.6a4d53c762549037cbb3294ba7cc2024abd64e981603b3d248bde2de20348c1b.js" integrity="sha256-ak1Tx2JUkDfLsylLp8wgJKvWTpgWA7PSSL3i3iA0jBs="></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -248,7 +254,31 @@ https://github.com/alex-shpak/hugo-book
     <input type="checkbox" class="hidden" id="toc-control" />
     <aside class="hidden clearfix">
       
-  <nav id="TableOfContents"></nav>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#requirements">Requirements</a></li>
+    <li><a href="#preparation">Preparation</a>
+      <ul>
+        <li><a href="#ip-address-for-deployment">IP address for deployment</a></li>
+        <li><a href="#selecting-service-cidr-and-pod-cidr">Selecting service CIDR and pod CIDR</a></li>
+        <li><a href="#selecting-node-name">Selecting node name</a></li>
+        <li><a href="#downloading-terraform-binary">Downloading <code>terraform</code> binary</a></li>
+        <li><a href="#downloading-terraform-provider-flexkube-binary">Downloading <code>terraform-provider-flexkube</code> binary</a></li>
+        <li><a href="#downloading-kubectl-binary">Downloading <code>kubectl</code> binary</a></li>
+        <li><a href="#make-downloaded-binaries-available-in-path">Make downloaded binaries available in $PATH</a></li>
+      </ul>
+    </li>
+    <li><a href="#creating-the-cluster">Creating the cluster</a></li>
+    <li><a href="#verifying-cluster-functionality">Verifying cluster functionality</a>
+      <ul>
+        <li><a href="#inspect-created-files">Inspect created files</a></li>
+        <li><a href="#using-etcdctl">Using <code>etcdctl</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#whats-next">What&rsquo;s next</a></li>
+    <li><a href="#cleaning-up">Cleaning up</a></li>
+  </ul>
+</nav>
 
 
     </aside>
@@ -258,8 +288,168 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown"><h1 id="creating-single-node-cluster-on-local-machine-using-terraform">Creating single-node cluster on local machine using Terraform</h1>
-</article>
+  <article class="markdown"><h1 id="creating-single-member-cluster-on-local-machine-using-terraform">Creating single-member cluster on local machine using Terraform</h1>
+<p>This guide describes how to create single node Kubernetes cluster using Terraform and Flexkube provider. The process is very simple and requires just a few steps.</p>
+<p>For more detailed guide, see <a href="/documentation/guides/kubernetes/creating-single-node-cluster-on-local-machine-using-flexkube-cli/">Creating single node Kubernetes cluster on local machine using flexkube CLI</a>.</p>
+<h2 id="requirements">Requirements</h2>
+<p>For this guide, it is required to have one Linux machine, with Docker daemon installed and running.</p>
+<p>It is recommended that machine has at least 2 GB of RAM and is a fresh machine, as in tutorial the tools will write to directories like <code>/var/lib/etcd</code>, <code>/etc/kubernetes</code> or <code>/var/lib/kubelet</code> without notice.</p>
+<p>The Docker version should be 18.06+. You can follow <a href="https://docs.docker.com/get-docker/">Docker documentation</a> to see how to install Docker on your machine.</p>
+<p>Network interfaces setup is not important, however having a private IP address is recommended from security perspective.</p>
+<p>If you don&rsquo;t have such machine, visit <a href="/documentation/getting-started/requirements/creating-virtual-machines-for-testing/#single-node">Creating virtual machines for testing</a> to see how to create one locally.</p>
+<h2 id="preparation">Preparation</h2>
+<p>Before we start creating a cluster, we need to gather some information and download required binaries.</p>
+<p>Log in into the machine where you want to deploy Kubernetes before proceeding.</p>
+<h3 id="ip-address-for-deployment">IP address for deployment</h3>
+<p>To configure cluster components, you need to provide the IP address, which will be used by the cluster. You can find available IP addresses using e.g. <code>ifconfig</code> command.</p>
+<p>You can try getting the IP address automatically using the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export TF_VAR_ip<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>ip addr show dev <span style="color:#66d9ef">$(</span>ip r | grep default | tr <span style="color:#e6db74">&#39; &#39;</span> <span style="color:#ae81ff">\\</span>n | grep -A1 dev | tail -n1<span style="color:#66d9ef">)</span> | grep <span style="color:#e6db74">&#39;inet &#39;</span> | awk <span style="color:#e6db74">&#39;{print $2}&#39;</span> | cut -d/ -f1<span style="color:#66d9ef">)</span>; echo $IP
+</code></pre></div><p>On VirtualBox, we can use <code>10.0.2.15</code> IP.</p>
+<p>Save the IP address for future use using the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export TF_VAR_ip<span style="color:#f92672">=</span>10.0.2.15
+</code></pre></div><h3 id="selecting-service-cidr-and-pod-cidr">Selecting service CIDR and pod CIDR</h3>
+<p>Kubernetes requires 2 network CIDRs to operate, one from each pod will receive the IP address and one for <code>Service</code> objects with type <code>ClusterIP</code>. While selecting the CIDRs, make sure they don&rsquo;t overlap with each other and other networks your machine is connected to.</p>
+<p>Once decided on CIDRs, we should also save 2 special IP addresses:</p>
+<ul>
+<li><code>kubernetes</code> Service - This IP address will be used by pods which talk to Kubernetes API. It must be included in <code>kube-apiserver</code> server certificate IP addresses list. This must be first address of Service CIDR. So if your service CIDR is <code>11.0.0.0/24</code>, it should be <code>11.0.0.1</code>.</li>
+<li>DNS Service - This IP address will be used by cluster&rsquo;s DNS service. This IP is usually 10th address of Service CIDR. So if your service CIDR is <code>11.0.0.0/24</code>, it should be <code>11.0.0.10</code>.</li>
+</ul>
+<p>With all this information gathered, you command like this to save this information for later use:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export TF_VAR_pod_cidr<span style="color:#f92672">=</span>10.0.0.0/24
+export TF_VAR_service_cidr<span style="color:#f92672">=</span>11.0.0.0/24
+export TF_VAR_kubernetes_service_ip<span style="color:#f92672">=</span>11.0.0.1
+export TF_VAR_dns_service_ip<span style="color:#f92672">=</span>11.0.0.10
+</code></pre></div><h3 id="selecting-node-name">Selecting node name</h3>
+<p>To ensure the consistency between deployed components, it is recommended to select some identifier for the node, which will be used as a etcd member name and Kubernetes Node name. In this guide, we can just use the <code>hostname</code> of the machine. This can be done by executing the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export TF_VAR_node_name<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>hostname<span style="color:#66d9ef">)</span>
+</code></pre></div><h3 id="downloading-terraform-binary">Downloading <code>terraform</code> binary</h3>
+<p>For this guide, you must have <code>terraform</code> binary available. You can download it using the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export VERSION<span style="color:#f92672">=</span>0.12.29
+wget https://releases.hashicorp.com/terraform/<span style="color:#e6db74">${</span>VERSION<span style="color:#e6db74">}</span>/terraform_<span style="color:#e6db74">${</span>VERSION<span style="color:#e6db74">}</span>_linux_amd64.zip <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>unzip terraform_<span style="color:#e6db74">${</span>VERSION<span style="color:#e6db74">}</span>_linux_amd64.zip <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>rm terraform_<span style="color:#e6db74">${</span>VERSION<span style="color:#e6db74">}</span>_linux_amd64.zip
+</code></pre></div><h3 id="downloading-terraform-provider-flexkube-binary">Downloading <code>terraform-provider-flexkube</code> binary</h3>
+<p>Execute the following command to download <code>flexkube</code> CLI binary into working directory on the machine where you want to create the etcd cluster.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export VERSION<span style="color:#f92672">=</span>v0.3.0
+wget -O- https://github.com/flexkube/libflexkube/releases/download/<span style="color:#e6db74">${</span>VERSION<span style="color:#e6db74">}</span>/terraform-provider-flexkube_<span style="color:#e6db74">${</span>VERSION<span style="color:#e6db74">}</span>_linux_amd64.tar.gz | tar zxvf - terraform-provider-flexkube_<span style="color:#e6db74">${</span>VERSION<span style="color:#e6db74">}</span>_x4
+</code></pre></div><h3 id="downloading-kubectl-binary">Downloading <code>kubectl</code> binary</h3>
+<p>To verify that cluster is operational it is recommended to have <code>kubectl</code> binary available. You can install it using the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">curl -LO https://storage.googleapis.com/kubernetes-release/release/<span style="color:#e6db74">`</span>curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt<span style="color:#e6db74">`</span>/bin/linux/amd64/kubectl <span style="color:#f92672">&amp;&amp;</span> chmod +x kubectl
+</code></pre></div><h3 id="make-downloaded-binaries-available-in-path">Make downloaded binaries available in $PATH</h3>
+<p>For compatibility with rest of the tutorial, you should make sure that downloaded binaries are in one of the directories in the $PATH environment variable.</p>
+<p>You can also add working directory to the $PATH using the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>pwd<span style="color:#66d9ef">)</span><span style="color:#e6db74">:</span><span style="color:#e6db74">${</span>PATH<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</code></pre></div><h2 id="creating-the-cluster">Creating the cluster</h2>
+<p>Now that you have all required binaries and information, we can start creating the cluster.</p>
+<p>Create <code>main.tf</code> file with the following content:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tf" data-lang="tf"><span style="color:#a6e22e">terraform</span> {
+	<span style="color:#a6e22e">required_providers</span> {
+		<span style="color:#a6e22e">flexkube</span> = <span style="color:#e6db74">&#34;0.3.0&#34;</span>
+		<span style="color:#a6e22e">local</span> 	 = <span style="color:#e6db74">&#34;1.4.0&#34;</span>
+		<span style="color:#a6e22e">random</span>	 = <span style="color:#e6db74">&#34;2.2.1&#34;</span>
+	}
+}
+<span style="color:#66d9ef">
+</span><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;ip&#34;</span> {}
+<span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;pod_cidr&#34;</span> {}
+<span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;service_cidr&#34;</span> {}
+<span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;kubernetes_service_ip&#34;</span> {}
+<span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;dns_service_ip&#34;</span> {}
+<span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;node_name&#34;</span> {}
+<span style="color:#66d9ef">
+</span><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;flexkube_pki&#34;</span> <span style="color:#e6db74">&#34;pki&#34;</span> {
+  <span style="color:#a6e22e">etcd</span> {
+    <span style="color:#a6e22e">peers</span> = {
+      <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>var.<span style="color:#a6e22e">name</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span> var.<span style="color:#a6e22e">ip</span>
+    }
+
+    <span style="color:#a6e22e">servers</span> = {
+      <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>var.<span style="color:#a6e22e">name</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span> var.<span style="color:#a6e22e">ip</span>
+    }
+
+    <span style="color:#a6e22e">client_cns</span> = [<span style="color:#e6db74">&#34;root&#34;</span>]
+  }
+}
+<span style="color:#66d9ef">
+</span><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;flexkube_etcd_cluster&#34;</span> <span style="color:#e6db74">&#34;etcd&#34;</span> {
+  <span style="color:#a6e22e">pki_yaml</span> = <span style="color:#a6e22e">flexkube_pki</span>.<span style="color:#a6e22e">pki</span>.<span style="color:#a6e22e">state_yaml</span>
+
+  <span style="color:#a6e22e">member</span> {
+    <span style="color:#a6e22e">name</span>           = var.<span style="color:#a6e22e">name</span>
+    <span style="color:#a6e22e">peer_address</span>   = var.<span style="color:#a6e22e">ip</span>
+    <span style="color:#a6e22e">server_address</span> = var.<span style="color:#a6e22e">ip</span>
+  }
+}
+
+<span style="color:#a6e22e">locals</span> {
+  <span style="color:#a6e22e">ca_cert</span> = <span style="color:#e6db74">&#34;./ca.pem&#34;</span>
+  <span style="color:#a6e22e">cert</span>    = <span style="color:#e6db74">&#34;./client.pem&#34;</span>
+  <span style="color:#a6e22e">key</span>     = <span style="color:#e6db74">&#34;./client.key&#34;</span>
+}
+<span style="color:#66d9ef">
+</span><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;local_file&#34;</span> <span style="color:#e6db74">&#34;etcd_ca_certificate&#34;</span> {
+  <span style="color:#a6e22e">content</span>  = <span style="color:#a6e22e">flexkube_pki</span>.<span style="color:#a6e22e">pki</span>.<span style="color:#a6e22e">etcd</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">ca</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">x509_certificate</span>
+  <span style="color:#a6e22e">filename</span> = <span style="color:#a6e22e">local</span>.<span style="color:#a6e22e">ca_cert</span>
+}
+<span style="color:#66d9ef">
+</span><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;local_file&#34;</span> <span style="color:#e6db74">&#34;etcd_root_user_certificate&#34;</span> {
+  <span style="color:#a6e22e">content</span>  = <span style="color:#a6e22e">flexkube_pki</span>.<span style="color:#a6e22e">pki</span>.<span style="color:#a6e22e">etcd</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">client_certificates</span>[<span style="color:#a6e22e">index</span>(<span style="color:#a6e22e">flexkube_pki</span>.<span style="color:#a6e22e">pki</span>.<span style="color:#a6e22e">etcd</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">client_cns</span>, <span style="color:#e6db74">&#34;root&#34;</span>)].<span style="color:#a6e22e">x509_certificate</span>
+  <span style="color:#a6e22e">filename</span> = <span style="color:#a6e22e">local</span>.<span style="color:#a6e22e">cert</span>
+}
+<span style="color:#66d9ef">
+</span><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;local_file&#34;</span> <span style="color:#e6db74">&#34;etcd_root_user_private_key&#34;</span> {
+  <span style="color:#a6e22e">sensitive_content</span> = <span style="color:#a6e22e">flexkube_pki</span>.<span style="color:#a6e22e">pki</span>.<span style="color:#a6e22e">etcd</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">client_certificates</span>[<span style="color:#a6e22e">index</span>(<span style="color:#a6e22e">flexkube_pki</span>.<span style="color:#a6e22e">pki</span>.<span style="color:#a6e22e">etcd</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">client_cns</span>, <span style="color:#e6db74">&#34;root&#34;</span>)].<span style="color:#a6e22e">private_key</span>
+  <span style="color:#a6e22e">filename</span>          = <span style="color:#a6e22e">local</span>.<span style="color:#a6e22e">key</span>
+}
+<span style="color:#66d9ef">
+</span><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;local_file&#34;</span> <span style="color:#e6db74">&#34;etcd_environment&#34;</span> {
+  <span style="color:#a6e22e">filename</span> = <span style="color:#e6db74">&#34;./etcd.env&#34;</span>
+  <span style="color:#a6e22e">content</span>  = <span style="color:#f92672">&lt;&lt;EOF</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">#!/bin/bash
+</span><span style="color:#e6db74">export ETCDCTL_API=3
+</span><span style="color:#e6db74">export ETCDCTL_CACERT=${abspath(local.ca_cert)}
+</span><span style="color:#e6db74">export ETCDCTL_CERT=${abspath(local.cert)}
+</span><span style="color:#e6db74">export ETCDCTL_KEY=${abspath(local.key)}
+</span><span style="color:#e6db74">export ETCDCTL_ENDPOINTS=&#34;https://${var.ip}:2379&#34;
+</span><span style="color:#e6db74"></span><span style="color:#f92672">EOF</span>
+
+  <span style="color:#a6e22e">depends_on</span> = [
+    <span style="color:#a6e22e">flexkube_etcd_cluster</span>.<span style="color:#a6e22e">etcd</span>,
+  ]
+}
+</code></pre></div><p>Now, to create the cluster run following commands:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">terraform init <span style="color:#f92672">&amp;&amp;</span> terraform apply
+</code></pre></div><p>Terraform should pick up the IP address automatically, if you exported it to <code>TF_VAR_ip</code> environment variable.</p>
+<p>If everything went successfully, you should see now running etcd container, when you execute <code>docker ps</code>.</p>
+<h2 id="verifying-cluster-functionality">Verifying cluster functionality</h2>
+<p>Now that the cluster is running, we can verify that it is functional.</p>
+<h3 id="inspect-created-files">Inspect created files</h3>
+<p>After creating the cluster, you can find following files in the working directory, created by Terraform:</p>
+<ul>
+<li><code>ca.pem</code> containing etcd CA X.509 certificate in PEM format.</li>
+<li><code>client.pem</code> containing etcd client X.509 certificate in PEM format, with <code>root</code> Common Name.</li>
+<li><code>client.key</code> RSA private key in PEM format for certificate in <code>client.pem</code>file.</li>
+<li><code>etcd.env</code> containing environment variables needed for <code>etcdctl</code>.</li>
+</ul>
+<p>Certificates and private key files are required to access the cluster. The <code>etcd.env</code> file is just a helper file for this tutorial.</p>
+<p>The files can also be safely removed, as all the certificates are stored in Terraform state anyway.</p>
+<h3 id="using-etcdctl">Using <code>etcdctl</code></h3>
+<p><code>etcdctl</code> can be used to verify that the cluster is functional and to perform some basic operations as well as administrative tasks.</p>
+<p>To be able to use it, it is recommended to set environment variables, pointing to the certificates and cluster members, so they don&rsquo;t have to be repeated for each command.</p>
+<p>With this guide, you get <code>etcd.env</code> helper file created, from which you can load the environment variables, using following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">source etcd.env
+</code></pre></div><p>Now <code>etcdctl</code> is ready to use.</p>
+<p>To check if cluster is healthy, execute the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">etcdctl endpoint health
+</code></pre></div><h2 id="whats-next">What&rsquo;s next</h2>
+<p>With cluster running, you can now start using it, e.g. to deploy Kubernetes cluster. To do that using Flexkube and Terraform, you can follow <a href="/documentation/guides/kubernetes/creating-single-node-cluster-on-local-machine-using-terraform/">Creating single node Kubernetes cluster on local machine using Terraform</a>.</p>
+<p>To clean up created resources, see the section below.</p>
+<h2 id="cleaning-up">Cleaning up</h2>
+<p>First step of removing the cluster is running Terraform, to remove all containers. To perform that, run this command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">terraform destroy
+</code></pre></div><p>Once finished, you can remove the directories created by the cluster, using the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo rm -rf /var/lib/etcd/ /etc/kubernetes/
+</code></pre></div></article>
  
       
 
@@ -298,7 +488,31 @@ https://github.com/alex-shpak/hugo-book
     
     <aside class="book-toc">
       
-  <nav id="TableOfContents"></nav>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#requirements">Requirements</a></li>
+    <li><a href="#preparation">Preparation</a>
+      <ul>
+        <li><a href="#ip-address-for-deployment">IP address for deployment</a></li>
+        <li><a href="#selecting-service-cidr-and-pod-cidr">Selecting service CIDR and pod CIDR</a></li>
+        <li><a href="#selecting-node-name">Selecting node name</a></li>
+        <li><a href="#downloading-terraform-binary">Downloading <code>terraform</code> binary</a></li>
+        <li><a href="#downloading-terraform-provider-flexkube-binary">Downloading <code>terraform-provider-flexkube</code> binary</a></li>
+        <li><a href="#downloading-kubectl-binary">Downloading <code>kubectl</code> binary</a></li>
+        <li><a href="#make-downloaded-binaries-available-in-path">Make downloaded binaries available in $PATH</a></li>
+      </ul>
+    </li>
+    <li><a href="#creating-the-cluster">Creating the cluster</a></li>
+    <li><a href="#verifying-cluster-functionality">Verifying cluster functionality</a>
+      <ul>
+        <li><a href="#inspect-created-files">Inspect created files</a></li>
+        <li><a href="#using-etcdctl">Using <code>etcdctl</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#whats-next">What&rsquo;s next</a></li>
+    <li><a href="#cleaning-up">Cleaning up</a></li>
+  </ul>
+</nav>
 
  
     </aside>

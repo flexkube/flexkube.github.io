@@ -6,9 +6,8 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Flexkube Flexkube is a minimalistic and flexible Kubernetes distribution, providing tools to manage each main Kubernetes component independently, which can be used together to create Kubernetes clusters.
-Core part of the project is libflexkube, a Go library providing logic for managing Kubernetes components (e.g. etcd, kubelet) and reference implementation of CLI tool and Terraform provider.
-Installation and usage CLI tool For more detailed instructions see the user guides.
-If you have go binary available in your system, you can start using Flexkube for creating Kubernetes certificates just by running the following commands:">
+Core part of the project is libflexkube, a Go library providing logic for managing Kubernetes components (e.g. etcd, kubelet, certificates) and reference implementation of CLI tool and Terraform provider.
+Installation and usage For quick examples of installation and usage, see the content below. For full documentation, see Getting started.">
 <meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
@@ -18,7 +17,7 @@ If you have go binary available in your system, you can start using Flexkube for
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.c3e2d100ba2319549e09b81b242634766bd799847cf02e1d6fa2426a64db14dc.css" integrity="sha256-w&#43;LRALojGVSeCbgbJCY0dmvXmYR88C4db6JCamTbFNw=">
-<script defer src="/en.search.min.1c0099f0585e6134dc57d3eccbfe45aba3191d79c68740f15a8d06b815b9ab74.js" integrity="sha256-HACZ8FheYTTcV9Psy/5Fq6MZHXnGh0DxWo0GuBW5q3Q="></script>
+<script defer src="/en.search.min.6a4d53c762549037cbb3294ba7cc2024abd64e981603b3d248bde2de20348c1b.js" integrity="sha256-ak1Tx2JUkDfLsylLp8wgJKvWTpgWA7PSSL3i3iA0jBs="></script>
 <link rel="alternate" type="application/rss+xml" href="https://flexkube.github.io/index.xml" title="Flexkube" />
 <!--
 Made with Book Theme
@@ -259,9 +258,14 @@ https://github.com/alex-shpak/hugo-book
       <ul>
         <li><a href="#cli-tool">CLI tool</a></li>
         <li><a href="#terraform">Terraform</a></li>
-        <li><a href="#characteristics">Characteristics</a></li>
+        <li><a href="#next-steps">Next steps</a></li>
       </ul>
     </li>
+    <li><a href="#characteristics">Characteristics</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#known-issues-missing-features-and-limitations">Known issues, missing features and limitations</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#status-of-the-project">Status of the project</a></li>
   </ul>
 </nav>
 
@@ -275,10 +279,10 @@ https://github.com/alex-shpak/hugo-book
       
   <article class="markdown"><h1 id="flexkube">Flexkube</h1>
 <p>Flexkube is a minimalistic and flexible Kubernetes distribution, providing tools to manage each main Kubernetes component independently, which can be used together to create Kubernetes clusters.</p>
-<p>Core part of the project is <a href="https://github.com/flexkube/libflexkube">libflexkube</a>, a Go library providing logic for managing Kubernetes components (e.g. <a href="https://etcd.io/">etcd</a>, <a href="https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/">kubelet</a>) and reference implementation of CLI tool and <a href="https://terraform.io">Terraform</a> provider.</p>
+<p>Core part of the project is <a href="https://github.com/flexkube/libflexkube">libflexkube</a>, a Go library providing logic for managing Kubernetes components (e.g. <a href="https://etcd.io/">etcd</a>, <a href="https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/">kubelet</a>, <a href="https://kubernetes.io/docs/setup/best-practices/certificates/">certificates</a>) and reference implementation of CLI tool and <a href="https://terraform.io">Terraform</a> provider.</p>
 <h2 id="installation-and-usage">Installation and usage</h2>
+<p>For quick examples of installation and usage, see the content below. For full documentation, see <a href="/documentation/getting-started/">Getting started</a>.</p>
 <h3 id="cli-tool">CLI tool</h3>
-<p>For more detailed instructions see the user <a href="/documentation/guides/">guides</a>.</p>
 <p>If you have <code>go</code> binary available in your system, you can start using Flexkube for creating Kubernetes certificates just by running the following commands:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">echo <span style="color:#e6db74">&#39;pki:
 </span><span style="color:#e6db74">  kubernetes: {}
@@ -294,9 +298,55 @@ echo <span style="color:#e6db74">&#39;resource &#34;flexkube_pki&#34; &#34;pki&#
 </span><span style="color:#e6db74">}&#39;</span> &gt; main.tf
 terraform init <span style="color:#f92672">&amp;&amp;</span> terraform apply
 </code></pre></div><p>After applying, Kubernetes certificates should be available as Terraform resource attributes of <code>flexkube_pki.pki</code> resource.</p>
-<h3 id="characteristics">Characteristics</h3>
+<h3 id="next-steps">Next steps</h3>
+<p>For more detailed instructions of how to use Flexkube, see the user <a href="https://flexkube.github.io/documentation/guides">guides</a>.</p>
+<h2 id="characteristics">Characteristics</h2>
 <p>Flexkube project focuses on simplicity and tries to only do minimal amount of steps in order to get Kubernetes cluster running, while keeping the configuration flexible and extensible. It is also a good material for learning how Kubernetes cluster is set up, as each part of the cluster is managed independently and code contains a lot of comments why specific flag/option is needed and what purpose does it serve.</p>
+<p>Parts of this project could possibly be used in other Kubernetes distributions or be used as a configuration reference, as setting up Kubernetes components requires many flags and configuration files to be created.</p>
 <p>Flexkube do not manage infrastructure for running Kubernetes clusters, it must be provided by the user.</p>
+<h2 id="features">Features</h2>
+<p>Here is the short list of Flexkube project features:</p>
+<ul>
+<li>Minimal host requirements - Use SSH connection forwarding for talking directly to the container runtime on remote machines for managing static containers and configuration files.</li>
+<li>Independent management of etcd, kubelets, static control plane and self-hosted components.</li>
+<li>All self-hosted control plane components managed using Helm 3 (e.g CoreDNS).</li>
+<li>1st class support for Terraform provider for automation.</li>
+<li>No Public DNS or any other public discovery service is required for getting cluster up and running.</li>
+<li>Others:
+<ul>
+<li>etcd, kubelet and static control plane running as containers.</li>
+<li>Self-hosted control plane.</li>
+<li>Supported container runtimes:
+<ul>
+<li>Docker</li>
+</ul>
+</li>
+<li>Configuration via YAML or via Terraform.</li>
+<li>Deployment using CLI tools or via Terraform.</li>
+<li>HAProxy for load-balancing and fail-over between Kubernetes API servers.</li>
+</ul>
+</li>
+</ul>
+<h2 id="known-issues-missing-features-and-limitations">Known issues, missing features and limitations</h2>
+<p>As the project is still in the early stages, here is the list of major existing issues or missing features, which are likely to be implemented in the future:</p>
+<ul>
+<li>gracefully replacing CA certificates (if private key does not change, it should work, but has not been tested)</li>
+<li>no checkpointer for pods/apiserver. If static kube-apiserver container is stopped and node reboots, single node cluster will not come back.</li>
+</ul>
+<p>And features, which are not yet implemented:</p>
+<ul>
+<li>network policies for kube-system namespace</li>
+<li>caching port forwarding</li>
+<li>bastion host(s) support for SSH</li>
+<li>parallel deployments across hosts</li>
+<li>removal of configuration files, created data and containers</li>
+<li>automatic shutdown/start of bootstrap control plane</li>
+</ul>
+<h2 id="contributing">Contributing</h2>
+<p>All contributions to this project are welcome. If it does not satisfy your needs, feel free to raise an issue about it or implement the support yourself and create a pull request with the patch, so we can all benefit from it.</p>
+<p>If you just want to help the project grow and mature, there are many TODOs spread across the code, which should be addresses sooner or later.</p>
+<h2 id="status-of-the-project">Status of the project</h2>
+<p>At the time of writing, this project is in active development state and it is not suitable for production use. Breaking changes might be introduced at any point in time, for both library interface and for existing deployments.</p>
 </article>
  
       
@@ -342,9 +392,14 @@ terraform init <span style="color:#f92672">&amp;&amp;</span> terraform apply
       <ul>
         <li><a href="#cli-tool">CLI tool</a></li>
         <li><a href="#terraform">Terraform</a></li>
-        <li><a href="#characteristics">Characteristics</a></li>
+        <li><a href="#next-steps">Next steps</a></li>
       </ul>
     </li>
+    <li><a href="#characteristics">Characteristics</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#known-issues-missing-features-and-limitations">Known issues, missing features and limitations</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#status-of-the-project">Status of the project</a></li>
   </ul>
 </nav>
 
