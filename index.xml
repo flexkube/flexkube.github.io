@@ -72,8 +72,8 @@
       <guid>https://flexkube.github.io/documentation/getting-started/installing/cli/</guid>
       <description>Flexkube CLI Download the pre-built binary The easiest way to get Flexkube CLI	is to use one of the pre-built release binaries which are available for macOS and Linux.
 See Github Releases page to find the latest available release.
-For example, to download version v0.3.0 on Linux, execute the following command:
-VERSION=v0.3.0 It will download the flexkube binary into your current directory. It is recommende to move this binary into one of directories mentioned in your $PATH environment variable, e.</description>
+For example, to download version v0.3.1 on Linux, execute the following command:
+VERSION=v0.3.1 It will download the flexkube binary into your current directory. It is recommende to move this binary into one of directories mentioned in your $PATH environment variable, e.</description>
     </item>
     
     <item>
@@ -96,8 +96,8 @@ With module added, go to Go examples to see how to use it in your code or see re
       <guid>https://flexkube.github.io/documentation/getting-started/installing/terraform/</guid>
       <description>Terraform provider Download the pre-built binary The easiest way to get Flexkube Terraform provider is to use one of the pre-built release binaries which are available for macOS and Linux.
 See Github Releases page for finding the latest available release.
-For example, to download version v0.3.0 on Linux, execute the following command:
-VERSION=v0.3.0 wget -qO- https://github.com/flexkube/libflexkube/releases/download/$VERSION/terraform-provider-flexkube_$VERSION_linux_amd64.tar.gz | tar zxvf - terraform-provider-flexkube_$VERSION_x4 It will download the terraform-provider-flexkube binary into your current directory.</description>
+For example, to download version v0.3.1 on Linux, execute the following command:
+VERSION=v0.3.1 wget -qO- https://github.com/flexkube/libflexkube/releases/download/$VERSION/terraform-provider-flexkube_$VERSION_linux_amd64.tar.gz | tar zxvf - terraform-provider-flexkube_$VERSION_x4 It will download the terraform-provider-flexkube binary into your current directory.</description>
     </item>
     
     <item>
@@ -362,7 +362,7 @@ It is recommended that machine has at least 2 GB of RAM and is a fresh machine, 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://flexkube.github.io/documentation/reference/cli/configuration/kubelet-pool/</guid>
-      <description></description>
+      <description>kubelet-pool </description>
     </item>
     
     <item>

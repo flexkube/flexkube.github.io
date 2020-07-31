@@ -20,7 +20,7 @@ It is recommended that machine has at least 2 GB of RAM and is a fresh machine, 
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.c3e2d100ba2319549e09b81b242634766bd799847cf02e1d6fa2426a64db14dc.css" integrity="sha256-w&#43;LRALojGVSeCbgbJCY0dmvXmYR88C4db6JCamTbFNw=">
-<script defer src="/en.search.min.6a4d53c762549037cbb3294ba7cc2024abd64e981603b3d248bde2de20348c1b.js" integrity="sha256-ak1Tx2JUkDfLsylLp8wgJKvWTpgWA7PSSL3i3iA0jBs="></script>
+<script defer src="/en.search.min.4e1689ee5c0e9d248474bea674a3e2e7bf2188562bccf0541bd2edc00e3d7136.js" integrity="sha256-ThaJ7lwOnSSEdL6mdKPi578hiFYrzPBUG9LtwA49cTY="></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -330,7 +330,7 @@ wget https://releases.hashicorp.com/terraform/<span style="color:#e6db74">${</sp
 </span><span style="color:#ae81ff"></span>rm terraform_<span style="color:#e6db74">${</span>VERSION<span style="color:#e6db74">}</span>_linux_amd64.zip
 </code></pre></div><h3 id="downloading-terraform-provider-flexkube-binary">Downloading <code>terraform-provider-flexkube</code> binary</h3>
 <p>Execute the following command to download <code>flexkube</code> CLI binary into working directory on the machine where you want to create the etcd cluster.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export VERSION<span style="color:#f92672">=</span>v0.3.0
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export VERSION<span style="color:#f92672">=</span>v0.3.1
 wget -O- https://github.com/flexkube/libflexkube/releases/download/<span style="color:#e6db74">${</span>VERSION<span style="color:#e6db74">}</span>/terraform-provider-flexkube_<span style="color:#e6db74">${</span>VERSION<span style="color:#e6db74">}</span>_linux_amd64.tar.gz | tar zxvf - terraform-provider-flexkube_<span style="color:#e6db74">${</span>VERSION<span style="color:#e6db74">}</span>_x4
 </code></pre></div><h3 id="downloading-kubectl-binary">Downloading <code>kubectl</code> binary</h3>
 <p>To verify that cluster is operational it is recommended to have <code>kubectl</code> binary available. You can install it using the following command:</p>
