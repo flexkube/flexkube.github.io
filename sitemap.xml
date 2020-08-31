@@ -343,46 +343,6 @@
   </url>
   
   <url>
-    <loc>https://flexkube.github.io/documentation/reference/terraform/flexkube-provider/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://flexkube.github.io/documentation/reference/terraform/resources/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_api_loadbalancer_pool/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_controlplane/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_etcd_cluster/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_helm_release/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_kubelet_pool/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_pki/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://flexkube.github.io/documentation/resources/</loc>
     <priority>0</priority>
   </url>

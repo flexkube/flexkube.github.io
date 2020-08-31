@@ -18,7 +18,7 @@ Requirements For this guide, it is required to have one Linux machine, with Dock
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.c3e2d100ba2319549e09b81b242634766bd799847cf02e1d6fa2426a64db14dc.css" integrity="sha256-w&#43;LRALojGVSeCbgbJCY0dmvXmYR88C4db6JCamTbFNw=">
-<script defer src="/en.search.min.4e1689ee5c0e9d248474bea674a3e2e7bf2188562bccf0541bd2edc00e3d7136.js" integrity="sha256-ThaJ7lwOnSSEdL6mdKPi578hiFYrzPBUG9LtwA49cTY="></script>
+<script defer src="/en.search.min.12cf2409b924a8032bcf2d60731aa142093526befc5f76320bbee62850333370.js" integrity="sha256-Es8kCbkkqAMrzy1gcxqhQgk1Jr78X3YyC77mKFAzM3A="></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -181,20 +181,7 @@ https://github.com/alex-shpak/hugo-book
 </li>
 </ul>
 </li>
-<li><a href="/documentation/reference/terraform/">Terraform</a>
-<ul>
-<li><a href="/documentation/reference/terraform/flexkube-provider/">Flexkube provider</a></li>
-<li><a href="/documentation/reference/terraform/resources/">Resources</a>
-<ul>
-<li><a href="/documentation/reference/terraform/resources/flexkube_pki/">flexkube_pki</a></li>
-<li><a href="/documentation/reference/terraform/resources/flexkube_etcd_cluster/">flexkube_etcd_cluster</a></li>
-<li><a href="/documentation/reference/terraform/resources/flexkube_controlplane/">flexkube_controlplane</a></li>
-<li><a href="/documentation/reference/terraform/resources/flexkube_api_loadbalancer_pool/">flexkube_api_loadbalancer_pool</a></li>
-<li><a href="/documentation/reference/terraform/resources/flexkube_kubelet_pool/">flexkube_kubelet_pool</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><a href="/documentation/reference/terraform/">Terraform</a></li>
 <li><a href="/documentation/reference/helm-charts/">Helm charts</a>
 <ul>
 <li><a href="/documentation/reference/helm-charts/kube-apiserver/">kube-apiserver</a></li>
@@ -307,14 +294,13 @@ https://github.com/alex-shpak/hugo-book
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export IP<span style="color:#f92672">=</span>10.0.2.15
 </code></pre></div><h3 id="downloading-flexkube-binary">Downloading <code>flexkube</code> binary</h3>
 <p>Once logged in, execute the following command to download <code>flexkube</code> CLI binary into working directory. This is the binary, which will be used to create a cluster components.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export VERSION<span style="color:#f92672">=</span>v0.3.1
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export VERSION<span style="color:#f92672">=</span>v0.4.0
 wget -O- https://github.com/flexkube/libflexkube/releases/download/<span style="color:#e6db74">${</span>VERSION<span style="color:#e6db74">}</span>/flexkube_<span style="color:#e6db74">${</span>VERSION<span style="color:#e6db74">}</span>_linux_amd64.tar.gz | tar zxvf -
 </code></pre></div><h3 id="downloading-etcdctl-binary-optional">Downloading <code>etcdctl</code> binary (optional)</h3>
 <p>To test cluster functionality, you can download <code>etcdctl</code> binary, however, this is optional. Also, if you use Flatcar Container Linux, the binary should be available on the system already.</p>
 <p>You can download it using the following command:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export ETCD_VER<span style="color:#f92672">=</span>v3.4.9
-wget https://storage.googleapis.com/etcd/<span style="color:#e6db74">${</span>ETCD_VER<span style="color:#e6db74">}</span>/etcd-<span style="color:#e6db74">${</span>ETCD_VER<span style="color:#e6db74">}</span>-linux-amd64.tar.gz -O- | tar zxvf - etcd-<span style="color:#e6db74">${</span>ETCD_VER<span style="color:#e6db74">}</span>-linux-amd64/etcdctl <span style="color:#f92672">&amp;&amp;</span> mv etcd-<span style="color:#e6db74">${</span>ETCD_VER<span style="color:#e6db74">}</span>-linux-amd64/etcdctl ./ <span style="color:#f92672">&amp;&amp;</span> rm
-dir etcd-<span style="color:#e6db74">${</span>ETCD_VER<span style="color:#e6db74">}</span>-linux-amd64
+wget https://storage.googleapis.com/etcd/<span style="color:#e6db74">${</span>ETCD_VER<span style="color:#e6db74">}</span>/etcd-<span style="color:#e6db74">${</span>ETCD_VER<span style="color:#e6db74">}</span>-linux-amd64.tar.gz -O- | tar zxvf - etcd-<span style="color:#e6db74">${</span>ETCD_VER<span style="color:#e6db74">}</span>-linux-amd64/etcdctl <span style="color:#f92672">&amp;&amp;</span> mv etcd-<span style="color:#e6db74">${</span>ETCD_VER<span style="color:#e6db74">}</span>-linux-amd64/etcdctl ./ <span style="color:#f92672">&amp;&amp;</span> rmdir etcd-<span style="color:#e6db74">${</span>ETCD_VER<span style="color:#e6db74">}</span>-linux-amd64
 </code></pre></div><h3 id="make-downloaded-binaries-available-in-path">Make downloaded binaries available in $PATH</h3>
 <p>For compatibility with rest of the tutorial, you should make sure that downloaded binaries are in one of the directories in the $PATH environment variable.</p>
 <p>You can also add working directory to the $PATH using the following command:</p>

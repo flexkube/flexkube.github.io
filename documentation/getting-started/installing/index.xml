@@ -18,8 +18,8 @@
       <guid>https://flexkube.github.io/documentation/getting-started/installing/cli/</guid>
       <description>Flexkube CLI Download the pre-built binary The easiest way to get Flexkube CLI	is to use one of the pre-built release binaries which are available for macOS and Linux.
 See Github Releases page to find the latest available release.
-For example, to download version v0.3.1 on Linux, execute the following command:
-VERSION=v0.3.1 It will download the flexkube binary into your current directory. It is recommende to move this binary into one of directories mentioned in your $PATH environment variable, e.</description>
+For example, to download version v0.4.0 on Linux, execute the following command:
+VERSION=v0.4.0 It will download the flexkube binary into your current directory. It is recommende to move this binary into one of directories mentioned in your $PATH environment variable, e.</description>
     </item>
     
     <item>
@@ -40,10 +40,9 @@ With module added, go to Go examples to see how to use it in your code or see re
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://flexkube.github.io/documentation/getting-started/installing/terraform/</guid>
-      <description>Terraform provider Download the pre-built binary The easiest way to get Flexkube Terraform provider is to use one of the pre-built release binaries which are available for macOS and Linux.
-See Github Releases page for finding the latest available release.
-For example, to download version v0.3.1 on Linux, execute the following command:
-VERSION=v0.3.1 wget -qO- https://github.com/flexkube/libflexkube/releases/download/$VERSION/terraform-provider-flexkube_$VERSION_linux_amd64.tar.gz | tar zxvf - terraform-provider-flexkube_$VERSION_x4 It will download the terraform-provider-flexkube binary into your current directory.</description>
+      <description>Terraform provider Using Terraform 0.13 and Terraform Registry The easiest way to get Flexkube Terraform provider is to pull it from the Terraform Registry. You can do that by adding the following snippet to required_providers block in terraform block in your module configuration:
+flexkube = { source = &amp;#34;flexkube/flexkube&amp;#34; version = &amp;#34;0.4.0&amp;#34; } So example versions.tf file would look like following:
+terraform { required_providers { flexkube = { source = &amp;#34;flexkube/flexkube&amp;#34; version = &amp;#34;0.</description>
     </item>
     
   </channel>

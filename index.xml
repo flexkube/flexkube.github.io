@@ -72,8 +72,8 @@
       <guid>https://flexkube.github.io/documentation/getting-started/installing/cli/</guid>
       <description>Flexkube CLI Download the pre-built binary The easiest way to get Flexkube CLI	is to use one of the pre-built release binaries which are available for macOS and Linux.
 See Github Releases page to find the latest available release.
-For example, to download version v0.3.1 on Linux, execute the following command:
-VERSION=v0.3.1 It will download the flexkube binary into your current directory. It is recommende to move this binary into one of directories mentioned in your $PATH environment variable, e.</description>
+For example, to download version v0.4.0 on Linux, execute the following command:
+VERSION=v0.4.0 It will download the flexkube binary into your current directory. It is recommende to move this binary into one of directories mentioned in your $PATH environment variable, e.</description>
     </item>
     
     <item>
@@ -94,10 +94,9 @@ With module added, go to Go examples to see how to use it in your code or see re
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://flexkube.github.io/documentation/getting-started/installing/terraform/</guid>
-      <description>Terraform provider Download the pre-built binary The easiest way to get Flexkube Terraform provider is to use one of the pre-built release binaries which are available for macOS and Linux.
-See Github Releases page for finding the latest available release.
-For example, to download version v0.3.1 on Linux, execute the following command:
-VERSION=v0.3.1 wget -qO- https://github.com/flexkube/libflexkube/releases/download/$VERSION/terraform-provider-flexkube_$VERSION_linux_amd64.tar.gz | tar zxvf - terraform-provider-flexkube_$VERSION_x4 It will download the terraform-provider-flexkube binary into your current directory.</description>
+      <description>Terraform provider Using Terraform 0.13 and Terraform Registry The easiest way to get Flexkube Terraform provider is to pull it from the Terraform Registry. You can do that by adding the following snippet to required_providers block in terraform block in your module configuration:
+flexkube = { source = &amp;#34;flexkube/flexkube&amp;#34; version = &amp;#34;0.4.0&amp;#34; } So example versions.tf file would look like following:
+terraform { required_providers { flexkube = { source = &amp;#34;flexkube/flexkube&amp;#34; version = &amp;#34;0.</description>
     </item>
     
     <item>
@@ -417,72 +416,6 @@ It is recommended that machine has at least 2 GB of RAM and is a fresh machine, 
       
       <guid>https://flexkube.github.io/documentation/reference/helm-charts/tls-bootstrapping/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://flexkube.github.io/documentation/reference/terraform/flexkube-provider/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://flexkube.github.io/documentation/reference/terraform/flexkube-provider/</guid>
-      <description>Flexkube Provider The Flexkube (flexkube) provider is used to interact with the resources supported by libflexkube. The provider itself do not require any configuration.
-Use the navigation to the left to read about the available resources.
-Please note, that while the Terraform provider provides very nice UI for automation, it has currently some bugs (#48, #85), which might be annoying in some scenarios.
-Example Usage provider &amp;#34;flexkube&amp;#34; {} </description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_api_loadbalancer_pool/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_api_loadbalancer_pool/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_controlplane/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_controlplane/</guid>
-      <description>flexkube_controlplane </description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_etcd_cluster/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_etcd_cluster/</guid>
-      <description>flexkube_etcd_cluster </description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_helm_release/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_helm_release/</guid>
-      <description>flexkube_helm_release </description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_kubelet_pool/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_kubelet_pool/</guid>
-      <description>flexkube_kubelet_pool </description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_pki/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://flexkube.github.io/documentation/reference/terraform/resources/flexkube_pki/</guid>
-      <description>flexkube_pki </description>
     </item>
     
     <item>

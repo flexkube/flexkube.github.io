@@ -10,17 +10,5 @@
 	<atom:link href="https://flexkube.github.io/documentation/reference/terraform/index.xml" rel="self" type="application/rss+xml" />
     
     
-    <item>
-      <title></title>
-      <link>https://flexkube.github.io/documentation/reference/terraform/flexkube-provider/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://flexkube.github.io/documentation/reference/terraform/flexkube-provider/</guid>
-      <description>Flexkube Provider The Flexkube (flexkube) provider is used to interact with the resources supported by libflexkube. The provider itself do not require any configuration.
-Use the navigation to the left to read about the available resources.
-Please note, that while the Terraform provider provides very nice UI for automation, it has currently some bugs (#48, #85), which might be annoying in some scenarios.
-Example Usage provider &amp;#34;flexkube&amp;#34; {} </description>
-    </item>
-    
   </channel>
 </rss>
