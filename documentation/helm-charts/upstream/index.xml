@@ -5,11 +5,7 @@
     <link>https://flexkube.github.io/documentation/helm-charts/upstream/</link>
     <description>Recent content on Flexkube</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    
-	<atom:link href="https://flexkube.github.io/documentation/helm-charts/upstream/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>en-us</language><atom:link href="https://flexkube.github.io/documentation/helm-charts/upstream/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title></title>
       <link>https://flexkube.github.io/documentation/helm-charts/upstream/stable-coredns/</link>

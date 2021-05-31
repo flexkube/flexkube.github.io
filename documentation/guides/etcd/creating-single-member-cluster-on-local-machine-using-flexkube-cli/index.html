@@ -12,13 +12,15 @@ Requirements For this guide, it is required to have one Linux machine, with Dock
 For fully automated creation, see Creating single-member etcd cluster on local machine using Terraform.
 Requirements For this guide, it is required to have one Linux machine, with Docker daemon installed and running." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://flexkube.github.io/documentation/guides/etcd/creating-single-member-cluster-on-local-machine-using-flexkube-cli/" />
+<meta property="og:url" content="https://flexkube.github.io/documentation/guides/etcd/creating-single-member-cluster-on-local-machine-using-flexkube-cli/" /><meta property="article:section" content="documentation" />
 
-<title>Creating Single Member Cluster on Local Machine Using Flexkube Cli | Flexkube</title>
+
+
+<title>Creating Single Member Cluster on Local Machine Using Flexkube CLI | Flexkube</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
-<link rel="stylesheet" href="/book.min.c3e2d100ba2319549e09b81b242634766bd799847cf02e1d6fa2426a64db14dc.css" integrity="sha256-w&#43;LRALojGVSeCbgbJCY0dmvXmYR88C4db6JCamTbFNw=">
-<script defer src="/en.search.min.12cf2409b924a8032bcf2d60731aa142093526befc5f76320bbee62850333370.js" integrity="sha256-Es8kCbkkqAMrzy1gcxqhQgk1Jr78X3YyC77mKFAzM3A="></script>
+<link rel="stylesheet" href="/book.min.9efae0ff4215c1c9b9ff428703b1e98208fa842709fb18caf11dda700085c8e8.css" integrity="sha256-nvrg/0IVwcm5/0KHA7Hpggj6hCcJ&#43;xjK8R3acACFyOg=">
+<script defer src="/en.search.min.e84c9db588351f9155c760ac4b19b273e24b0235df3344ade01a6c1c82fd4a7f.js" integrity="sha256-6EydtYg1H5FVx2CsSxmyc&#43;JLAjXfM0St4BpsHIL9Sn8="></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -213,7 +215,7 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+  <script>(function(){var a=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
 
 
  
@@ -227,7 +229,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>Creating Single Member Cluster on Local Machine Using Flexkube Cli</strong>
+  <strong>Creating Single Member Cluster on Local Machine Using Flexkube CLI</strong>
 
   <label for="toc-control">
     <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
@@ -294,13 +296,13 @@ https://github.com/alex-shpak/hugo-book
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export IP<span style="color:#f92672">=</span>10.0.2.15
 </code></pre></div><h3 id="downloading-flexkube-binary">Downloading <code>flexkube</code> binary</h3>
 <p>Once logged in, execute the following command to download <code>flexkube</code> CLI binary into working directory. This is the binary, which will be used to create a cluster components.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export VERSION<span style="color:#f92672">=</span>v0.4.0
-wget -O- https://github.com/flexkube/libflexkube/releases/download/<span style="color:#e6db74">${</span>VERSION<span style="color:#e6db74">}</span>/flexkube_<span style="color:#e6db74">${</span>VERSION<span style="color:#e6db74">}</span>_linux_amd64.tar.gz | tar zxvf -
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export FLEXKUBE_VERSION<span style="color:#f92672">=</span>v0.6.0
+wget -O- https://github.com/flexkube/libflexkube/releases/download/<span style="color:#e6db74">${</span>FLEXKUBE_VERSION<span style="color:#e6db74">}</span>/flexkube_<span style="color:#e6db74">${</span>FLEXKUBE_VERSION<span style="color:#e6db74">}</span>_linux_amd64.tar.gz | tar zxvf -
 </code></pre></div><h3 id="downloading-etcdctl-binary-optional">Downloading <code>etcdctl</code> binary (optional)</h3>
 <p>To test cluster functionality, you can download <code>etcdctl</code> binary, however, this is optional. Also, if you use Flatcar Container Linux, the binary should be available on the system already.</p>
 <p>You can download it using the following command:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export ETCD_VER<span style="color:#f92672">=</span>v3.4.9
-wget https://storage.googleapis.com/etcd/<span style="color:#e6db74">${</span>ETCD_VER<span style="color:#e6db74">}</span>/etcd-<span style="color:#e6db74">${</span>ETCD_VER<span style="color:#e6db74">}</span>-linux-amd64.tar.gz -O- | tar zxvf - etcd-<span style="color:#e6db74">${</span>ETCD_VER<span style="color:#e6db74">}</span>-linux-amd64/etcdctl <span style="color:#f92672">&amp;&amp;</span> mv etcd-<span style="color:#e6db74">${</span>ETCD_VER<span style="color:#e6db74">}</span>-linux-amd64/etcdctl ./ <span style="color:#f92672">&amp;&amp;</span> rmdir etcd-<span style="color:#e6db74">${</span>ETCD_VER<span style="color:#e6db74">}</span>-linux-amd64
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export ETCD_VERSION<span style="color:#f92672">=</span>v3.4.16
+wget https://storage.googleapis.com/etcd/<span style="color:#e6db74">${</span>ETCD_VERSION<span style="color:#e6db74">}</span>/etcd-<span style="color:#e6db74">${</span>ETCD_VERSION<span style="color:#e6db74">}</span>-linux-amd64.tar.gz -O- | tar zxvf - etcd-<span style="color:#e6db74">${</span>ETCD_VERSION<span style="color:#e6db74">}</span>-linux-amd64/etcdctl <span style="color:#f92672">&amp;&amp;</span> mv etcd-<span style="color:#e6db74">${</span>ETCD_VERSION<span style="color:#e6db74">}</span>-linux-amd64/etcdctl ./ <span style="color:#f92672">&amp;&amp;</span> rmdir etcd-<span style="color:#e6db74">${</span>ETCD_VERSION<span style="color:#e6db74">}</span>-linux-amd64
 </code></pre></div><h3 id="make-downloaded-binaries-available-in-path">Make downloaded binaries available in $PATH</h3>
 <p>For compatibility with rest of the tutorial, you should make sure that downloaded binaries are in one of the directories in the $PATH environment variable.</p>
 <p>You can also add working directory to the $PATH using the following command:</p>
@@ -314,12 +316,12 @@ wget https://storage.googleapis.com/etcd/<span style="color:#e6db74">${</span>ET
 <p>First step to create a cluster is to generate all certificates required by etcd. For that, we will use Flexkube <a href="/documentation/resources/pki/">PKI resource</a>.</p>
 <p>Before we create the certificates, we need to provide some configuration to tell PKI resource to create etcd certificates, as by default it only creates Root CA certificate.</p>
 <p>For this guide, you can create configuration using the following command:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">cat &lt;&lt;EOF | sed <span style="color:#e6db74">&#39;/^$/d&#39;</span> &gt; config.yaml
-<span style="color:#66d9ef">pki</span>:
-  <span style="color:#66d9ef">etcd</span>:
-    <span style="color:#66d9ef">peers</span>:
-      <span style="color:#66d9ef">member1</span>: ${IP}
-EOF
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#ae81ff">cat &lt;&lt;EOF | sed &#39;/^$/d&#39; &gt; config.yaml</span>
+<span style="color:#f92672">pki</span>:
+  <span style="color:#f92672">etcd</span>:
+    <span style="color:#f92672">peers</span>:
+      <span style="color:#f92672">member1</span>: <span style="color:#ae81ff">${IP}</span>
+<span style="color:#ae81ff">EOF</span>
 </code></pre></div><blockquote class="book-hint info">
   See <a href="/documentation/reference/cli/configuration/pki/">PKI configuration reference</a> to see all available configuration options.
 </blockquote>
@@ -339,13 +341,13 @@ EOF
 <h3 id="creating-etcd-cluster">Creating etcd cluster</h3>
 <p>With certificates ready, we can now create etcd cluster using <a href="/documentation/resources/etcd/">etcd</a> resource.</p>
 <p>To create etcd cluster, we need to configure it&rsquo;s members in <code>config.yaml</code> file. This can be done using the following command:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">cat &lt;&lt;EOF &gt;&gt; config.yaml
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#ae81ff">cat &lt;&lt;EOF &gt;&gt; config.yaml</span>
 
-<span style="color:#66d9ef">etcd</span>:
-  <span style="color:#66d9ef">members</span>:
-    <span style="color:#66d9ef">member1</span>:
-      <span style="color:#66d9ef">peerAddress</span>: ${IP}
-EOF
+<span style="color:#f92672">etcd</span>:
+  <span style="color:#f92672">members</span>:
+    <span style="color:#f92672">member1</span>:
+      <span style="color:#f92672">peerAddress</span>: <span style="color:#ae81ff">${IP}</span>
+<span style="color:#ae81ff">EOF</span>
 </code></pre></div><blockquote class="book-hint info">
   See <a href="/documentation/reference/cli/configuration/etcd/">etcd configuration reference</a> to see all available configuration options.
 </blockquote>

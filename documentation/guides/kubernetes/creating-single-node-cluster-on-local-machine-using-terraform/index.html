@@ -14,13 +14,15 @@ For more detailed guide, see Creating single node Kubernetes cluster on local ma
 Requirements For this guide, it is required to have one Linux machine, with Docker daemon installed and running.
 It is recommended that machine has at least 2 GB of RAM and is a fresh machine, as in tutorial the tools will write to directories like /var/lib/etcd, /etc/kubernetes or /var/lib/kubelet without notice." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://flexkube.github.io/documentation/guides/kubernetes/creating-single-node-cluster-on-local-machine-using-terraform/" />
+<meta property="og:url" content="https://flexkube.github.io/documentation/guides/kubernetes/creating-single-node-cluster-on-local-machine-using-terraform/" /><meta property="article:section" content="documentation" />
+
+
 
 <title>Creating Single Node Cluster on Local Machine Using Terraform | Flexkube</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
-<link rel="stylesheet" href="/book.min.c3e2d100ba2319549e09b81b242634766bd799847cf02e1d6fa2426a64db14dc.css" integrity="sha256-w&#43;LRALojGVSeCbgbJCY0dmvXmYR88C4db6JCamTbFNw=">
-<script defer src="/en.search.min.12cf2409b924a8032bcf2d60731aa142093526befc5f76320bbee62850333370.js" integrity="sha256-Es8kCbkkqAMrzy1gcxqhQgk1Jr78X3YyC77mKFAzM3A="></script>
+<link rel="stylesheet" href="/book.min.9efae0ff4215c1c9b9ff428703b1e98208fa842709fb18caf11dda700085c8e8.css" integrity="sha256-nvrg/0IVwcm5/0KHA7Hpggj6hCcJ&#43;xjK8R3acACFyOg=">
+<script defer src="/en.search.min.e84c9db588351f9155c760ac4b19b273e24b0235df3344ade01a6c1c82fd4a7f.js" integrity="sha256-6EydtYg1H5FVx2CsSxmyc&#43;JLAjXfM0St4BpsHIL9Sn8="></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -215,7 +217,7 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+  <script>(function(){var a=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
 
 
  
@@ -310,10 +312,10 @@ export TF_VAR_dns_service_ip<span style="color:#f92672">=</span>11.0.0.10
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export TF_VAR_node_name<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>hostname<span style="color:#66d9ef">)</span>
 </code></pre></div><h3 id="downloading-terraform-binary">Downloading <code>terraform</code> binary</h3>
 <p>For this guide, you must have <code>terraform</code> binary available. You can download it using the following command:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export VERSION<span style="color:#f92672">=</span>0.13.1
-wget https://releases.hashicorp.com/terraform/<span style="color:#e6db74">${</span>VERSION<span style="color:#e6db74">}</span>/terraform_<span style="color:#e6db74">${</span>VERSION<span style="color:#e6db74">}</span>_linux_amd64.zip <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>unzip terraform_<span style="color:#e6db74">${</span>VERSION<span style="color:#e6db74">}</span>_linux_amd64.zip <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>rm terraform_<span style="color:#e6db74">${</span>VERSION<span style="color:#e6db74">}</span>_linux_amd64.zip
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export TERRAFORM_VERSION<span style="color:#f92672">=</span>0.15.4
+wget https://releases.hashicorp.com/terraform/<span style="color:#e6db74">${</span>TERRAFORM_VERSION<span style="color:#e6db74">}</span>/terraform_<span style="color:#e6db74">${</span>TERRAFORM_VERSION<span style="color:#e6db74">}</span>_linux_amd64.zip <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>unzip terraform_<span style="color:#e6db74">${</span>TERRAFORM_VERSION<span style="color:#e6db74">}</span>_linux_amd64.zip <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>rm terraform_<span style="color:#e6db74">${</span>TERRAFORM_VERSION<span style="color:#e6db74">}</span>_linux_amd64.zip
 </code></pre></div><h3 id="downloading-kubectl-binary">Downloading <code>kubectl</code> binary</h3>
 <p>To verify that cluster is operational it is recommended to have <code>kubectl</code> binary available. You can install it using the following command:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">curl -LO https://storage.googleapis.com/kubernetes-release/release/<span style="color:#e6db74">`</span>curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt<span style="color:#e6db74">`</span>/bin/linux/amd64/kubectl <span style="color:#f92672">&amp;&amp;</span> chmod +x kubectl
@@ -328,7 +330,7 @@ wget https://releases.hashicorp.com/terraform/<span style="color:#e6db74">${</sp
   <span style="color:#a6e22e">required_providers</span> {
     <span style="color:#a6e22e">flexkube</span> = {
       <span style="color:#a6e22e">source</span>  = <span style="color:#e6db74">&#34;flexkube/flexkube&#34;</span>
-      <span style="color:#a6e22e">version</span> = <span style="color:#e6db74">&#34;0.4.0&#34;</span>
+      <span style="color:#a6e22e">version</span> = <span style="color:#e6db74">&#34;0.5.1&#34;</span>
     }
     <span style="color:#a6e22e">local</span> = {
       <span style="color:#a6e22e">source</span>  = <span style="color:#e6db74">&#34;hashicorp/local&#34;</span>
@@ -340,7 +342,7 @@ wget https://releases.hashicorp.com/terraform/<span style="color:#e6db74">${</sp
 		}
   }
 
-  <span style="color:#a6e22e">required_version</span> = <span style="color:#e6db74">&#34;&gt;= 0.13&#34;</span>
+  <span style="color:#a6e22e">required_version</span> = <span style="color:#e6db74">&#34;&gt;= 0.15&#34;</span>
 }
 <span style="color:#66d9ef">
 </span><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;ip&#34;</span> {}

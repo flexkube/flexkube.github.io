@@ -4,17 +4,21 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Flexkube CLI (flexkube) This section includes the reference documentation for the Flexkube CLI (flexkube), it&rsquo;s subcommands and flags and configuration syntax and options.">
+<meta name="description" content="Flexkube CLI (flexkube) This section includes the reference documentation for the Flexkube CLI (flexkube), it&rsquo;s subcommands and flags and configuration syntax and options.
+To learn about available subcommands, see Commands section.
+All commands consume config.yaml file from the current directory and may produce state.yaml file, which will also be used on next runs.
+Configuration config.yaml file contains configuration for all subcommands. It&rsquo;s syntax is described in Configuration section.
+State state.yaml file contains information about created resources, like container IDs, generated certificates etc.">
 <meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://flexkube.github.io/documentation/reference/cli/" />
 
-<title>Cli | Flexkube</title>
+<title>CLI | Flexkube</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
-<link rel="stylesheet" href="/book.min.c3e2d100ba2319549e09b81b242634766bd799847cf02e1d6fa2426a64db14dc.css" integrity="sha256-w&#43;LRALojGVSeCbgbJCY0dmvXmYR88C4db6JCamTbFNw=">
-<script defer src="/en.search.min.12cf2409b924a8032bcf2d60731aa142093526befc5f76320bbee62850333370.js" integrity="sha256-Es8kCbkkqAMrzy1gcxqhQgk1Jr78X3YyC77mKFAzM3A="></script>
+<link rel="stylesheet" href="/book.min.9efae0ff4215c1c9b9ff428703b1e98208fa842709fb18caf11dda700085c8e8.css" integrity="sha256-nvrg/0IVwcm5/0KHA7Hpggj6hCcJ&#43;xjK8R3acACFyOg=">
+<script defer src="/en.search.min.e84c9db588351f9155c760ac4b19b273e24b0235df3344ade01a6c1c82fd4a7f.js" integrity="sha256-6EydtYg1H5FVx2CsSxmyc&#43;JLAjXfM0St4BpsHIL9Sn8="></script>
 <link rel="alternate" type="application/rss+xml" href="https://flexkube.github.io/documentation/reference/cli/index.xml" title="Flexkube" />
 <!--
 Made with Book Theme
@@ -210,7 +214,7 @@ https://github.com/alex-shpak/hugo-book
 
 
 
-  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+  <script>(function(){var a=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
 
 
  
@@ -224,7 +228,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>Cli</strong>
+  <strong>CLI</strong>
 
   <label for="toc-control">
     <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
@@ -236,7 +240,12 @@ https://github.com/alex-shpak/hugo-book
     <input type="checkbox" class="hidden" id="toc-control" />
     <aside class="hidden clearfix">
       
-  <nav id="TableOfContents"></nav>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#configuration">Configuration</a></li>
+    <li><a href="#state">State</a></li>
+  </ul>
+</nav>
 
 
     </aside>
@@ -248,6 +257,13 @@ https://github.com/alex-shpak/hugo-book
       
   <article class="markdown"><h1 id="flexkube-cli-flexkube">Flexkube CLI (flexkube)</h1>
 <p>This section includes the reference documentation for the Flexkube CLI (<code>flexkube</code>), it&rsquo;s subcommands and flags and configuration syntax and options.</p>
+<p>To learn about available subcommands, see <a href="/documentation/reference/cli/commands/">Commands</a> section.</p>
+<p>All commands consume <code>config.yaml</code> file from the current directory and may produce <code>state.yaml</code> file, which will also be used on next runs.</p>
+<h2 id="configuration">Configuration</h2>
+<p><code>config.yaml</code> file contains configuration for all subcommands. It&rsquo;s syntax is described in <a href="/documentation/reference/cli/configuration/">Configuration</a> section.</p>
+<h2 id="state">State</h2>
+<p><code>state.yaml</code> file contains information about created resources, like container IDs, generated certificates etc. It is important to keep this file if you want to be able to update or remove your resources using <code>flexkube</code> CLI.</p>
+<p>You can examine this file to find how how configuration options got transpiled into containers flags, environment variables and configuration files.</p>
 </article>
  
       
@@ -287,7 +303,12 @@ https://github.com/alex-shpak/hugo-book
     
     <aside class="book-toc">
       
-  <nav id="TableOfContents"></nav>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#configuration">Configuration</a></li>
+    <li><a href="#state">State</a></li>
+  </ul>
+</nav>
 
  
     </aside>
